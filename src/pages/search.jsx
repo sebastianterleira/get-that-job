@@ -5,6 +5,8 @@ import { BiSearch } from "react-icons/bi";
 import { fonts } from "../styles/typography";
 import JobList from "../components/job-list";
 import FilterJob from "../components/filters-job";
+import data from "../data/data";
+import { useState } from "react";
 
 const Wrapper = styled.div`
 max-width: 1024px;
@@ -64,6 +66,8 @@ position: relative;
 `
 
 function Search() {
+	const [jobs, setJob] = useState(data);
+
 	return (
 		<>
 			<Wrapper>
@@ -71,14 +75,14 @@ function Search() {
 						<LabelInput>
 							<p css={css`margin-bottom: 4px;`}>search by job title or company name</p>
 								<GroupInput>
-									<BiSearch css={css`position: absolute; margin-left: 15px; width: 16px; top: 11px;`}/>
+									<BiSearch css={css`position: absolute; margin-left: 15px; width: 16px; top: -1px; font-size: 40px;`}/>
 										<Input
 										placeholder="manufacturing, sales, swim"
 										/>
 							</GroupInput>
 						</LabelInput>
 					<FilterJob/>
-				<JobList/>
+				<JobList jobs={jobs}/>
 			</Wrapper>
 		</>
 	);
