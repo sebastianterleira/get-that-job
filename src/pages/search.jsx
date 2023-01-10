@@ -66,7 +66,14 @@ position: relative;
 `
 
 function Search() {
-	const [jobs, setJob] = useState(data);
+	const [jobs] = useState(data);
+
+	let allCategories = jobs.reduce((accu, current) => {
+    if (!accu.includes(current.category)) accu.push(current.category);
+
+		return accu;
+  }, []);
+
 
 	return (
 		<>
@@ -81,7 +88,7 @@ function Search() {
 										/>
 							</GroupInput>
 						</LabelInput>
-					<FilterJob/>
+					<FilterJob categories={allCategories}/>
 				<JobList jobs={jobs}/>
 			</Wrapper>
 		</>

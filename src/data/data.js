@@ -14,7 +14,7 @@ const data = [
 	},
 	{
 		id: 2,
-		category: 'Manufactoring',
+		category: 'Legal',
 		image:
 			'https://samuelkraft.com/_next/image?url=%2Fblog%2Fradix-ui-styling-with-css%2Fimage.png&w=1080&q=75',
 		title: 'The job title',
@@ -28,7 +28,7 @@ const data = [
 	},
 	{
 		id: 3,
-		category: 'Manufactoring',
+		category: 'Education',
 		image:
 			'https://samuelkraft.com/_next/image?url=%2Fblog%2Ffractional-svg-stars-css%2Fimage.png&w=1080&q=75',
 		title: 'The job title',
@@ -42,7 +42,7 @@ const data = [
 	},
 	{
 		id: 4,
-		category: 'Manufactoring',
+		category: 'Goverment',
 		image:
 			'https://samuelkraft.com/_next/image?url=%2Fblog%2Fresponsive-animation-framer-motion%2Fimage.png&w=1080&q=75',
 		title: 'The job title',
@@ -56,7 +56,7 @@ const data = [
 	},
 	{
 		id: 5,
-		category: 'Manufactoring',
+		category: 'Sales',
 		image:
 			'https://samuelkraft.com/_next/image?url=%2Fblog%2Fbuilding-a-notion-blog-with-public-api%2Fimage.png&w=1080&q=75',
 		title: 'The job title',
