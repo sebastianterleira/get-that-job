@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import UnauthenticatedApp from "./UnauthenticatedApp";
 import AuthenticatedApp from "./AuthenticatedApp";
 import { getUser } from "./service/user-service";
-import { login, signUp } from "./service/auth-service";
+import { login, signUp } from "./service/auth-services";
 
 
 function App() {
