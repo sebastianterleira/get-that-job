@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createUser, getUser } from "../services/user-services";
-import * as auth from "../services/auth-services";
+import { createUser, getUser } from "../service/user-services";
+import * as auth from "../service/auth-services";
 
 const AuthContext = createContext();
 
@@ -8,9 +8,9 @@ const AuthContext = createContext();
 function AuthProvider(props) {
   const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   getUser().then(setUser).catch(console.log);
-  // }, []);
+  useEffect(() => {
+    getUser().then(setUser).catch(console.log);
+  }, []);
   
   function login(credentials) {
     auth.login(credentials).then(setUser).catch(console.log);
@@ -23,6 +23,8 @@ function AuthProvider(props) {
   function signup(userData) {
     createUser(userData).then(setUser).catch(console.log);
   }
+
+	console.log(user)
 
   const value = {
     user,

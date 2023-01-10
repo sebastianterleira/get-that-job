@@ -52,6 +52,16 @@ color: #373737;
 margin-bottom: 16px;
 `
 
+const Menssage = styled.p`
+font-family: ${fonts.bedroom};
+font-weight: 500;
+font-size: 20px;
+line-height: 28px;
+color: #373737;
+letter-spacing: 0.15px;
+margin-bottom: 32px;
+`
+
 function LoginPage() {
 	const [showLogin, setShowLogin] = useState("Professional")
 
@@ -67,6 +77,7 @@ function LoginPage() {
 		<Wrapper>
 			<div css={css`display: flex; flex-direction: column;`}>
 				<WelcomeText>Welcome back</WelcomeText>
+				<Menssage>Login to you account as...</Menssage>
 				<div onClick={handleLinkChange}>
 					{showLogin === "Professional"
 					? <NavContainer>

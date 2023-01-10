@@ -5,7 +5,7 @@ import { fonts } from "./styles";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/header";
-import Home from "./pages/landin-page";
+import Home from "./pages/landing-page";
 import LoginPage from "./components/login-form";
 
 const Wrapper = styled.div`
