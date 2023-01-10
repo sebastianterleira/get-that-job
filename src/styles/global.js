@@ -55,7 +55,6 @@ export const reset = css`
   /* Make images easier to work with */
   img,
   picture {
-    max-width: 100%;
     display: block;
   }
 

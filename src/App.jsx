@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
-
 import UnauthenticatedApp from "./UnauthenticatedApp";
 import AuthenticatedApp from "./AuthenticatedApp";
-import { getUser } from "./service/user-service";
-import { login, signUp } from "./service/auth-services";
+import { login } from "./service/auth-services";
+import { createUser } from "./service/user-services";
 
 
 function App() {
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    getUser().then(setUser).catch(console.log);
-  }, []);
 
   console.log(user);
 
@@ -20,7 +15,7 @@ function App() {
   }
 
   function handleSignup(credentials) {
-    signUp(credentials).then(setUser).catch(console.log);
+    createUser(credentials).then(setUser).catch(console.log);
   }
   
   return (
