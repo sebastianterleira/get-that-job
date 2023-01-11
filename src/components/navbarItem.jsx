@@ -31,9 +31,10 @@ const Icon = styled.div`
   font-size: 1.4rem;
 `;
 
-function NavBarItem({ name, icon, to }) {
+function NavBarItem({ name, icon, to, handleClick }) {
   return (
     <StyledNavLink
+      onClick={handleClick || console.log}
       to={to}
       style={({ isActive }) => {
         if (!isActive) return;

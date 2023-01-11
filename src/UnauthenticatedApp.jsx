@@ -10,35 +10,26 @@ import LoginPage from "./pages/login-page";
 import SignUpPage from "./pages/signup-page";
 
 const Wrapper = styled.div`
-margin: auto;
-display: flex;
-flex-direction: row;
-padding: 20px 20px 0px 20px;
-align-items: center;
-`
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 20px 0px 20px;
+  align-items: center;
+`;
 
 function UnauthenticatedApp() {
   return (
-		<>
-			<Header/>
-				<Wrapper>
-				<Routes>
-					<Route
-					path={"/"}
-					element={<Home/>}
-					/>
-					<Route
-					path={"/login"}
-					element={<LoginPage/>}
-					/>
-					<Route
-					path={"/signup"}
-					element={<SignUpPage/>}
-					/>
-				</Routes>
-			</Wrapper>
-		</>
-	);
+    <>
+      <Header />
+      <Wrapper>
+        <Routes>
+          <Route path={"/"} element={<Home />} />
+          <Route path={"/login"} element={<LoginPage />} />
+          <Route path={"/signup"} element={<SignUpPage />} />
+        </Routes>
+      </Wrapper>
+    </>
+  );
 }
 
 export default UnauthenticatedApp;

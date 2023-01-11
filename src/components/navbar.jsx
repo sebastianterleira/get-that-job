@@ -9,6 +9,7 @@ import { VscNewFile } from "react-icons/vsc";
 import NavBarItem from "./navbarItem";
 import { typography } from "../styles";
 import getJob from "../static/img/logoNavbar.svg";
+import { useAuth } from "../context/auth-context";
 
 const NavbarC = styled("div")`
   width: 250px;
@@ -55,6 +56,7 @@ const Main = styled.div`
 `;
 
 function Navbar() {
+  const { logoutRecruiter } = useAuth();
   const optionIcon = {
     job: <RiSuitcaseLine />,
     create: <VscNewFile />,
@@ -85,7 +87,8 @@ function Navbar() {
           />
 
           <NavBarItem
-            to={"favorites"}
+            to={"/"}
+            handleClick={logoutRecruiter}
             name={"Logout"}
             icon={optionIcon.logout}
           />
