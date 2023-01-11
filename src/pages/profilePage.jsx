@@ -110,13 +110,13 @@ const ProfileRecruiter = () => {
 
   function handleChangeFile(event) {
     console.log(event.target.files[0]);
+    setFormData({ ...formData, profile: event.target.files[0] });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     console.log(formData);
     // const fileUploaded = event.target.files[0];
-    console.log(event.target.files[0]);
     // login(formData);
   }
 
