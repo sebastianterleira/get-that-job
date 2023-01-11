@@ -1,13 +1,13 @@
 export const fonts = {
   primary: `"Source Code Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif`,
-	secondary: `"SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  secondary: `"SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif`,
-	third: `"Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  third: `"Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif`,
-	bedroom: `"Monserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  bedroom: `"Monserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif`,
-	chiron:  `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  chiron: `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif`,
 };
 
@@ -64,6 +64,6 @@ export const typography = {
 
 for (const size in typography.text) {
   typography.text[size] += `
-  font-family: ${fonts.primary};
+  font-family: ${fonts.chiron};
   `;
 }

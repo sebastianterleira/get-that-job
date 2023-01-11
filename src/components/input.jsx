@@ -1,7 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { fonts } from "../styles";
+import { typography } from "../styles/typography";
 
 const StyledInput = styled("input")`
   ::placeholder {
@@ -11,11 +9,16 @@ const StyledInput = styled("input")`
 		font-family: ${fonts.third};
 		color: #333333;
   }
-  outline: none;
-  border-style: none;
 `;
 
-function Input({
+const Label = styled.label`
+  color: #373737;
+  ${typography.text.sm}
+  Line-height: 12px;
+  letter-spacing: 1.5px;
+`;
+
+const Input = ({
   id,
   name,
   type = "text",
@@ -23,19 +26,12 @@ function Input({
   onChange,
   placeholder,
   label,
-}) {
+  color,
+}) => {
   return (
-    <div>
-      {label && <label css={css`
-			color: #B8B8BB;
-			line-height: 16.8px;
-			font-weight: 600;
-			font-size: 14px;
-			`} htmlFor={id || name}>{label}</label>}
-      <StyledInput css={css`
-          display: flex;
-					padding-top: 10px;
-          `}
+    <Container>
+      {label && <Label htmlFor={id || name}>{label}</Label>}
+      <StyledInput
         id={id || name}
         name={name}
         type={type}
@@ -43,16 +39,8 @@ function Input({
         onChange={onChange}
         placeholder={placeholder}
       />
-			<div css={css`
-			border-top: 1px solid black;
-			height: 2px;
-			padding: 0;
-			margin: 5px auto 0 auto;
-			width: 314px;
-			margin-bottom: 60px;
-			`}/>
-    </div>
+    </Container>
   );
-}
+};
 
 export default Input;

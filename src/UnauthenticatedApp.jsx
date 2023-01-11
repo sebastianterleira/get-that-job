@@ -10,12 +10,12 @@ import LoginPage from "./pages/login-page";
 import SignUpPage from "./pages/signup-page";
 
 const Wrapper = styled.div`
-margin: auto;
-display: flex;
-flex-direction: row;
-padding: 20px 20px 0px 20px;
-align-items: center;
-`
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 20px 0px 20px;
+  align-items: center;
+`;
 
 function UnauthenticatedApp() {
   return (
