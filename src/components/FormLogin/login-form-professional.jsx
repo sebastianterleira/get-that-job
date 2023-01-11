@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";

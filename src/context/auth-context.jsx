@@ -1,11 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createUser, getUser } from "../service/user-services";
 import * as auth from "../service/auth-services";
+import React from "react";
 
 const AuthContext = createContext();
 
 function AuthProvider(props) {
   const [user, setUser] = useState(null);
+	
+  useEffect(() => {
+    getUser().then(setUser).catch(console.log);
+  }, []);
+  
   const [recruiter, setRecruiter] = useState(null);
 
   // useEffect(() => {

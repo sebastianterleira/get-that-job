@@ -1,22 +1,13 @@
 import styled from "@emotion/styled";
 import { typography } from "../styles/typography";
 
-const Container = styled.div`
-  width: 310px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const StyledInput = styled.input`
-  height: 36px;
-  border: 1.3px solid #f48fb1;
-  border-radius: 8px;
-  background-color: ${({ color }) => (color ? "" : "#f6f6f9")};
-  box-sizing: border-box;
-
-  &:focus-visible {
-    outline: 1px solid #f48fb1;
+const StyledInput = styled("input")`
+  ::placeholder {
+		line-height: 22.63px;
+		font-weight: 400;
+		font-size: 18px;
+		font-family: ${fonts.third};
+		color: #333333;
   }
 `;
 
@@ -47,7 +38,6 @@ const Input = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        color={color}
       />
     </Container>
   );

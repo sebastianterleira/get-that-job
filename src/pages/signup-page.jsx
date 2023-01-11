@@ -39,8 +39,8 @@ font-size: 18px;
 line-height: 23px;
 height: 50px;
 background: #fff;
-border-bottom-left-radius: 30px;
-border-bottom-right-radius: 30px;
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
 margin-bottom: 50px;
 `
 const WelcomeText = styled.p`

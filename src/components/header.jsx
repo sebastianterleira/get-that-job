@@ -62,11 +62,21 @@ z-index: 0;
 }
 `
 
+const ImagenLogo = styled.img`
+position: relative;
+overflow: hidden;
+  transition: all 400ms ease;
+  &:hover {
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  transform: translateY(-3%);
+	border-radius: 10px;
+  }
+`
 function Header() {
   return (
 		<NavBarMenu>
 			<Link to="/">
-				<img src={LogoHeader} alt="LogoHeader"/>
+				<ImagenLogo src={LogoHeader} alt="LogoHeader" />
 			</Link>
 			<ContentRow>
 				<Link to="/login" css={css`text-decoration: none;`}>

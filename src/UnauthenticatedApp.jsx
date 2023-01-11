@@ -19,17 +19,26 @@ const Wrapper = styled.div`
 
 function UnauthenticatedApp() {
   return (
-    <>
-      <Header />
-      <Wrapper>
-        <Routes>
-          <Route path={"/"} element={<Home />} />
-          <Route path={"/login"} element={<LoginPage />} />
-          <Route path={"/signup"} element={<SignUpPage />} />
-        </Routes>
-      </Wrapper>
-    </>
-  );
+		<>
+			<Header/>
+				<Wrapper>
+					<Routes>
+						<Route
+						path={"/"}
+						element={<Home/>}
+						/>
+						<Route
+						path={"/login"}
+						element={<LoginPage/>}
+						/>
+						<Route
+						path={"/signup"}
+						element={<SignUpPage/>}
+						/>
+					</Routes>
+			</Wrapper>
+		</>
+	);
 }
 
 export default UnauthenticatedApp;
