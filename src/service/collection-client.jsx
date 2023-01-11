@@ -28,7 +28,7 @@ export default async function collectionClient(
 
   const response = await fetch(BASE_URI + endpoint, config);
 
-  let data;
+  let data, header;
   if (!response.ok) {
     try {
       data = await response.json();
@@ -39,6 +39,8 @@ export default async function collectionClient(
   }
 
   try {
+    header = response.headers.get("Authorization");
+    if (header) sessionStorage.setItem(tokenKey, header.split(" ")[1]);
     data = await response.json();
   } catch (error) {
     data = response.statusText;

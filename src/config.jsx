@@ -1,2 +1,2 @@
-export const BASE_URI = "https://react-eatable-api.herokuapp.com";
-export const tokenKey = "react-eatable-token";
+export const BASE_URI = "http://127.0.0.1:3000/api/v1";
+export const tokenKey = "react-get-that-Job-token";
