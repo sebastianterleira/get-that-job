@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
+import ProfileRecruiter from "./pages/profilePage";
 import Search from "./pages/search";
 
 const Container = styled.div`
@@ -14,6 +15,7 @@ function AuthenticatedApp() {
       <Navbar />
       <Routes>
         <Route path={"/home"} element={<Search />} />
+        <Route path={"/profile"} element={<ProfileRecruiter />} />
       </Routes>
     </Container>
   );
