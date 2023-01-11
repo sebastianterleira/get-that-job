@@ -8,9 +8,9 @@ const AuthContext = createContext();
 function AuthProvider(props) {
   const [user, setUser] = useState(null);
 	
-  useEffect(() => {
-    getUser().then(setUser).catch(console.log);
-  }, []);
+  // useEffect(() => {
+  //   getUser().then(setUser).catch(console.log);
+  // }, []);
   
   const [recruiter, setRecruiter] = useState(null);
 

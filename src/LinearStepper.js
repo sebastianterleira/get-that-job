@@ -7,13 +7,7 @@ import {
   Step,
   StepLabel,
 } from "@mui/material";
-import { styled } from "@mui/system";
 
-const useStyles = styled((theme) => ({
-  button: {
-    marginRight: theme.spacing(5),
-  },
-}));
 
 function getSteps() {
   return [
@@ -161,7 +155,6 @@ function getStepContent(step) {
 }
 
 const LinaerStepper = () => {
-  const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
@@ -226,8 +219,6 @@ const LinaerStepper = () => {
         <>
           <form>{getStepContent(activeStep)}</form>
           <Button
-						spacing={2}
-            className={classes.button}
             disabled={activeStep === 0}
             onClick={handleBack}
           >
@@ -235,7 +226,6 @@ const LinaerStepper = () => {
           </Button>
           {isStepOptional(activeStep) && (
             <Button
-              className={classes.button}
               variant="contained"
               color="primary"
               onClick={handleSkip}
@@ -244,7 +234,6 @@ const LinaerStepper = () => {
             </Button>
           )}
           <Button
-            className={classes.button}
             variant="contained"
             color="primary"
             onClick={handleNext}
