@@ -9,11 +9,11 @@ import { AuthProvider } from "./context/auth-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <AuthProvider>
-      <Global styles={reset} />
-      <Global styles={global} />
-      <App />
-    </AuthProvider>
-  </BrowserRouter>
+    <BrowserRouter>
+        <AuthProvider>
+          <Global styles={reset} />
+          <Global styles={global} />
+          <App />
+        </AuthProvider>
+    </BrowserRouter>
 );
