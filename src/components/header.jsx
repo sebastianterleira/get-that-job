@@ -66,13 +66,15 @@ function Header() {
   return (
 		<NavBarMenu>
 			<Link to="/">
-			<img src={LogoHeader} alt="LogoHeader"/>
+				<img src={LogoHeader} alt="LogoHeader"/>
 			</Link>
 			<ContentRow>
 				<Link to="/login" css={css`text-decoration: none;`}>
-				<ButtonNav>🙍‍♂️   Login</ButtonNav>
+					<ButtonNav>🙍‍♂️   Login</ButtonNav>
 				</Link>
-				<ButtonNav>🙍‍♂️   Sign-Up</ButtonNav>
+				<Link to="/signup" css={css`text-decoration: none;`}>
+					<ButtonNav>🙍‍♂️   Sign-Up</ButtonNav>
+				</Link>
 			</ContentRow>
 		</NavBarMenu>
 	);

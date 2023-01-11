@@ -4,15 +4,15 @@ import styled from "@emotion/styled";
 import { fonts } from "../styles";
 import HombreSaludo from "../static/img/LoginPage/HombreSaludo.png"
 import { useState } from "react";
-import LoginFormProfessional from "./FormLogin/login-form-professional";
-import LoginFormRecruiter from "./FormLogin/login-form-recruiter";
+import LoginFormProfessional from "../components/FormLogin/login-form-professional";
+import LoginFormRecruiter from "../components/FormLogin/login-form-recruiter";
 
 const Wrapper = styled.div`
 max-width: 1024px;
 margin: auto;
 display: flex;
 flex-direction: row;
-padding: 20px;
+padding: 0px 20px 0px 20px
 `
 
 const LinkOn = styled.button`
@@ -52,7 +52,7 @@ color: #373737;
 margin-bottom: 16px;
 `
 
-const Menssage = styled.p`
+const Message = styled.p`
 font-family: ${fonts.bedroom};
 font-weight: 500;
 font-size: 20px;
@@ -77,7 +77,7 @@ function LoginPage() {
 		<Wrapper>
 			<div css={css`display: flex; flex-direction: column;`}>
 				<WelcomeText>Welcome back</WelcomeText>
-				<Menssage>Login to you account as...</Menssage>
+				<Message>Login to you account as...</Message>
 				<div onClick={handleLinkChange}>
 					{showLogin === "Professional"
 					? <NavContainer>
@@ -92,10 +92,10 @@ function LoginPage() {
 
         {showLogin === "Professional" ? <LoginFormProfessional/> : <LoginFormRecruiter/>}
       </div>
-			<div>
-				<img src={HombreSaludo} alt="HobreSaludo"/>
-			</div>
 		</Wrapper>
+			<div>
+				<img src={HombreSaludo} alt="HobreSaludo" css={css`width: 400px; margin-right: 70px;`}/>
+			</div>
 		</>
 	);
 }

@@ -6,13 +6,15 @@ import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./pages/landing-page";
-import LoginPage from "./components/login-form";
+import LoginPage from "./pages/login-page";
+import SignUpPage from "./pages/signup-page";
 
 const Wrapper = styled.div`
 margin: auto;
 display: flex;
-flex-direction: column;
-padding: 20px;
+flex-direction: row;
+padding: 20px 20px 0px 20px;
+align-items: center;
 `
 
 function UnauthenticatedApp() {
@@ -28,6 +30,10 @@ function UnauthenticatedApp() {
 					<Route
 					path={"/login"}
 					element={<LoginPage/>}
+					/>
+					<Route
+					path={"/signup"}
+					element={<SignUpPage/>}
 					/>
 				</Routes>
 			</Wrapper>
