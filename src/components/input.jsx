@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 import { fonts } from "../styles";
 
 const StyledInput = styled("input")`
-	background-color: #F2F2F2;
   ::placeholder {
 		line-height: 22.63px;
 		font-weight: 400;
@@ -43,7 +42,6 @@ function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-				size="20"
       />
 			<div css={css`
 			border-top: 1px solid black;
