@@ -16,6 +16,7 @@ const NavbarC = styled("div")`
   flex-direction: column;
   justify-content: space-between;
   padding: 1.3rem 0;
+  background-color: #e1e2e1;
 `;
 
 const ContainerItems = styled.div`
@@ -78,7 +79,7 @@ function Navbar() {
             icon={optionIcon.create}
           />
           <NavBarItem
-            to={"favorites"}
+            to={"profile"}
             name={"Profile"}
             icon={optionIcon.profile}
           />

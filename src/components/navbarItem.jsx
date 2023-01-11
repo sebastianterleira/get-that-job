@@ -10,7 +10,6 @@ const StyledNavLink = styled(NavLink)`
   color: #373737;
   font-weight: 500;
   align-items: center;
-  border-radius: 0.375rem;
 
   cursor: pointer;
   text-decoration: none;
@@ -20,7 +19,7 @@ const StyledNavLink = styled(NavLink)`
     }
   }
   &:focus {
-    background: #fff;
+    background: #f2f2f2;
     svg {
       fill: #828282;
     }
