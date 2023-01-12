@@ -547,7 +547,7 @@ const LinaerStepper = () => {
 								: <ButtonForm
 								onClick={handleBack}
 							>
-								previus
+								{"<   previus"}
 							</ButtonForm>
 								}
 							{isStepOptional(activeStep) && (
@@ -565,7 +565,7 @@ const LinaerStepper = () => {
 								onClick={handleNext}
 								type="submit"
 							>
-								{activeStep === steps.length - 1 ? "Finish" : "Next"}
+								{activeStep === steps.length - 1 ? "Finish    >" : "Next    >"}
 							</ButtonForm>
 								</ContentButton>
 							</StyledForm>

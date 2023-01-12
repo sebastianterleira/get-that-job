@@ -10,7 +10,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { DiGithubBadge, DiReact, DiRuby } from "react-icons/di";
 import { AiFillLinkedin } from "react-icons/ai";
 import { icons } from "react-icons";
-import { typography } from "../src/styles/typography"
+import { typography } from "./styles/typography"
 
 const styledIma = styled.img`
 

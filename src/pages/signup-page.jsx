@@ -98,7 +98,7 @@ function SignUpPage() {
 				</div>
 			</Wrapper>
 			<div>
-				<img src={Woman} alt="Woman" css={css`margin: 100px 0px 0px 0px; width: 600px;`}/>
+				<img src={Woman} alt="Woman" css={css`margin: 120px 0px 0px 0px; width: 640px;`}/>
 			</div>
 		</>
 	);
