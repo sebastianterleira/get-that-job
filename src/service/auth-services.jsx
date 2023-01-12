@@ -2,11 +2,11 @@ import { tokenKey } from "../config";
 import collectionClient from "./collection-client";
 
 export async function login(credentials) {
-  const { ...user } = await collectionClient("/login", {
+  const { data } = await collectionClient("/login", {
     body: credentials,
   });
 
-  return user;
+  return data;
 }
 
 export async function logout() {
@@ -18,11 +18,10 @@ export async function logout() {
 }
 
 export async function loginRecruiter(credentials) {
-  const { ...user } = await collectionClient("/company/sign_in", {
+  const { data } = await collectionClient("/company/sign_in", {
     body: credentials,
   });
-
-  return user;
+  return data;
 }
 
 export async function logoutRecruiter() {
