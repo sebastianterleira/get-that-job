@@ -10,6 +10,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { DiGithubBadge, DiReact, DiRuby } from "react-icons/di";
 import { AiFillLinkedin } from "react-icons/ai";
 import { icons } from "react-icons";
+import { typography } from "../src/styles/typography"
 
 const styledIma = styled.img`
 
@@ -28,8 +29,7 @@ const StyledO = styled.div`
 
 const Parrafo = styled.p`
   margin-top: 30px;
-  font-family: ‘Montserrat’;
-  font-style: normal;
+   ${typography.xs};
   font-weight: 400;
   font-size: 24px;
   line-height: 29px;
@@ -97,8 +97,7 @@ const StyledH3 = styled.h3`
   width: 356px;
   height: 59px;
   top: 64px;
-  font-family: “Montserrat”;
-  font-style: normal;
+   ${typography.sm};
   font-weight: 400;
   font-size: 48px;
   line-height: 59px;
@@ -126,8 +125,7 @@ const StyledD = styled.div`
 // `;
 const StyledH2 = styled.h2`
   margin-top: 61px;
-  font-family: “Montserrat”;
-  font-style: normal;
+  ${typography.sm};
   font-weight: 400;
   font-size: 48px;
   line-height: 59px;
@@ -135,8 +133,7 @@ const StyledH2 = styled.h2`
 `;
 const StyledPa = styled.p`
   margin-top: 30px;
-  font-family: “Montserrat”;
-  font-style: normal;
+  ${typography.sm};
   font-weight: 400;
   font-size: 24px;
   line-height: 29px;
@@ -169,8 +166,7 @@ const StyledIm = styled.img`
 const StyledP = styled.p`
 margin-top: 30px;
   width: 720px;
-  font-family: “Montserrat”;
-  font-style: normal;
+  ${typography.sm};
   font-weight: 400;
   font-size: 24px;
   line-height: 29px;
@@ -188,6 +184,7 @@ const StyledBu = styled.button`
   border: none;
   background: #f48fb1;
   border-radius: 16px;
+   ${typography.sm};
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
@@ -196,9 +193,7 @@ const StyledBu = styled.button`
 const StyledH1 = styled.h1`
   margin-top: 61px;
   width: 504px;
-
-  font-family: “Montserrat”;
-  font-style: normal;
+   ${typography.sm};
   font-weight: 300;
   font-size: 61px;
   line-height: 74px;
