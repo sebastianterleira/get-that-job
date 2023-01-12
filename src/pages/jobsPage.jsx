@@ -10,6 +10,8 @@ const Container = styled.div`
 
 const ContainerCards = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const Title = styled.h2`
@@ -57,14 +59,20 @@ const RadioButton = styled.input`
   }
 `;
 
-const JobsPage = () => {
+const JobsPage = ({ jobs, handleState, handleFilter }) => {
   return (
     <Container>
       <Title>Job Postings</Title>
       <Filters>
         <ContainerFilter>
-          <RadioButton type="radio" id="Choice3" name="contact" value="all" />
-          <label for="Choice3">All</label>
+          <RadioButton
+            type="radio"
+            id="Choice3"
+            name="contact"
+            value="all"
+            onClick={handleFilter}
+          />
+          <label htmlFor="Choice3">All</label>
         </ContainerFilter>
         <ContainerFilter>
           <RadioButton
@@ -72,8 +80,9 @@ const JobsPage = () => {
             id="contactChoice1"
             name="contact"
             value="ontrack"
+            onClick={handleFilter}
           />
-          <label for="contactChoice1">With candidates on track</label>
+          <label htmlFor="contactChoice1">With candidates on track</label>
         </ContainerFilter>
         <ContainerFilter>
           <RadioButton
@@ -81,13 +90,16 @@ const JobsPage = () => {
             id="Choice2"
             name="contact"
             value="closed"
+            onClick={handleFilter}
           />
-          <label for="Choice2">Closed</label>
+          <label htmlFor="Choice2">Closed</label>
         </ContainerFilter>
       </Filters>
-      <Subtitle>4 Job postings found</Subtitle>
+      <Subtitle>{`${jobs.length} Job postings found`}</Subtitle>
       <ContainerCards>
-        <CardPosting />
+        {jobs?.map((elem) => (
+          <CardPosting handleUpdate={handleState} key={elem.id} job={elem} />
+        ))}
       </ContainerCards>
     </Container>
   );
