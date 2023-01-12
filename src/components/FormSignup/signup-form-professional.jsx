@@ -543,7 +543,7 @@ const LinaerStepper = () => {
 							<StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
 								{getStepContent(activeStep)}
 								<ContentButton>
-									{activeStep === 0 ? ""
+									{activeStep === 0 || activeStep === 1 ? ""
 								: <ButtonForm
 								onClick={handleBack}
 							>
