@@ -4,7 +4,8 @@ import styled from "@emotion/styled";
 import { typography } from "../styles/typography";
 import { fonts } from "../styles/typography";
 
-const StyledInput = styled("input")`
+const StyledInput = styled.input`
+background-color: #F2F2F2;
   ::placeholder {
 		line-height: 22.63px;
 		font-weight: 400;
@@ -12,6 +13,8 @@ const StyledInput = styled("input")`
 		font-family: ${fonts.third};
 		color: #333333;
   }
+  outline: none;
+  border-style: none;
 `;
 
 const Container = styled.div`
@@ -40,31 +43,30 @@ function Input({
   return (
     <div>
       <Container>
-          {label && <Label htmlFor={id || name}>{label}</Label>}
-          <StyledInput css={css`
-              display: flex;
-              padding-top: 10px;
-              `}
-            id={id || name}
-            name={name}
-            type={type}
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            size="20"
-          />
-          <div css={css`
-          border-top: 1px solid black;
-          height: 2px;
-          padding: 0;
-          margin: 5px auto 0 auto;
-          width: 314px;
-          margin-bottom: 60px;
-          `}/>
+        {label && <Label htmlFor={id || name}>{label}</Label>}
+        <StyledInput css={css`
+            display: flex;
+            padding-top: 10px;
+            `}
+          id={id || name}
+          name={name}
+          type={type}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          size="20"
+        />
+        <div css={css`
+        border-top: 1px solid black;
+        height: 2px;
+        padding: 0;
+        margin: 5px auto 0 auto;
+        width: 314px;
+        margin-bottom: 60px;
+        `}/>
       </Container>
     </div>
   );
 }
 
 export default Input;
-
