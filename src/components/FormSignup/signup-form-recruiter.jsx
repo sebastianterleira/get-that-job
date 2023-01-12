@@ -382,6 +382,8 @@ const LinaerStepper = () => {
       password: "",
       password_confirmation: "",
       company_webside: "",
+      about_company: "",
+      upload_photo: ""
     },
   });
 

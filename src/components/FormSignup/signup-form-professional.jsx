@@ -425,13 +425,13 @@ const ProfessionalInformation = () => {
 					)}/>
 				<Controller
       control={control}
-      name="upload_photo"
+      name="upload_cv"
       render={({ field }) => (
         <TextField
           id="title"
           variant="standard"
           fullWidth
-					name="upload_photo"
+					name="upload_cv"
           margin="normal"
 					type="file"
           {...field}
@@ -470,7 +470,7 @@ const LinaerStepper = () => {
 			title: "",
 			education: "",
 			experiencia: "",
-			upload_photo: "",
+			upload_cv: "",
     },
   });
 
