@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth-context";
 import { fonts } from "../../styles";
 import Input from "../input";
@@ -61,7 +60,6 @@ const ButtonForm = styled.button`
 
 function LoginFormProfessional() {
 	const { login } = useAuth();
-	const { home } = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -103,7 +101,7 @@ function LoginFormProfessional() {
           />
         </DivContainer>
 
-        <ButtonForm type="submit" onClick={() => home("/home")}>Login</ButtonForm>
+        <ButtonForm type="submit">Login</ButtonForm>
       </Form>
 		</>
 	);
