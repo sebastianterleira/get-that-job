@@ -6,20 +6,21 @@ import Woman from "../static/img/SignUpPage/Woman.png"
 import { useState } from "react";
 import SignUpFormProfessional from "../components/FormSignup/signup-form-professional";
 import SignUpFormRecruiter from "../components/FormSignup/signup-form-recruiter";
+import { Container, Paper, Box } from "@mui/material";
 
 const Wrapper = styled.div`
 max-width: 1024px;
 margin: auto;
 display: flex;
 flex-direction: row;
-padding: 20px 20px 0px 20px;
+padding: 0px 20px 0px 20px;
 `
 
 const LinkOn = styled.button`
 border: none;
 background: none;
 cursor: pointer;
-border-bottom: 3px red solid
+border-bottom: 3px #F48FB1 solid;
 `
 
 const LinkOff = styled.button`
@@ -74,27 +75,30 @@ function SignUpPage() {
 
   return (
 		<>
-		<Wrapper>
-			<div css={css`display: flex; flex-direction: column;`}>
-				<WelcomeText>Good choice!</WelcomeText>
-				<Message>Create a new account as...</Message>
-				<div onClick={handleLinkChange}>
-					{showLogin === "Professional"
-					? <NavContainer>
-						<LinkOn onClick={handleLinkChange}>Professional</LinkOn>
-						<LinkOff onClick={handleLinkChange}>Recruiter</LinkOff>
-					</NavContainer>
-					: <NavContainer>
-						<LinkOff onClick={handleLinkChange}>Professional</LinkOff>
-						<LinkOn onClick={handleLinkChange}>Recruiter</LinkOn>
-					</NavContainer>}
+			<Wrapper>
+				<div css={css`display: flex; flex-direction: column; width: 700px;`}>
+					<WelcomeText>Good choice!</WelcomeText>
+					<Message>Create a new account as...</Message>
+					<div onClick={handleLinkChange}>
+						{showLogin === "Professional"
+						? <NavContainer>
+							<LinkOn onClick={handleLinkChange}>Professional</LinkOn>
+							<LinkOff onClick={handleLinkChange}>Recruiter</LinkOff>
+						</NavContainer>
+						: <NavContainer>
+							<LinkOff onClick={handleLinkChange}>Professional</LinkOff>
+							<LinkOn onClick={handleLinkChange}>Recruiter</LinkOn>
+						</NavContainer>}
+					</div>
+						<Container component={Box} css={css`padding: 0px 32px 32px 32px; `}>
+							<Paper component={Box}  css={css`box-shadow: 0 0 0 0; padding: 0px 24px 0px 24px; background-color: #F2F2F2;`}>
+							{showLogin === "Professional" ? <SignUpFormProfessional/> : <SignUpFormRecruiter/>}
+							</Paper>
+						</Container>
 				</div>
-
-        {showLogin === "Professional" ? <SignUpFormProfessional/> : <SignUpFormRecruiter/>}
-      </div>
-		</Wrapper>
+			</Wrapper>
 			<div>
-				<img src={Woman} alt="Woman" css={css`margin: 35px 0px 0px 0px;`}/>
+				<img src={Woman} alt="Woman" css={css`margin: 100px 0px 0px 0px; width: 600px;`}/>
 			</div>
 		</>
 	);
