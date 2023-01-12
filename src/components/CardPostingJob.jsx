@@ -10,6 +10,7 @@ import {
   RiSearchLine,
 } from "react-icons/ri";
 import { BiUserCircle } from "react-icons/bi";
+import * as dayjs from "dayjs";
 
 import { useState } from "react";
 import { FaIndustry } from "react-icons/fa";
@@ -17,9 +18,11 @@ import DetailJob from "./detailJob";
 import { css } from "@emotion/react";
 import { useAuth } from "../context/auth-context";
 
+dayjs().format();
+
 const Container = styled.div`
   min-height: 102px;
-  min-width: 944px;
+  width: 997px;
   background-color: #fff;
   border-radius: 8px;
   display: flex;
@@ -131,7 +134,7 @@ const ButtonClose = styled.button`
   font-weight:500;
   ${({ disabled }) =>
     disabled
-      ? "background-color: #fa7849;"
+      ? "background-color: #E1E2E1; color:#8E8E8E;"
       : `background-color: #BF5F82;
     cursor:pointer;
     &:hover {
@@ -165,9 +168,23 @@ const ContainerButtons = styled.section`
   gap: 1rem;
 `;
 
-const CardPosting = ({ id }) => {
+const CardPosting = ({ job, handleUpdate }) => {
   const { navigate } = useAuth();
   const [display, setDisplay] = useState(false);
+  const {
+    id,
+    name,
+    description,
+    category,
+    type_job,
+    mix_salary,
+    max_salary,
+    requirements,
+    optional_requirements,
+    state,
+    applications_jobs,
+    // company_id,
+  } = job;
 
   function handleDisplay() {
     setDisplay(!display);
@@ -176,19 +193,30 @@ const CardPosting = ({ id }) => {
   function handleNavigate() {
     navigate(`/jobs/${id}`);
   }
+
+  function handleUpdateState() {
+    handleUpdate({ state: "closed" }, id);
+  }
+
   return (
     <Container>
       <Wrapper>
         <Header>
-          <section>
-            <Title>The job title</Title>
+          <section
+            css={css`
+              width: 322px;
+            `}
+          >
+            <Title>{name}</Title>
             <Details>
-              <DetailJob icon={<FaIndustry />} name={"Manufactoring"} />
+              <DetailJob icon={<FaIndustry />} name={category} />
 
-              <DetailJob icon={<RiCalendar2Line />} name={"Full Time"} />
+              <DetailJob icon={<RiCalendar2Line />} name={type_job} />
               <DetailJob
                 icon={<RiMoneyDollarCircleLine />}
-                name={"2.0k - 2.5k"}
+                name={`${((mix_salary || 1000) / 1000).toFixed(1)}k - ${(
+                  max_salary / 1000
+                ).toFixed(1)}k`}
               />
             </Details>
           </section>
@@ -197,12 +225,14 @@ const CardPosting = ({ id }) => {
               <IconWrapper>
                 <RiMailOpenLine />
               </IconWrapper>
-              <TextIcon>{`Open on 07/11/20`}</TextIcon>
+              <TextIcon>{`Open on ${dayjs(job.created_at).format(
+                "MM-DD-YYYY"
+              )}`}</TextIcon>
             </JobCandidates>
             <JobCandidates>
               <IconWrapper>
                 <BiUserCircle />
-                <Amount>5</Amount>
+                <Amount>{applications_jobs.length}</Amount>
               </IconWrapper>
               <TextIcon>{`Total Candidates`}</TextIcon>
             </JobCandidates>
@@ -210,7 +240,13 @@ const CardPosting = ({ id }) => {
             <JobCandidates colorDesi={"pink"}>
               <IconWrapper>
                 <BiUserCircle />
-                <Amount>6</Amount>
+                <Amount>
+                  {
+                    applications_jobs?.filter(
+                      (elem) => elem.status === "review"
+                    ).length
+                  }
+                </Amount>
               </IconWrapper>
               <TextIcon>{`Candidates on track`}</TextIcon>
             </JobCandidates>
@@ -225,7 +261,10 @@ const CardPosting = ({ id }) => {
               />
               SHOW
             </ButtonSearch>
-            <ButtonClose>
+            <ButtonClose
+              onClick={handleUpdateState}
+              disabled={state === "closed"}
+            >
               <RiCloseCircleLine
                 css={css`
                   font-size: 1.4rem;
@@ -238,38 +277,16 @@ const CardPosting = ({ id }) => {
         <ContainerMain active={display}>
           <ContainerText>
             <SubTitle>About the job position</SubTitle>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut est
-              eligendi quidem ratione, hic pariatur adipisci ducimus quis error
-              perspiciatis nisi suscipit dolorum cum molestiae veritatis rem!
-              Totam rem repellat, possimus beatae excepturi nam dicta commodi
-              omnis accusantium enim laborum sit fugit distinctio fuga officia
-              voluptatem assumenda consectetur repudiandae eius aliquid ipsam
-              provident quo! Explicabo soluta molestiae tempora velit error ex
-              vel, debitis facere quam consequatur rerum illo a id officia
-              nesciunt sit temporibus dolorem cum, suscipit iusto neque quos
-              ducimus maiores molestias! Iste optio tenetur cum dolorum
-              architecto sed molestiae eius voluptates, dolor laborum reiciendis
-              tempore, voluptatem cupiditate commodi?
-            </p>
+            <p>{description}</p>
           </ContainerText>
 
           <ContainerText>
             <SubTitle>Mandatory Requirements</SubTitle>
-            <div>
-              <p>- Lorem ipsum dolor sit amet.</p>
-              <p>- Lorem ipsum dolor sit amet.</p>
-              <p>- Lorem ipsum dolor sit amet.</p>
-              <p>- Lorem ipsum dolor sit amet.</p>
-              <p>- Lorem ipsum dolor sit amet.</p>
-            </div>
+            <div>{requirements}</div>
           </ContainerText>
           <ContainerText>
             <SubTitle>Optional Requirements</SubTitle>
-            <div>
-              <p>- Lorem ipsum dolor sit amet.</p>
-              <p>- Lorem ipsum dolor sit amet.</p>
-            </div>
+            <div>{optional_requirements}</div>
           </ContainerText>
         </ContainerMain>
       </Wrapper>
