@@ -13,13 +13,14 @@ margin: auto;
 display: flex;
 flex-direction: row;
 padding: 0px 20px 0px 20px
+background-color: #F2F2F2;
 `
 
 const LinkOn = styled.button`
 border: none;
 background: none;
 cursor: pointer;
-border-bottom: 3px red solid
+border-bottom: 3px #F48FB1 solid;
 `
 
 const LinkOff = styled.button`

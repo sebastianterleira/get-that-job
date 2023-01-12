@@ -1,9 +1,11 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { fonts } from "../styles";
 import LogoHeader from "../static/LogoHeader.png"
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import LoginPage from "../pages/login-page";
+import SignUpPage from "../pages/signup-page";
+import Home from "../pages/landing-page";
 
 const NavBarMenu = styled.div`
 background: #FFFFFF;
@@ -14,6 +16,14 @@ padding: 12px 152px 12px 152px;
 gap: 690px; 
 box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 `
+
+const Wrapper = styled.div`
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 20px 0px 20px;
+  align-items: center;
+`;
 
 const ContentRow = styled.div`
 display: flex;
@@ -73,20 +83,23 @@ overflow: hidden;
   }
 `
 function Header() {
+	const [showView, setShowView] = useState();
+
   return (
+	<>
 		<NavBarMenu>
-			<Link to="/">
-				<ImagenLogo src={LogoHeader} alt="LogoHeader" />
-			</Link>
+				<Link onClick={() => setShowView("")}>
+					<ImagenLogo src={LogoHeader} alt="LogoHeader" />
+				</Link>
 			<ContentRow>
-				<Link to="/login" css={css`text-decoration: none;`}>
-					<ButtonNav>🙍‍♂️   Login</ButtonNav>
-				</Link>
-				<Link to="/signup" css={css`text-decoration: none;`}>
-					<ButtonNav>🙍‍♂️   Sign-Up</ButtonNav>
-				</Link>
+				<ButtonNav onClick={() => setShowView("Login")}>🙍‍♂️   Login</ButtonNav>
+				<ButtonNav onClick={() => setShowView("SignUp")}>🙍‍♂️   Sign-Up</ButtonNav>
 			</ContentRow>
 		</NavBarMenu>
+		<Wrapper>
+			{showView === "Login" ? <LoginPage/> : showView === "SignUp" ? <SignUpPage/> : <Home/> }
+		</Wrapper>
+	</>
 	);
 }
 

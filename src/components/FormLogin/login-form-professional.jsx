@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth-context";
 import { fonts } from "../../styles";
 import Input from "../input";
