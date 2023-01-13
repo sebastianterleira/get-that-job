@@ -431,7 +431,6 @@ const ProfessionalInformation = () => {
           id="title"
           variant="standard"
           fullWidth
-					name="upload_cv"
           margin="normal"
 					type="file"
           {...field}

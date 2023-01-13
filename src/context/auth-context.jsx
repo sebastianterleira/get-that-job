@@ -1,8 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createUser, getJobs, getUser } from "../service/user-services";
-import * as auth from "../service/auth-services";
-import React from "react";
-import { createUser, getRecruiter } from "../service/user-services";
+import { createUser, getJobs, getUser, getRecruiter } from "../service/user-services";
 import * as auth from "../service/auth-services";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +21,7 @@ function AuthProvider(props) {
   }, []);
 
   const navigate = useNavigate();
+  
   // useEffect(() => {
   //   getUser().then(setUser).catch(console.log);
   // }, []);

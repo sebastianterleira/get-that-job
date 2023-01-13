@@ -10,12 +10,6 @@ export async function createUser(userData) {
   return user;
 }
 
-export async function getUser() {
-  const { token, ...user } = await collectionClient("/profile");
-
-  return user;
-}
-
 export async function updateUser(data) {
 	const {token, ...user} = await collectionClient("/profile", {
 		body: data,
@@ -30,10 +24,11 @@ export async function getJobs() {
 	return await collectionClient("/jobs")
 }
 
-  const { token, ...user } = await collectionClient("/profile", {
-    body: data,
-    method: "PATCH",
-  });
+export async function getUser(data) {
+	const { token, ...user } = await collectionClient("/profile", {
+		body: data,
+		method: "PATCH",
+	});
 
   sessionStorage.setItem(tokenKey, token);
   return user;
