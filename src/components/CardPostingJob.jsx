@@ -182,7 +182,7 @@ const CardPosting = ({ job, handleUpdate }) => {
     requirements,
     optional_requirements,
     state,
-    applications_jobs,
+    applications,
     // company_id,
   } = job;
 
@@ -232,7 +232,7 @@ const CardPosting = ({ job, handleUpdate }) => {
             <JobCandidates>
               <IconWrapper>
                 <BiUserCircle />
-                <Amount>{applications_jobs.length}</Amount>
+                <Amount>{applications.length}</Amount>
               </IconWrapper>
               <TextIcon>{`Total Candidates`}</TextIcon>
             </JobCandidates>
@@ -242,9 +242,8 @@ const CardPosting = ({ job, handleUpdate }) => {
                 <BiUserCircle />
                 <Amount>
                   {
-                    applications_jobs?.filter(
-                      (elem) => elem.status === "review"
-                    ).length
+                    applications?.filter((elem) => elem.status === "review")
+                      .length
                   }
                 </Amount>
               </IconWrapper>
