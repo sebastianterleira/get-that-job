@@ -14,8 +14,11 @@ const AuthContext = createContext();
 function AuthProvider(props) {
   const [user, setUser] = useState(null);
   const [recruiter, setRecruiter] = useState(null);
-
   const [jobs, setJobs] = useState(null);
+
+  useEffect(() => {
+    getUser().then(setUser).catch(console.log);
+  }, []);
 
   useEffect(() => {
     getJobs().then(setJobs).catch(console.log);
@@ -43,7 +46,7 @@ function AuthProvider(props) {
   }
 
   function logout() {
-    auth.logout().then(() => setUser(null));
+    auth.logoutProfessional().then(() => setUser(null));
   }
 
   function logoutRecruiter() {
