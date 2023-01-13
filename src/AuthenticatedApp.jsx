@@ -9,6 +9,7 @@ import JobsPage from "./pages/jobsPage";
 import { useEffect, useState } from "react";
 import { getJobsRecruiter, updateJob } from "./service/jobsRecruiter-services";
 import { useLocalStorage } from "./hook";
+import NewJob from "./pages/newJob";
 
 const Container = styled.div`
   display: flex;
@@ -70,10 +71,10 @@ function AuthenticatedApp() {
     <Container>
       {user ? (
         <>
-        <Navbar />
-        <Routes>
-          <Route path={"/"} element={<Search />} />
-        </Routes>
+          <Navbar />
+          <Routes>
+            <Route path={"/"} element={<Search />} />
+          </Routes>
         </>
       ) : (
         <>
@@ -89,6 +90,9 @@ function AuthenticatedApp() {
                 />
               }
             />
+
+            <Route path={"/newjob"} element={<NewJob />} />
+
             <Route path={"/profile"} element={<ProfileRecruiter />} />
             <Route
               path={"/jobs"}

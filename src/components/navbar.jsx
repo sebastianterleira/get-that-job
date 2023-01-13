@@ -13,6 +13,7 @@ import { useAuth } from "../context/auth-context";
 
 const NavbarC = styled("div")`
   width: 250px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -72,7 +73,7 @@ function Navbar() {
         <ContainerItems>
           <NavBarItem to={"jobs"} name={"Job Postings"} icon={optionIcon.job} />
           <NavBarItem
-            to={"/"}
+            to={"/newjob"}
             name={"Create New Job"}
             icon={optionIcon.create}
           />
