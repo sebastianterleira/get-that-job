@@ -35,8 +35,7 @@ function AuthenticatedApp() {
   if (filter === "ontrack") {
     filterJobs = jobs?.filter(
       (elem) =>
-        elem.applications_jobs.filter((elem) => elem.status === "review")
-          .length > 0
+        elem.applications.filter((elem) => elem.status === "review").length > 0
     );
   }
 
@@ -68,6 +67,17 @@ function AuthenticatedApp() {
         <>
           <Navbar />
           <Routes>
+            <Route
+              path={"/"}
+              element={
+                <JobsPage
+                  handleFilter={handleFilter}
+                  jobs={filterJobs}
+                  handleState={handleJob}
+                />
+              }
+            />
+
             <Route path={"/home"} element={<Search />} />
             <Route path={"/profile"} element={<ProfileRecruiter />} />
             <Route
@@ -82,8 +92,7 @@ function AuthenticatedApp() {
             />
             <Route
               path={"/jobs/:id"}
-              element={<JobPage />}
-              findJob={searchJob}
+              element={<JobPage findJob={searchJob} setJobs={setJobs} />}
             />
           </Routes>
         </>
