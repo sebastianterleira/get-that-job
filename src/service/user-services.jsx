@@ -25,3 +25,7 @@ export async function updateUser(data) {
 	sessionStorage.setItem(tokenKey, token);
 	return user;
 }
+
+export async function getJobs() {
+	return await collectionClient("/jobs")
+}

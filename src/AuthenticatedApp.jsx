@@ -16,12 +16,16 @@ function AuthenticatedApp() {
   return (
     <Container>
       {user ? (
-        ""
+        <>
+        <Navbar />
+        <Routes>
+          <Route path={"/"} element={<Search />} />
+        </Routes>
+        </>
       ) : (
         <>
           <Navbar />
           <Routes>
-            <Route path={"/home"} element={<Search />} />
             <Route path={"/profile"} element={<ProfileRecruiter />} />
           </Routes>
         </>
