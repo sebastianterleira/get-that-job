@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import CustomButton from "../components/button";
-import Input from "../components/input";
+import InputStyledut from "../components/inputStyled";
 import { typography } from "../styles";
 import { RiUploadLine } from "react-icons/ri";
 
@@ -30,7 +30,7 @@ const StyledInput = styled.textarea`
   height: 156px;
   border: 1.3px solid #f48fb1;
   border-radius: 8px;
-  background-color: ${({ color }) => (color ? "" : "#f6f6f9")};
+  background-color: ${({ color }) => (color ? "" : "#fff")};
   box-sizing: border-box;
 
   &:focus-visible {
@@ -147,7 +147,7 @@ const ProfileRecruiter = () => {
           </div>
         </ContainerFile>
 
-        <Input
+        <InputStyledut
           id="email"
           name="email"
           type="email"
@@ -156,7 +156,7 @@ const ProfileRecruiter = () => {
           placeholder=""
           label="COMPANY EMAIL"
         />
-        <Input
+        <InputStyledut
           id="name"
           name="name"
           type="text"
@@ -165,7 +165,7 @@ const ProfileRecruiter = () => {
           placeholder=""
           label="COMPANY NAME"
         />
-        <Input
+        <InputStyledut
           id="website"
           name="website"
           type="text"

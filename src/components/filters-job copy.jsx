@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React from "react";
 import { fonts } from "../styles";
 import { RiCloseLine } from "react-icons/ri";
 import { RiArrowDownSLine } from "react-icons/ri";
@@ -63,8 +62,8 @@ const GroupInput = styled.div`
 position: relative;
 `
 
-function FilterJob({allCategories, filterCategory}) {
-console.log(allCategories)
+function FilterJob() {
+
 
 	return (
 		<>
@@ -72,7 +71,6 @@ console.log(allCategories)
 				<LabelInput>
 				<p css={css`margin-bottom: 4px;`}>Category</p>
 					<GroupInput>
-						{allCategories.map((category) => (
 							<Multiselect
 								customCloseIcon={<RiCloseLine/>}
 								displayValue="key"
@@ -83,8 +81,24 @@ console.log(allCategories)
 								options={[
 									{
 										cat: 'Group 1',
-										key: {category},
-									}
+										key: 'Manufactoring'
+									},
+									{
+										cat: 'Group 1',
+										key: 'Legal'
+									},
+									{
+										cat: 'Group 1',
+										key: 'Education'
+									},
+									{
+										cat: 'Group 2',
+										key: 'Goverment'
+									},
+									{
+										cat: 'Group 2',
+										key: 'Sales'
+									},
 								]}
 								placeholder="Select Category"
 								style={{
@@ -125,11 +139,10 @@ console.log(allCategories)
 										'border-radius': '8px',
 									},
 								}}
-								/>
-								))}
-								<RiArrowDownSLine css={css`position: absolute; margin-left: 245px; top: 8px; font-size: 25px;`}/>
-								</GroupInput>
-								</LabelInput>
+							/>
+						<RiArrowDownSLine css={css`position: absolute; margin-left: 245px; top: 8px; font-size: 25px;`}/>
+					</GroupInput>
+				</LabelInput>
 				<LabelInput>
 				<p css={css`margin-bottom: 4px;`}>Type</p>
 					<GroupInput>

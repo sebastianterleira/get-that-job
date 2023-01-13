@@ -7,7 +7,6 @@ import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { FaIndustry } from "react-icons/fa";
 import { RiFocus3Line } from "react-icons/ri";
 import { useState } from "react";
-import Company from "../static/img/Companies-Logos/Rectangle1.png"
 
 const Tittle = styled.div`
 font-family: ${fonts.bedroom};
@@ -21,7 +20,7 @@ margin-bottom: 8px;
 const ContainerCard = styled.div`
   display: grid;
 	grid-gap: 10px;
-	grid-template-columns: repeat(3, 320px);
+	grid-template-columns: repeat(3, 290px);
 	grid-auto-rows: minmax(170px, auto);
 `
 
@@ -46,7 +45,7 @@ overflow: hidden;
 const ContentJob = styled.div`
 display: flex;
 flex-direction: column;
-padding: 12px 0px 12px 85px;
+padding: 12px 0px 12px 42px;
 margin-left: 20px;
 `
 
@@ -226,7 +225,7 @@ transition: all 500ms ease;
 z-index: 0;
 `
 
-function JobList({jobs}) {
+function JobFollow({jobs}) {
 	const [activeButton, setActiveButton] = useState(".")
 
 	function handleLinkChange(event) {
@@ -236,27 +235,28 @@ function JobList({jobs}) {
     : setActiveButton(activeButton);
   }
 
+
 	return (
 		<>
-		<Tittle>{jobs?.length} jobs for you</Tittle>
+		<Tittle> You are fllowing {jobs.filter((job)=> job.follow === true).length} jobs </Tittle>
 			<ContainerCard>
-				{ jobs?.map((job) => (
+			{ jobs.filter((job)=> job.follow === true).map((job) => (
 				<CardData
-				key={job?.id}
+				key={job.id}
 				>
+					<img src={job.image} css={css`width: 75px; height: 75px; position: absolute; left: 15px; top: 20px; border-radius: 50%;`}/>
 				<ContentJob>
-						<img src={Company} css={css`width: 75px; height: 75px; position: absolute; left: 15px; top: 20px; border-radius: 50%;`}/>
 					<ContentRow>
 						<FaIndustry css={css`font-size: 12.5px;`}/>
-						<TextCategory>{job?.category}</TextCategory>
+						<TextCategory>{job.category}</TextCategory>
 					</ContentRow>
-						<TextTitle>{job?.name}</TextTitle>
-						<TextCompanyName>{job?.company_name}</TextCompanyName>
+						<TextTitle>{job.title}</TextTitle>
+						<TextCompanyName>{job.company_name}</TextCompanyName>
 						<ContentRow>
 							<MdOutlineDateRange css={css`font-size: 12.5px;`}/>
-							<TextCompanyName>{job?.type_job}</TextCompanyName>
+							<TextCompanyName>{job.type}</TextCompanyName>
 							<RiMoneyDollarCircleLine css={css`font-size: 12.5px;`}/>
-							<TextCompanyName>{job?.min_salary}</TextCompanyName>
+							<TextCompanyName>{job.min_max_price}</TextCompanyName>
 						</ContentRow>
 				</ContentJob>
 				<div css={css`
@@ -281,10 +281,10 @@ function JobList({jobs}) {
 					<TextButtonFollow>follow</TextButtonFollow>
 					<ButtonSeeMore>See More</ButtonSeeMore>
 				</div>
-					</CardData>
+				</CardData>
 				))}
 			</ContainerCard>
 		</>
 	);
 }
-export default JobList;
+export default JobFollow;

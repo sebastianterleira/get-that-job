@@ -32,6 +32,14 @@ export async function logoutRecruiter() {
   sessionStorage.removeItem(tokenKey);
 }
 
+
+export async function loginProfessional(credentials) {
+  const { data } = await collectionClient("/user/sign_in", {
+    body: credentials,
+  });
+  return data;
+}
+
 export async function logoutProfessional() {
   await collectionClient("/user/sign_out", {
     method: "DELETE",
