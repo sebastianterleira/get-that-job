@@ -9,6 +9,8 @@ import { typography } from "../styles";
 import CustomButton from "../components/button";
 import { useState } from "react";
 import { fonts } from "../styles";
+import { createJob } from "../service/jobsRecruiter-services";
+import { useAuth } from "../context/auth-context";
 
 const Container = styled.div`
   margin: 2rem auto;
@@ -138,7 +140,8 @@ const Guion = styled.p`
   font-size: 19px;
 `;
 
-const NewJob = () => {
+const NewJob = ({ addNewJob }) => {
+  const { navigate } = useAuth();
   const [formData, setFormData] = useState({
     description: "",
     name: "",
@@ -150,6 +153,7 @@ const NewJob = () => {
     optional_requirements: "",
     // profile: "",
   });
+
   const {
     category,
     name,
@@ -167,12 +171,17 @@ const NewJob = () => {
     setFormData({ ...formData, [name]: value });
   }
 
+  function handleCategory(elem) {
+    setFormData({ ...formData, category: elem });
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     console.log(formData);
     // const fileUploaded = event.target.files[0];
-    // updateRecruiterProfile(formData);
-    // navigate("/");
+    createJob(formData);
+    addNewJob(formData);
+    navigate("/");
   }
   return (
     <Container>
@@ -184,12 +193,12 @@ const NewJob = () => {
           <InputStyled
             id="name"
             name="name"
-            placeholder={"Software enginerr"}
+            placeholder={"Software engineer"}
             value={name}
             onChange={handleChange}
             label="JOB TITLE"
           />
-          <SelectExample />
+          <SelectExample category={category} handleCategory={handleCategory} />
           <Type
             name="type_job"
             id="type_job"

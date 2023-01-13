@@ -72,6 +72,10 @@ function AuthenticatedApp() {
     setJobs(newjobs);
   }
 
+  function addJob(job) {
+    setJobs([...jobs, job]);
+  }
+
   return (
     <Container>
       {user ? (
@@ -96,13 +100,13 @@ function AuthenticatedApp() {
                 />
               }
             />
-            <Following />
+
+            <Route path={"/newjob"} element={<NewJob addNewJob={addJob} />} />
+
             <Route
               path={"/profile"}
               element={<ProfileRecruiter recruiter={recruiter} />}
             />
-
-            <Route path={"/newjob"} element={<NewJob />} />
 
             <Route
               path={"/jobs"}
