@@ -9,9 +9,9 @@ function AuthProvider(props) {
   const [user, setUser] = useState(null);
   const [recruiter, setRecruiter] = useState(null);
 
-  // useEffect(() => {
-  //   getUser().then(setUser).catch(console.log);
-  // }, []);
+  useEffect(() => {
+    getUser().then(setUser).catch(console.log);
+  }, []);
 
   // useEffect(() => {
   //   getUser().then(setUser).catch(console.log);
@@ -26,7 +26,7 @@ function AuthProvider(props) {
   }
 
   function logout() {
-    auth.logout().then(() => setUser(null));
+    auth.logoutProfessional().then(() => setUser(null));
   }
 
   function logoutRecruiter() {

@@ -11,9 +11,9 @@ export async function createUser(userData) {
 }
 
 export async function getUser() {
-	const {token, ...user} = await collectionClient("/profile");
+	const data = await collectionClient("/profile");
 
-	return user;
+	return data;
 }
 
 export async function updateUser(data) {

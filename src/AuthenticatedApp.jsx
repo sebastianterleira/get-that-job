@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
+import Navbar_professional from "./components/navbar_professional";
 import { useAuth } from "./context/auth-context";
 import ProfileRecruiter from "./pages/profilePage";
 import Search from "./pages/search";
@@ -16,7 +17,13 @@ function AuthenticatedApp() {
   return (
     <Container>
       {user ? (
-        ""
+        <>
+        <Navbar_professional />
+        <Routes>
+            <Route path={"/home"} element={<Search />} />
+            <Route path={"/"} element={<Search />} />
+          </Routes>
+        </>
       ) : (
         <>
           <Navbar />

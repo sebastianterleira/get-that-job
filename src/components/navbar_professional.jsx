@@ -4,7 +4,15 @@ import {
   RiUserLine,
   RiLogoutCircleLine,
   RiGithubFill,
+  RiFileList2Line,
 } from "react-icons/ri";
+import {
+  AiOutlineSearch,
+} from "react-icons/ai";
+import {
+  BiTargetLock,
+} from "react-icons/bi";
+
 import { VscNewFile } from "react-icons/vsc";
 import NavBarItem from "./navbarItem";
 import { typography } from "../styles";
@@ -56,9 +64,12 @@ const Main = styled.div`
   gap: 2rem;
 `;
 
-function Navbar() {
-  const { logoutRecruiter } = useAuth();
+function Navbar_professional() {
+  const { logout } = useAuth();
   const optionIcon = {
+    following: <BiTargetLock/>,
+    search: <AiOutlineSearch />,
+    application: <RiFileList2Line />,
     job: <RiSuitcaseLine />,
     create: <VscNewFile />,
     profile: <RiUserLine />,
@@ -72,14 +83,19 @@ function Navbar() {
         </ContainerImage>
         <ContainerItems>
           <NavBarItem
-            to={"profile"}
-            name={"Job Postings"}
-            icon={optionIcon.job}
+            to={"home"}
+            name={"Find that job"}
+            icon={optionIcon.search}
           />
           <NavBarItem
             to={"/"}
-            name={"Create New Job"}
-            icon={optionIcon.create}
+            name={"Your applications"}
+            icon={optionIcon.application}
+          />
+          <NavBarItem
+            to={"profile"}
+            name={"Following"}
+            icon={optionIcon.following}
           />
           <NavBarItem
             to={"profile"}
@@ -89,7 +105,7 @@ function Navbar() {
 
           <NavBarItem
             to={"/"}
-            handleClick={logoutRecruiter}
+            handleClick={logout}
             name={"Logout"}
             icon={optionIcon.logout}
           />
@@ -138,4 +154,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navbar_professional;
