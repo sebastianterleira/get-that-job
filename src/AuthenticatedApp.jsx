@@ -8,6 +8,8 @@ import Search from "./pages/search";
 import JobsPage from "./pages/jobsPage";
 import { useEffect, useState } from "react";
 import { getJobsRecruiter, updateJob } from "./service/jobsRecruiter-services";
+import { useLocalStorage } from "./hook";
+import NewJob from "./pages/newJob";
 
 const Container = styled.div`
   display: flex;
@@ -15,16 +17,22 @@ const Container = styled.div`
 
 function AuthenticatedApp() {
   const { user, recruiter } = useAuth();
-  const [jobs, setJobs] = useState([]);
+  const [localSto, setLocalSto] = useLocalStorage([], "Jobs");
+  const [jobs, setJobs] = useState(localSto || []);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     if (user) {
     }
     if (recruiter) {
-      getJobsRecruiter().then(setJobs).catch(console.log);
+      getJobsRecruiter()
+        .then((data) => {
+          setJobs(data);
+          setLocalSto(data);
+        })
+        .catch(console.log);
     }
-  }, [recruiter, user]);
+  }, [recruiter, user, setLocalSto]);
 
   let filterJobs = jobs;
 
@@ -63,10 +71,10 @@ function AuthenticatedApp() {
     <Container>
       {user ? (
         <>
-        <Navbar />
-        <Routes>
-          <Route path={"/"} element={<Search />} />
-        </Routes>
+          <Navbar />
+          <Routes>
+            <Route path={"/"} element={<Search />} />
+          </Routes>
         </>
       ) : (
         <>
@@ -82,6 +90,9 @@ function AuthenticatedApp() {
                 />
               }
             />
+
+            <Route path={"/newjob"} element={<NewJob />} />
+
             <Route path={"/profile"} element={<ProfileRecruiter />} />
             <Route
               path={"/jobs"}
