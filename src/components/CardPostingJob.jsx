@@ -242,7 +242,7 @@ const CardPosting = ({ job, handleUpdate }) => {
                 <BiUserCircle />
                 <Amount>
                   {
-                    applications?.filter((elem) => elem.status === "review")
+                    applications?.filter((elem) => elem.state === "review")
                       .length
                   }
                 </Amount>

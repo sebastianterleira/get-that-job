@@ -35,7 +35,7 @@ function AuthenticatedApp() {
   if (filter === "ontrack") {
     filterJobs = jobs?.filter(
       (elem) =>
-        elem.applications.filter((elem) => elem.status === "review").length > 0
+        elem.applications.filter((elem) => elem.state === "review").length > 0
     );
   }
 

@@ -128,12 +128,18 @@ const ButtonSearch = styled.button`
   border: 1px solid #f48fb1;
   border-radius: 1rem;
   ${typography.text.sm}
-  cursor:pointer;
-  &:hover {
-    background-color: #db5c8b;
 
-    color: #fff;
-  }
+  ${({ disabled }) =>
+    disabled
+      ? "background-color: #E1E2E1; color:#8E8E8E; border:none;"
+      : `
+    cursor:pointer;
+    &:hover {
+      background-color: #db5c8b;
+  
+      color: #fff;
+    }
+`}
 `;
 
 const ContainerButtons = styled.section`
@@ -226,7 +232,12 @@ const CardApplies = ({ applications }) => {
           </ContainerCandidates>
 
           <ContainerButtons>
-            <ButtonSearch onClick={updateState}>
+            <ButtonSearch
+              disabled={
+                statusValue === "finished" || statusValue === "declined"
+              }
+              onClick={updateState}
+            >
               {statusValue === "review"
                 ? "MARK AS STARTED"
                 : statusValue === "progress"
