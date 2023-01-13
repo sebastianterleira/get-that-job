@@ -2,7 +2,11 @@ import styled from "@emotion/styled";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
 import { useAuth } from "./context/auth-context";
+
+import Following from "./pages/Following";
+
 import JobPage from "./pages/jobPage";
+
 import ProfileRecruiter from "./pages/profilePage";
 import Search from "./pages/search";
 import JobsPage from "./pages/jobsPage";
@@ -69,6 +73,8 @@ function AuthenticatedApp() {
 
   return (
     <Container>
+
+     
       {user ? (
         <>
           <Navbar />
@@ -77,8 +83,11 @@ function AuthenticatedApp() {
           </Routes>
         </>
       ) : (
+
         <>
-          <Navbar />
+
+        <Following />
+          {/* <Navbar />
           <Routes>
             <Route
               path={"/"}
@@ -94,6 +103,9 @@ function AuthenticatedApp() {
             <Route path={"/newjob"} element={<NewJob />} />
 
             <Route path={"/profile"} element={<ProfileRecruiter />} />
+
+          </Routes> */}
+
             <Route
               path={"/jobs"}
               element={
@@ -109,8 +121,9 @@ function AuthenticatedApp() {
               element={<JobPage findJob={searchJob} setJobs={setJobs} />}
             />
           </Routes>
+
         </>
-      )}
+      {/* )} */}
     </Container>
   );
 }
