@@ -108,7 +108,7 @@ const data = [
 			'A guide on creating a spring-based Parallax scrolling effect using Framer Motion and React',
 		min_max_price: '2.0k - 2.5k',
 		date: 'Published on Mar 15, 2021 ',
-		follow: true,
+		follow: false,
 	},
 	{
 		id: 9,
@@ -122,7 +122,7 @@ const data = [
 			'A guide on creating a spring-based Parallax scrolling effect using Framer Motion and React',
 		min_max_price: '2.0k - 2.5k',
 		date: 'Published on Mar 15, 2021 ',
-		follow: true,
+		follow: false,
 	},
 ];
 
