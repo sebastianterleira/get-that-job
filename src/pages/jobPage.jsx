@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
+
+import { useParams } from "react-router-dom";
 import CardApplies from "../components/cardApplies";
 import CardPosting from "../components/CardPostingJob";
+
 import { typography } from "../styles/typography";
 
 const Container = styled.div`
@@ -67,21 +70,26 @@ const Subtitle = styled.h3`
   margin-bottom: 0.5rem;
 `;
 
-const JobPage = () => {
+const JobPage = ({ findJob, setJobs }) => {
+  const { id } = useParams();
+  const job = findJob(Number.parseInt(id));
+
+  let applications = job.applications;
+
   return (
     <Container>
       <Title>Show Job Posting</Title>
       <WrapperJob>
-        <CardPosting />
+        <CardPosting job={job} handleUpdate={console.log} />
       </WrapperJob>
       <Filters>
         <ContainerFilter>
           <RadioButton type="radio" id="all" name="state" value="all" />
-          <label for="all">All</label>
+          <label htmlFor="all">All</label>
         </ContainerFilter>
         <ContainerFilter>
           <RadioButton type="radio" id="waiting" name="state" value="waiting" />
-          <label for="waiting">Waiting</label>
+          <label htmlFor="waiting">Waiting</label>
         </ContainerFilter>
         <ContainerFilter>
           <RadioButton
@@ -90,17 +98,19 @@ const JobPage = () => {
             name="state"
             value="In progress"
           />
-          <label for="In progress">In progress</label>
+          <label htmlFor="In progress">In progress</label>
         </ContainerFilter>
         <ContainerFilter>
           <RadioButton type="radio" id="Finished" name="state" value="closed" />
-          <label for="Finished">Finished</label>
+          <label htmlFor="Finished">Finished</label>
         </ContainerFilter>
       </Filters>
-      <Subtitle>5 candidates found</Subtitle>
+      <Subtitle>{`${applications.length} candidates found`}</Subtitle>
 
       <ContainerApplications>
-        <CardApplies />
+        {applications?.map((appli) => (
+          <CardApplies key={appli.id} applications={appli} />
+        ))}
       </ContainerApplications>
     </Container>
   );
