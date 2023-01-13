@@ -6,7 +6,11 @@ import { fonts } from "../styles/typography";
 import JobList from "../components/job-list";
 import FilterJob from "../components/filters-job";
 import data from "../data/data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "../context/auth-context";
+import axios from "axios";
+import { getJobs } from "../service/user-services";
+
 
 const Wrapper = styled.div`
 max-width: 1024px;
@@ -66,14 +70,65 @@ position: relative;
 `
 
 function Search() {
-	const [jobs] = useState(data);
+	const {jobs, setJobs} = useAuth([]);
+	const [tablaProducts, setTablaProducts] = useState([]);
+	const [ query, setQuery] = useState("");
+	const [state, setState] = useState({
+    status: "idle",
+    data: null,
+    error: null,
+  });
+  const { status, data: item, error } = state;
 
+	useEffect(() => {
+		getJobs().then(setTablaProducts).catch(console.log)
+	}, []);
+
+	useEffect(() => {
+		if (query === "") return;
+		setState({ status: "pending" })
+		.then((data) => {
+				setState({
+					status: "success",
+					data: data,
+					error: null,
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+				setState({
+					status: "error",
+					data: null,
+					error: "El usuario no existe! Intenta de nuevo o perdio Conexion 💀",
+				});
+			});
+	}, [query]);
+	
+	
+	const filterSearch =(terminoBusqueda) => {
+		var searchResults=tablaProducts.filter((elemento) => {
+			if(elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())){
+				return elemento;
+			}
+		});
+		setJobs(searchResults);
+	}
+	
 	let allCategories = jobs.reduce((accu, current) => {
-    if (!accu.includes(current.category)) accu.push(current.category);
+		if (!accu.includes(current.category)) accu.push(current.category);
 
 		return accu;
-  }, []);
+	}, ["All"]);
 
+	const filterCategory = (category) => {
+		if(category === "All") {
+			setJobs(tablaProducts)
+			return;
+}
+
+		const filteredData = tablaProducts.filter(job => job.category === category)
+		setJobs(filteredData);
+	}
 
 	return (
 		<>
@@ -83,12 +138,13 @@ function Search() {
 							<p css={css`margin-bottom: 4px;`}>search by job title or company name</p>
 								<GroupInput>
 									<BiSearch css={css`position: absolute; margin-left: 15px; width: 16px; top: -1px; font-size: 40px;`}/>
-										<Input
+										<Input 
+										onChange={(event) => filterSearch(event.target.value)}
 										placeholder="manufacturing, sales, swim"
 										/>
 							</GroupInput>
 						</LabelInput>
-					<FilterJob categories={allCategories}/>
+					<FilterJob allCategories={allCategories} filterCategory={filterCategory}/>
 				<JobList jobs={jobs}/>
 			</Wrapper>
 		</>
