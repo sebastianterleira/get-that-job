@@ -2,7 +2,7 @@ import { tokenKey } from "../config";
 import collectionClient from "./collection-client";
 
 export async function login(credentials) {
-  const { data } = await collectionClient("/login", {
+  const { data } = await collectionClient("/user/sign_in", {
     body: credentials,
   });
 
@@ -31,6 +31,7 @@ export async function logoutRecruiter() {
 
   sessionStorage.removeItem(tokenKey);
 }
+
 
 export async function loginProfessional(credentials) {
   const { data } = await collectionClient("/user/sign_in", {

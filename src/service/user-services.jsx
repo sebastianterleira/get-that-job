@@ -10,6 +10,12 @@ export async function createUser(userData) {
   return user;
 }
 
+export async function getUser() {
+	const data = await collectionClient("/profile");
+
+	return data;
+}
+
 export async function updateUser(data) {
 	const {token, ...user} = await collectionClient("/profile", {
 		body: data,

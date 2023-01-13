@@ -1,13 +1,20 @@
 import styled from "@emotion/styled";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
+import Navbar_professional from "./components/navbar_professional";
 import { useAuth } from "./context/auth-context";
+
+import Following from "./pages/Following";
+
 import JobPage from "./pages/jobPage";
+
 import ProfileRecruiter from "./pages/profilePage";
 import Search from "./pages/search";
 import JobsPage from "./pages/jobsPage";
 import { useEffect, useState } from "react";
 import { getJobsRecruiter, updateJob } from "./service/jobsRecruiter-services";
+import { useLocalStorage } from "./hook";
+import NewJob from "./pages/newJob";
 
 const Container = styled.div`
   display: flex;
@@ -15,16 +22,22 @@ const Container = styled.div`
 
 function AuthenticatedApp() {
   const { user, recruiter } = useAuth();
-  const [jobs, setJobs] = useState([]);
+  const [localSto, setLocalSto] = useLocalStorage([], "Jobs");
+  const [jobs, setJobs] = useState(localSto || []);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     if (user) {
     }
     if (recruiter) {
-      getJobsRecruiter().then(setJobs).catch(console.log);
+      getJobsRecruiter()
+        .then((data) => {
+          setJobs(data);
+          setLocalSto(data);
+        })
+        .catch(console.log);
     }
-  }, [recruiter, user]);
+  }, [recruiter, user, setLocalSto]);
 
   let filterJobs = jobs;
 
@@ -61,16 +74,31 @@ function AuthenticatedApp() {
 
   return (
     <Container>
+
+     
       {user ? (
+
         <>
-        <Navbar />
+        <Navbar_professional />
         <Routes>
-          <Route path={"/"} element={<Search />} />
-        </Routes>
+            <Route path={"/home"} element={<Search />} />
+            <Route path={"/"} element={<Search />} />
+          </Routes>
         </>
       ) : (
+
         <>
           <Navbar />
+          <Routes>
+            <Route path={"/"} element={<Search />} />
+          </Routes>
+        </>
+      ) : (
+
+        <>
+
+        <Following />
+          {/* <Navbar />
           <Routes>
             <Route
               path={"/"}
@@ -82,7 +110,13 @@ function AuthenticatedApp() {
                 />
               }
             />
+
+            <Route path={"/newjob"} element={<NewJob />} />
+
             <Route path={"/profile"} element={<ProfileRecruiter />} />
+
+          </Routes> */}
+
             <Route
               path={"/jobs"}
               element={
@@ -98,8 +132,9 @@ function AuthenticatedApp() {
               element={<JobPage findJob={searchJob} setJobs={setJobs} />}
             />
           </Routes>
+
         </>
-      )}
+      {/* )} */}
     </Container>
   );
 }
