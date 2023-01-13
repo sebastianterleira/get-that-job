@@ -2,11 +2,17 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { createUser, getJobs, getUser } from "../service/user-services";
 import * as auth from "../service/auth-services";
 import React from "react";
+import { createUser, getRecruiter } from "../service/user-services";
+import * as auth from "../service/auth-services";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
 const AuthContext = createContext();
 
 function AuthProvider(props) {
   const [user, setUser] = useState(null);
   const [recruiter, setRecruiter] = useState(null);
+
   const [jobs, setJobs] = useState(null)
 
  useEffect(() => {
@@ -17,9 +23,15 @@ function AuthProvider(props) {
     getUser().then(setUser).catch(console.log);
   }, []);
 
+  const navigate = useNavigate();
   // useEffect(() => {
   //   getUser().then(setUser).catch(console.log);
   // }, []);
+
+
+  useEffect(() => {
+    getRecruiter().then(setRecruiter).catch(console.log);
+  }, []);
 
 
   function loginProfessional(credentials) {
@@ -55,6 +67,8 @@ function AuthProvider(props) {
     signup,
     lgoinRecruiter,
     loginProfessional,
+    recruiter,
+    navigate,
     logoutRecruiter,
     logoutProfessional,
     setJobs,

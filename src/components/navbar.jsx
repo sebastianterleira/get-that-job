@@ -70,11 +70,7 @@ function Navbar() {
           <img src={getJob} alt="navbar-Title" />
         </ContainerImage>
         <ContainerItems>
-          <NavBarItem
-            to={"profile"}
-            name={"Job Postings"}
-            icon={optionIcon.job}
-          />
+          <NavBarItem to={"jobs"} name={"Job Postings"} icon={optionIcon.job} />
           <NavBarItem
             to={"/"}
             name={"Create New Job"}
