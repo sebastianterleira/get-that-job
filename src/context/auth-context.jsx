@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { createUser, getJobs, getUser, getRecruiter } from "../service/user-services";
 import {
   createUser,
   getJobs,
   getUser,
   getRecruiter,
 } from "../service/user-services";
+import { updateRecruiter } from "../service/user-services";
 import * as auth from "../service/auth-services";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,8 @@ const AuthContext = createContext();
 function AuthProvider(props) {
   const [user, setUser] = useState(null);
   const [recruiter, setRecruiter] = useState(null);
+  const navigate = useNavigate();
+
   const [jobs, setJobs] = useState(null);
 
   useEffect(() => {
@@ -29,8 +31,6 @@ function AuthProvider(props) {
     getUser().then(setUser).catch(console.log);
   }, []);
 
-  const navigate = useNavigate();
-  
   // useEffect(() => {
   //   getUser().then(setUser).catch(console.log);
   // }, []);
@@ -63,6 +63,10 @@ function AuthProvider(props) {
     createUser(userData).then(setUser).catch(console.log);
   }
 
+  function updateRecruiterProfile(data) {
+    updateRecruiter(data).then(setRecruiter).catch(console.log);
+  }
+
   const value = {
     user,
     jobs,
@@ -76,6 +80,7 @@ function AuthProvider(props) {
     logoutRecruiter,
     logoutProfessional,
     setJobs,
+    updateRecruiterProfile,
   };
 
   return <AuthContext.Provider value={value} {...props} />;

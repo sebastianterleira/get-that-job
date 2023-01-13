@@ -10,6 +10,7 @@ const StyledInput = styled.input`
   height: 36px;
   border: 1.3px solid #f48fb1;
   border-radius: 8px;
+  padding: 4px 12px;
   background-color: ${({ color }) => (color ? "" : "#fff")};
   box-sizing: border-box;
   &:focus-visible {
@@ -18,7 +19,7 @@ const StyledInput = styled.input`
 `;
 const Label = styled.label`
   color: #373737;
-  ${typography.text.sm}
+  ${typography.text.xs}
   Line-height: 12px;
   letter-spacing: 1.5px;
 `;

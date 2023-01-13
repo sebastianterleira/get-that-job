@@ -72,33 +72,23 @@ function AuthenticatedApp() {
     setJobs(newjobs);
   }
 
+  function addJob(job) {
+    setJobs([...jobs, job]);
+  }
+
   return (
     <Container>
-
-     
       {user ? (
-
         <>
-        <Navbar_professional />
-        <Routes>
+          <Navbar_professional />
+          <Routes>
             <Route path={"/home"} element={<Search />} />
             <Route path={"/"} element={<Search />} />
           </Routes>
         </>
       ) : (
-
         <>
           <Navbar />
-          <Routes>
-            <Route path={"/"} element={<Search />} />
-          </Routes>
-        </>
-      ) : (
-
-        <>
-
-        <Following />
-          {/* <Navbar />
           <Routes>
             <Route
               path={"/"}
@@ -111,11 +101,12 @@ function AuthenticatedApp() {
               }
             />
 
-            <Route path={"/newjob"} element={<NewJob />} />
+            <Route path={"/newjob"} element={<NewJob addNewJob={addJob} />} />
 
-            <Route path={"/profile"} element={<ProfileRecruiter />} />
-
-          </Routes> */}
+            <Route
+              path={"/profile"}
+              element={<ProfileRecruiter recruiter={recruiter} />}
+            />
 
             <Route
               path={"/jobs"}
@@ -131,10 +122,19 @@ function AuthenticatedApp() {
               path={"/jobs/:id"}
               element={<JobPage findJob={searchJob} setJobs={setJobs} />}
             />
+            <Route
+              path={"*"}
+              element={
+                <JobsPage
+                  handleFilter={handleFilter}
+                  jobs={filterJobs}
+                  handleState={handleJob}
+                />
+              }
+            />
           </Routes>
-
         </>
-      {/* )} */}
+      )}
     </Container>
   );
 }
