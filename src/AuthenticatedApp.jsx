@@ -118,6 +118,16 @@ function AuthenticatedApp() {
               path={"/jobs/:id"}
               element={<JobPage findJob={searchJob} setJobs={setJobs} />}
             />
+            <Route
+              path={"*"}
+              element={
+                <JobsPage
+                  handleFilter={handleFilter}
+                  jobs={filterJobs}
+                  handleState={handleJob}
+                />
+              }
+            />
           </Routes>
         </>
       )}
