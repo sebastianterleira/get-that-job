@@ -74,31 +74,17 @@ function AuthenticatedApp() {
 
   return (
     <Container>
-
-     
       {user ? (
-
         <>
-        <Navbar_professional />
-        <Routes>
+          <Navbar_professional />
+          <Routes>
             <Route path={"/home"} element={<Search />} />
             <Route path={"/"} element={<Search />} />
           </Routes>
         </>
       ) : (
-
         <>
           <Navbar />
-          <Routes>
-            <Route path={"/"} element={<Search />} />
-          </Routes>
-        </>
-      ) : (
-
-        <>
-
-        <Following />
-          {/* <Navbar />
           <Routes>
             <Route
               path={"/"}
@@ -110,12 +96,13 @@ function AuthenticatedApp() {
                 />
               }
             />
+            <Following />
+            <Route
+              path={"/profile"}
+              element={<ProfileRecruiter recruiter={recruiter} />}
+            />
 
             <Route path={"/newjob"} element={<NewJob />} />
-
-            <Route path={"/profile"} element={<ProfileRecruiter />} />
-
-          </Routes> */}
 
             <Route
               path={"/jobs"}
@@ -132,9 +119,8 @@ function AuthenticatedApp() {
               element={<JobPage findJob={searchJob} setJobs={setJobs} />}
             />
           </Routes>
-
         </>
-      {/* )} */}
+      )}
     </Container>
   );
 }

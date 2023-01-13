@@ -5,6 +5,7 @@ import {
   getJobs,
   getUser,
   getRecruiter,
+  updateRecruiter,
 } from "../service/user-services";
 import * as auth from "../service/auth-services";
 import React from "react";
@@ -63,6 +64,10 @@ function AuthProvider(props) {
     createUser(userData).then(setUser).catch(console.log);
   }
 
+  function updateRecruiterProfile(data) {
+    updateRecruiter(data).then(setRecruiter).catch(console.log);
+  }
+
   const value = {
     user,
     jobs,
@@ -76,6 +81,7 @@ function AuthProvider(props) {
     logoutRecruiter,
     logoutProfessional,
     setJobs,
+    updateRecruiterProfile,
   };
 
   return <AuthContext.Provider value={value} {...props} />;

@@ -11,33 +11,23 @@ export async function createUser(userData) {
 }
 
 export async function getUser() {
-	const data = await collectionClient("/profile");
+  const data = await collectionClient("/profile");
 
-	return data;
+  return data;
 }
 
 export async function updateUser(data) {
-	const {token, ...user} = await collectionClient("/profile", {
-		body: data,
-		method: "PATCH",
-	});
-
-	sessionStorage.setItem(tokenKey, token);
-	return user;
-}
-
-export async function getJobs() {
-	return await collectionClient("/jobs")
-}
-
-export async function getUser(data) {
-	const { token, ...user } = await collectionClient("/profile", {
-		body: data,
-		method: "PATCH",
-	});
+  const { token, ...user } = await collectionClient("/profile", {
+    body: data,
+    method: "PATCH",
+  });
 
   sessionStorage.setItem(tokenKey, token);
   return user;
+}
+
+export async function getJobs() {
+  return await collectionClient("/jobs");
 }
 
 export async function getRecruiter() {
@@ -46,3 +36,11 @@ export async function getRecruiter() {
   return user;
 }
 
+export async function updateRecruiter(body) {
+  const { data } = await collectionClient("/company", {
+    body: body,
+    method: "PATCH",
+  });
+
+  return data;
+}

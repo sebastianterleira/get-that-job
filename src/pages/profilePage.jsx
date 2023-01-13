@@ -4,6 +4,7 @@ import CustomButton from "../components/button";
 import InputStyledut from "../components/inputStyled";
 import { typography } from "../styles";
 import { RiUploadLine } from "react-icons/ri";
+import { useAuth } from "../context/auth-context";
 
 const Container = styled.div`
   margin: 2rem auto;
@@ -22,6 +23,7 @@ const AreaContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 1.5rem;
 `;
 
 const StyledInput = styled.textarea`
@@ -92,13 +94,14 @@ const Img = styled.img`
   filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.25));
 `;
 
-const ProfileRecruiter = () => {
+const ProfileRecruiter = ({ recruiter }) => {
+  const { navigate, updateRecruiterProfile } = useAuth();
   const [formData, setFormData] = useState({
-    email: "",
-    name: "",
-    website: "",
-    description: "",
-    profile: "",
+    email: recruiter?.email,
+    name: recruiter?.name,
+    website: recruiter?.website,
+    description: recruiter?.description,
+    // profile: "",
   });
   const { email, name, website, description, profile } = formData;
 
@@ -110,14 +113,15 @@ const ProfileRecruiter = () => {
 
   function handleChangeFile(event) {
     console.log(event.target.files[0]);
-    setFormData({ ...formData, profile: event.target.files[0] });
+    // setFormData({ ...formData, profile: event.target.files[0] });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     // const fileUploaded = event.target.files[0];
-    // login(formData);
+    updateRecruiterProfile(formData);
+    navigate("/");
   }
 
   return (
@@ -125,7 +129,7 @@ const ProfileRecruiter = () => {
       <Title>Profile</Title>
       <Form onSubmit={handleSubmit}>
         <ContainerFile>
-          <Img />
+          <Img src={profile} />
 
           <div>
             <AreaContainer>
