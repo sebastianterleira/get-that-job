@@ -1,9 +1,13 @@
+/** @jsxImportSource @emotion/react */
 import styled from "@emotion/styled";
 import { typography } from "../styles/typography";
 import { HiOutlineChevronDown } from "react-icons/hi";
 import { RiPauseCircleLine, RiMailOpenLine, RiPhoneLine } from "react-icons/ri";
 
 import { useState } from "react";
+import { css } from "@emotion/react";
+import dayjs from "dayjs";
+import { updateApplicationJob } from "../service/applicationJobs";
 
 const Container = styled.div`
   min-height: 102px;
@@ -16,11 +20,13 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   padding: 1rem;
+  width: 100%;
 `;
 
 const Header = styled.section`
   display: flex;
   gap: 3rem;
+  justify-content: space-between;
 `;
 
 const Title = styled.p`
@@ -135,11 +141,40 @@ const ContainerButtons = styled.section`
   gap: 1rem;
 `;
 
-const CardApplies = () => {
+const CardApplies = ({ applications }) => {
   const [display, setDisplay] = useState(false);
+  const [statusValue, setStatusValue] = useState(applications.state);
 
   function handleDisplay() {
     setDisplay(!display);
+  }
+  let message;
+  switch (statusValue) {
+    case "review":
+      message = "Waiting in review";
+      break;
+    case "progress":
+      message = "Review in progress";
+      break;
+    case "finished":
+      message = "Review finished";
+      break;
+    case "declined":
+      message = `Declined in ${dayjs(applications.updated_at).format(
+        "MM-DD-YYYY"
+      )}`;
+      break;
+    default:
+      break;
+  }
+
+  function updateState() {
+    let state;
+    if (statusValue === "review") state = "progress";
+    if (statusValue === "progress") state = "finished";
+
+    updateApplicationJob({ state: state }, applications.id).then().catch();
+    setStatusValue(state);
   }
 
   return (
@@ -147,23 +182,27 @@ const CardApplies = () => {
       <Wrapper>
         <Header>
           <section>
-            <Title>Guybrush Threepwood</Title>
+            <Title>{applications?.user_data.name}</Title>
             <Details>
-              <span>Migthy Pirate</span>
+              <span>{applications?.user_data.title}</span>
             </Details>
           </section>
-          <section>
+          <section
+            css={css`
+              width: 140px;
+            `}
+          >
             <ProfileData>
               <IconWrapper>
                 <RiMailOpenLine />
               </IconWrapper>
-              <span>guy.brush@mail.com</span>
+              <span>{applications?.user_data.email}</span>
             </ProfileData>
             <ProfileData>
               <IconWrapper>
                 <RiPhoneLine />
               </IconWrapper>
-              <span>guy.brush@mail.com</span>
+              <span>{applications.user_data.phone}</span>
             </ProfileData>
           </section>
           <ContainerCandidates>
@@ -176,33 +215,30 @@ const CardApplies = () => {
 
             <JobCandidates colorDesi={"pink"}>
               <IconWrapper>
-                <RiPauseCircleLine />
+                {statusValue === "review" ? (
+                  <RiPauseCircleLine />
+                ) : (
+                  <RiMailOpenLine />
+                )}
               </IconWrapper>
-              <TextIcon>{`Waiting for review`}</TextIcon>
+              <TextIcon>{message}</TextIcon>
             </JobCandidates>
           </ContainerCandidates>
 
           <ContainerButtons>
-            <ButtonSearch>MARK AS STARTED</ButtonSearch>
+            <ButtonSearch onClick={updateState}>
+              {statusValue === "review"
+                ? "MARK AS STARTED"
+                : statusValue === "progress"
+                ? "MARK AS FINISHED"
+                : "FINISHED"}
+            </ButtonSearch>
           </ContainerButtons>
         </Header>
         <ContainerMain active={display}>
           <ContainerText>
             <SubTitle>Professional experience</SubTitle>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut est
-              eligendi quidem ratione, hic pariatur adipisci ducimus quis error
-              perspiciatis nisi suscipit dolorum cum molestiae veritatis rem!
-              Totam rem repellat, possimus beatae excepturi nam dicta commodi
-              omnis accusantium enim laborum sit fugit distinctio fuga officia
-              voluptatem assumenda consectetur repudiandae eius aliquid ipsam
-              provident quo! Explicabo soluta molestiae tempora velit error ex
-              vel, debitis facere quam consequatur rerum illo a id officia
-              nesciunt sit temporibus dolorem cum, suscipit iusto neque quos
-              ducimus maiores molestias! Iste optio tenetur cum dolorum
-              architecto sed molestiae eius voluptates, dolor laborum reiciendis
-              tempore, voluptatem cupiditate commodi?
-            </p>
+            <p>{applications.user_data.experience}</p>
           </ContainerText>
 
           <ContainerText>
