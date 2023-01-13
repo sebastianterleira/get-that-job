@@ -62,7 +62,12 @@ function AuthenticatedApp() {
   return (
     <Container>
       {user ? (
-        ""
+        <>
+        <Navbar />
+        <Routes>
+          <Route path={"/"} element={<Search />} />
+        </Routes>
+        </>
       ) : (
         <>
           <Navbar />
@@ -77,8 +82,6 @@ function AuthenticatedApp() {
                 />
               }
             />
-
-            <Route path={"/home"} element={<Search />} />
             <Route path={"/profile"} element={<ProfileRecruiter />} />
             <Route
               path={"/jobs"}
