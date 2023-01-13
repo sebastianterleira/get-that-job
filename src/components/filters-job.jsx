@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React from "react";
+import React, {useState} from "react";
 import { fonts } from "../styles";
 import { RiCloseLine } from "react-icons/ri";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import Multiselect from 'multiselect-react-dropdown';
+
 
 const ContentRow = styled.div`
 display: flex;
@@ -63,8 +64,21 @@ const GroupInput = styled.div`
 position: relative;
 `
 
-function FilterJob({allCategories, filterCategory}) {
-console.log(allCategories)
+function FilterJob( {filteredProducts, jobs}) {
+	const [selectedCategories, setSelectedCategories] = useState([]);
+	const [selectedValues, setSelectedValues] = useState([]);
+
+	console.log(selectedCategories)
+
+const categories = [
+  { cat: 'Group 1', key: 'Manufactoring' },
+  { cat: 'Group 1', key: 'Art' },
+  { cat: 'Group 1', key: 'Programmig' },
+];
+
+const handleChange = (value) => {
+  setSelectedValues(value, () => console.log(selectedValues));
+}
 
 	return (
 		<>
@@ -72,7 +86,6 @@ console.log(allCategories)
 				<LabelInput>
 				<p css={css`margin-bottom: 4px;`}>Category</p>
 					<GroupInput>
-						{allCategories.map((category) => (
 							<Multiselect
 								customCloseIcon={<RiCloseLine/>}
 								displayValue="key"
@@ -80,12 +93,10 @@ console.log(allCategories)
 								onRemove={function noRefCheck(){}}
 								onSearch={function noRefCheck(){}}
 								onSelect={function noRefCheck(){}}
-								options={[
-									{
-										cat: 'Group 1',
-										key: {category},
-									}
-								]}
+								value={handleChange}
+								onChange={handleChange}
+								onClick={() => filteredProducts(selectedCategories)}
+								options={categories}
 								placeholder="Select Category"
 								style={{
 									chips: {
@@ -126,7 +137,6 @@ console.log(allCategories)
 									},
 								}}
 								/>
-								))}
 								<RiArrowDownSLine css={css`position: absolute; margin-left: 245px; top: 8px; font-size: 25px;`}/>
 								</GroupInput>
 								</LabelInput>

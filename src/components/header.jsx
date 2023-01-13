@@ -21,8 +21,9 @@ const Wrapper = styled.div`
   margin: auto;
   display: flex;
   flex-direction: row;
-  padding: 20px 20px 0px 20px;
+  padding: 20px 0px 0px 0px;
   align-items: center;
+  justify-content: center;
 `;
 
 const ContentRow = styled.div`

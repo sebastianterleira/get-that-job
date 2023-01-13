@@ -171,8 +171,8 @@ margin-top: 30px;
   font-size: 24px;
   line-height: 29px;
   text-align: center;
-  
 `;
+
 const StyledBu = styled.button`
   display: flex;
   flex-direction: row;
@@ -200,6 +200,7 @@ const StyledH1 = styled.h1`
   text-align: center;
   letter-spacing: -0.5px;
 `;
+
 function MenuIndex() {
   return (
     <>

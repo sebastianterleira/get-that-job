@@ -118,17 +118,16 @@ function Search() {
 		if (!accu.includes(current.category)) accu.push(current.category);
 
 		return accu;
-	}, ["All"]);
+	}, ["All"]);	
 
-	const filterCategory = (category) => {
-		if(category === "All") {
-			setJobs(tablaProducts)
-			return;
-}
+console.log(tablaProducts)
 
-		const filteredData = tablaProducts.filter(job => job.category === category)
-		setJobs(filteredData);
-	}
+	const filteredProducts = (data) => tablaProducts.map(job => {
+		if(data.includes(job.category)){
+			console.log(job)
+			setJobs(job)
+		}
+	});
 
 	return (
 		<>
@@ -144,7 +143,7 @@ function Search() {
 										/>
 							</GroupInput>
 						</LabelInput>
-					<FilterJob allCategories={allCategories} filterCategory={filterCategory}/>
+					<FilterJob jobs={jobs} filteredProducts={filteredProducts}/>
 				<JobList jobs={jobs}/>
 			</Wrapper>
 		</>
