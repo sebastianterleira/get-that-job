@@ -225,14 +225,14 @@ const CardPosting = ({ job, handleUpdate }) => {
               <IconWrapper>
                 <RiMailOpenLine />
               </IconWrapper>
-              <TextIcon>{`Open on ${dayjs(job.created_at).format(
+              <TextIcon>{`Open on ${dayjs(job?.created_at).format(
                 "MM-DD-YYYY"
               )}`}</TextIcon>
             </JobCandidates>
             <JobCandidates>
               <IconWrapper>
                 <BiUserCircle />
-                <Amount>{applications.length}</Amount>
+                <Amount>{applications?.length}</Amount>
               </IconWrapper>
               <TextIcon>{`Total Candidates`}</TextIcon>
             </JobCandidates>
@@ -243,7 +243,7 @@ const CardPosting = ({ job, handleUpdate }) => {
                 <Amount>
                   {
                     applications?.filter((elem) => elem.state === "review")
-                      .length
+                      ?.length
                   }
                 </Amount>
               </IconWrapper>
