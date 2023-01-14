@@ -8,6 +8,15 @@ import LoginFormProfessional from "../components/FormLogin/login-form-profession
 import LoginFormRecruiter from "../components/FormLogin/login-form-recruiter";
 
 const Wrapper = styled.div`
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  padding: 0px 0px 20px 0px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Wrapper2 = styled.div`
 max-width: 1024px;
 margin: auto;
 display: flex;
@@ -91,8 +100,8 @@ function LoginPage() {
   }
 
   return (
-		<>
 		<Wrapper>
+		<Wrapper2>
 			<div css={css`display: flex; flex-direction: column;`}>
 				<WelcomeText>Welcome back</WelcomeText>
 				<Message>Login to you account as...</Message>
@@ -110,11 +119,11 @@ function LoginPage() {
 
         {showLogin === "Professional" ? <LoginFormProfessional/> : <LoginFormRecruiter/>}
       </div>
-		</Wrapper>
+		</Wrapper2>
 			<Card>
 				<img src={HombreSaludo} alt="HobreSaludo" css={css`width: 400px; margin-right: 70px;`}/>
 			</Card>
-		</>
+		</Wrapper>
 	);
 }
 
