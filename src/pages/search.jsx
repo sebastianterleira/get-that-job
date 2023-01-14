@@ -103,7 +103,22 @@ function Search() {
       });
   }, [query]);
 
-  console.log(tablaProducts);
+  const filterSearch =(terminoBusqueda) => {
+		var searchResults=tablaProducts.filter((elemento) => {
+			if(elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())){
+				return elemento;
+			}
+		});
+		setJobs(searchResults);
+	}
+
+  // let allCategories = jobs.reduce((accu, current) => {
+	// 	if (!accu.includes(current.category)) accu.push(current.category);
+
+	// 	return accu;
+	// }, ["All"]);
+
+  // console.log(tablaProducts);
 
   const filteredProducts = (data) =>
     tablaProducts.map((job) => {
