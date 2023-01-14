@@ -82,7 +82,6 @@ function AuthenticatedApp() {
         <>
           <Navbar_professional />
           <Routes>
-            <Route path={"/home"} element={<Search />} />
             <Route path={"/"} element={<Search />} />
           </Routes>
         </>

@@ -4,9 +4,8 @@ import React from "react";
 import Group from "../static/img/HomePage/G.png"
 import Sebastian from "../static/img/HomePage/sebastian.jpeg"
 import Patricia from "../static/img/HomePage/patricia.jpeg"
-import Camilo from "../static/img/HomePage/eli.png"
+import Camilo from "../static/img/HomePage/camilo.png"
 import Beatriz from "../static/img/HomePage/bea.png"
-
 import Search from "../static/img/HomePage/search.png"
 import styled from "@emotion/styled";
 import { fonts } from "../styles";
@@ -222,7 +221,7 @@ function Home() {
 								<NameDev>Sebastian</NameDev>
 									<ContentContact>
 										<a href="https://github.com/sebastianterleira" css={css`text-decoration: none;`} target="blank_"> <DiGithubBadge css={css`font-size: 30px; text-decoration: none; color: #616161;`}/> </a>
-										<a href="https://www.linkedin.com/in/camilohuanca/" css={css`text-decoration: none;`} target="blank_"> <AiFillLinkedin css={css`font-size: 30px; text-decoration: none; color: #616161;`}/> </a>
+										<a href="https://www.linkedin.com/in/sebastian-terleira-8773a4247/" css={css`text-decoration: none;`} target="blank_"> <AiFillLinkedin css={css`font-size: 30px; text-decoration: none; color: #616161;`}/> </a>
 									</ContentContact>
 								</ContentGrid>
 								<ContentGrid>
