@@ -101,7 +101,7 @@ const ProfileRecruiter = ({ recruiter }) => {
     name: recruiter?.name,
     website: recruiter?.website,
     description: recruiter?.description,
-    // profile: "",
+    profile: recruiter?.profile_image,
   });
   const { email, name, website, description, profile } = formData;
 
@@ -113,17 +113,26 @@ const ProfileRecruiter = ({ recruiter }) => {
 
   function handleChangeFile(event) {
     console.log(event.target.files[0]);
-    // setFormData({ ...formData, profile: event.target.files[0] });
+    setFormData({ ...formData, profile: event.target.files[0] });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     // console.log(formData);
     // const fileUploaded = event.target.files[0];
-    updateRecruiterProfile(formData);
+    const formData1 = new FormData();
+    formData1.append("profile", profile);
+    formData1.append("name", name);
+    formData1.append("email", email);
+    formData1.append("website", website);
+    formData1.append("description", description);
+
+    updateRecruiterProfile(formData1);
     navigate("/");
   }
-
+  
+  console.log(recruiter)
+  
   return (
     <Container>
       <Title>Profile</Title>
@@ -143,7 +152,6 @@ const ProfileRecruiter = ({ recruiter }) => {
                 name="profile"
                 type="file"
                 placeholder="Choose a file"
-                value={profile}
                 onChange={handleChangeFile}
               />
             </AreaContainer>
