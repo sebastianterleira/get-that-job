@@ -59,7 +59,7 @@ const ButtonForm = styled.button`
 `
 
 function LoginFormProfessional() {
-	const { loginProfessional } = useAuth();
+	const { loginProfessional, navigate } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -75,6 +75,7 @@ function LoginFormProfessional() {
     event.preventDefault();
 
     loginProfessional(formData);
+    navigate("/");
   }
 
   return (

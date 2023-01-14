@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
-import Navbar_professional from "./components/navbar_professional";
+import NavbarProfessional from "./components/navbar_professional";
 import { useAuth } from "./context/auth-context";
 
 import Following from "./pages/Following";
@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { getJobsRecruiter, updateJob } from "./service/jobsRecruiter-services";
 import { useLocalStorage } from "./hook";
 import NewJob from "./pages/newJob";
+import Application from "./components/ApplicationPage";
 
 const Container = styled.div`
   display: flex;
@@ -80,9 +81,13 @@ function AuthenticatedApp() {
     <Container>
       {user ? (
         <>
-          <Navbar_professional />
+          <NavbarProfessional />
           <Routes>
             <Route path={"/"} element={<Search />} />
+            <Route path={"/home"} element={<Search />} />
+            <Route path={"*"} element={<Search />} />
+            <Route path={"/Appli"} element={<Application />} />
+            <Route path={"/following"} element={<Following />} />
           </Routes>
         </>
       ) : (

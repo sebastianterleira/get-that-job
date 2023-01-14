@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
+import { useAuth } from "../context/auth-context";
 import { fonts } from "../styles";
 import LogoHeader from "../static/LogoHeader.png"
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import LoginPage from "../pages/login-page";
-import SignUpPage from "../pages/signup-page";
 import Home from "../pages/landing-page";
 
 const NavBarMenu = styled.div`
@@ -84,21 +83,24 @@ overflow: hidden;
   }
 `
 function Header() {
-	const [showView, setShowView] = useState();
+	const { navigate } = useAuth()
+	function Navigate(link) {
+		navigate(`/${link}`);
+	}
+
 
   return (
 	<>
 		<NavBarMenu>
-				<Link onClick={() => setShowView("")}>
+				<Link to={"/"}>
 					<ImagenLogo src={LogoHeader} alt="LogoHeader" />
 				</Link>
 			<ContentRow>
-				<ButtonNav onClick={() => setShowView("Login")}>🙍‍♂️   Login</ButtonNav>
-				<ButtonNav onClick={() => setShowView("SignUp")}>🙍‍♂️   Sign-Up</ButtonNav>
+				<ButtonNav onClick={() => Navigate("login")} >🙍‍♂️   Login</ButtonNav>
+				<ButtonNav onClick={() => Navigate("signup")}>🙍‍♂️   Sign-Up</ButtonNav>
 			</ContentRow>
 		</NavBarMenu>
 		<Wrapper>
-			{showView === "Login" ? <LoginPage/> : showView === "SignUp" ? <SignUpPage/> : <Home/> }
 		</Wrapper>
 	</>
 	);

@@ -64,7 +64,7 @@ const Main = styled.div`
   gap: 2rem;
 `;
 
-function Navbar_professional() {
+function NavbarProfessional() {
   const { logout } = useAuth();
   const optionIcon = {
     following: <BiTargetLock/>,
@@ -83,17 +83,17 @@ function Navbar_professional() {
         </ContainerImage>
         <ContainerItems>
           <NavBarItem
-            to={"home"}
+            to={"/"}
             name={"Find that job"}
             icon={optionIcon.search}
           />
           <NavBarItem
-            to={"/"}
+            to={"/Appli"}
             name={"Your applications"}
             icon={optionIcon.application}
           />
           <NavBarItem
-            to={"profile"}
+            to={"/following"}
             name={"Following"}
             icon={optionIcon.following}
           />
@@ -154,4 +154,4 @@ function Navbar_professional() {
   );
 }
 
-export default Navbar_professional;
+export default NavbarProfessional;

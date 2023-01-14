@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import React from "react";
+import React, { useState } from "react";
 import Group from "../static/img/HomePage/G.png"
 import Sebastian from "../static/img/HomePage/sebastian.jpeg"
 import Patricia from "../static/img/HomePage/patricia.jpeg"
@@ -9,10 +9,12 @@ import Beatriz from "../static/img/HomePage/bea.png"
 import Search from "../static/img/HomePage/search.png"
 import styled from "@emotion/styled";
 import { fonts } from "../styles";
-import { icons } from "react-icons";
 import { typography } from "../styles";
 import { DiGithubBadge, DiReact, DiRuby } from "react-icons/di";
 import { AiFillLinkedin } from "react-icons/ai";
+import SignUpPage from "./signup-page";
+import Loading from "../components/Loading/loading";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -22,6 +24,15 @@ justify-content: center;
 flex-direction: column;
 align-items: center;
 `
+
+const Wrapper2 = styled.div`
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0px 0px 0px;
+  align-items: center;
+  justify-content: center;
+`;
 
 const ContentTitle = styled.div`
 display: flex;
@@ -179,8 +190,15 @@ color: #000000;
 `
 
 function Home() {
-  return (
-	  <main>
+	const [showView, setShowVIew ] = useState(false)
+console.log(showView)
+	if(showView) {
+		return (
+			<SignUpPage/>
+		)
+	} else {
+		return (
+			<main>
 			<section>
 				<Wrapper>
 					<ContentTitle>
@@ -193,7 +211,7 @@ function Home() {
 							will take care of it.
 							</PageDescription>
 						</ContentParrafo>
-							<ButtonNav>CREATE AN ACCOUNT NOW</ButtonNav>
+						<ButtonNav onClick={() => setShowVIew(true)}>CREATE AN ACCOUNT NOW</ButtonNav>
 							<img src={Group} alt={"Group"} css={css`margin: 20px 0 60px 0;`}/>
 						<Card>
 						<ContentText>
@@ -260,11 +278,13 @@ function Home() {
             <p> <DiReact/> React Responsive SPA</p>
           </div>
         </footer>
+				<Loading/>
 						</Wrapper>
 					</Wrapper>
 			</section>
 	  </main>
 	);
+}
 }
 
 export default Home;

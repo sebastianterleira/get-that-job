@@ -8,13 +8,21 @@ import SignUpFormProfessional from "../components/FormSignup/signup-form-profess
 import SignUpFormRecruiter from "../components/FormSignup/signup-form-recruiter";
 import { Container, Paper, Box } from "@mui/material";
 
-const Wrapper = styled.div`
+const Wrapper2 = styled.div`
 max-width: 1024px;
 margin: auto;
 display: flex;
 flex-direction: row;
 padding: 0px 20px 0px 20px;
 `
+const Wrapper = styled.div`
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  padding: 0px 0px 20px 0px;
+  align-items: center;
+  justify-content: center;
+`;
 
 const LinkOn = styled.button`
 border: none;
@@ -91,8 +99,8 @@ function SignUpPage() {
   }
 
   return (
-		<>
-			<Wrapper>
+		<Wrapper>
+			<Wrapper2>
 				<div css={css`display: flex; flex-direction: column; width: 700px;`}>
 					<WelcomeText>Good choice!</WelcomeText>
 					<Message>Create a new account as...</Message>
@@ -113,11 +121,11 @@ function SignUpPage() {
 							</Paper>
 						</Container>
 				</div>
-			</Wrapper>
+			</Wrapper2>
 			<Card>
 					<img src={Woman} alt="Woman" css={css`margin: 200px 0px 0px 0px; width: 650px; position: absolute; right: -150px; top: -170px;`}/>
 			</Card>
-		</>
+		</Wrapper>
 	);
 }
 

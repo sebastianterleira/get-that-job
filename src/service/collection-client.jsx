@@ -13,18 +13,44 @@ export default async function collectionClient(
     };
   }
 
+  // if (body) {
+  //   headers = {
+  //     "Content-Type": "application/json",
+  //     ...headers,
+  //   };
+  // }
+
+  // const config = {
+  //   method: method || (body ? "POST" : "GET"),
+  //   headers,
+  //   body: body ? JSON.stringify(body) : null,
+  // };
+  let config;
   if (body) {
-    headers = {
-      "Content-Type": "application/json",
-      ...headers,
+    console.log(body instanceof FormData);
+    if (body instanceof FormData) {
+      config = {
+        method: method || "POST",
+        headers,
+        body: body,
+      };
+    } else {
+      headers = {
+        "Content-Type": "application/json",
+        ...headers,
+      };
+      config = {
+        method: method || "POST",
+        headers,
+        body: JSON.stringify(body),
+      };
+    }
+  } else {
+    config = {
+      method: method || "GET",
+      headers,
     };
   }
-
-  const config = {
-    method: method || (body ? "POST" : "GET"),
-    headers,
-    body: body ? JSON.stringify(body) : null,
-  };
 
   const response = await fetch(BASE_URI + endpoint, config);
 
