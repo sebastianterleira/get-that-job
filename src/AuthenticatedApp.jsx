@@ -16,6 +16,8 @@ import { getJobsRecruiter, updateJob } from "./service/jobsRecruiter-services";
 import { useLocalStorage } from "./hook";
 import NewJob from "./pages/newJob";
 import Application from "./components/ApplicationPage";
+import SeeMore from "./components/SeeMoreJob";
+import Loading from "./components/Loading/loading";
 
 const Container = styled.div`
   display: flex;
@@ -86,8 +88,13 @@ function AuthenticatedApp() {
             <Route path={"/"} element={<Search />} />
             <Route path={"/home"} element={<Search />} />
             <Route path={"*"} element={<Search />} />
-            <Route path={"/Appli"} element={<Application />} />
-            <Route path={"/following"} element={<Following />} />
+            <Route path={"Appli"} element={<Application />} />
+            <Route path={"following"} element={<Following />} />
+            <Route path={"componente"} element={<Loading />} />
+            <Route path={"jobs/:id"} element={<SeeMore 
+            findJob={searchJob}
+            />
+            } />
           </Routes>
         </>
       ) : (
