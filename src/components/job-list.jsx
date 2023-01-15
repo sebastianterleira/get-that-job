@@ -8,6 +8,7 @@ import { FaIndustry } from "react-icons/fa";
 import { RiFocus3Line } from "react-icons/ri";
 import { useState } from "react";
 import Company from "../static/img/Companies-Logos/Rectangle1.png"
+import { useAuth } from "../context/auth-context";
 
 const Tittle = styled.div`
 font-family: ${fonts.bedroom};
@@ -227,7 +228,8 @@ z-index: 0;
 `
 
 function JobList({jobs}) {
-	const [activeButton, setActiveButton] = useState(".")
+	const [activeButton, setActiveButton] = useState(".");
+	const { navigate } = useAuth();
 
 	function handleLinkChange(event) {
     event.preventDefault();
@@ -279,7 +281,7 @@ function JobList({jobs}) {
 					}
 				</div>
 					<TextButtonFollow>follow</TextButtonFollow>
-					<ButtonSeeMore>See More</ButtonSeeMore>
+					<ButtonSeeMore onClick={() => navigate(`jobs/${job?.id}`)}>See More</ButtonSeeMore>
 				</div>
 					</CardData>
 				))}
