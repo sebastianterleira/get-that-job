@@ -1,80 +1,53 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { BiSearch } from "react-icons/bi";
-import { fonts } from "../styles/typography";
 import JobFollow from "../components/job-follow";
-import FilterJob from "../components/filters-job";
-import data from "../data/data";
-import { useState } from "react";
 
 const Wrapper = styled.div`
-max-width: 1024px;
-margin: auto;
-display: flex;
-flex-direction: column;
-padding: 20px;
-`
+  margin: 2rem 8.31rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`;
 
 const Tittle = styled.div`
-font-family: ${fonts.bedroom};
-font-weight: 400;
-font-size: 34px;
-line-height: 42px;
-margin-bottom: 16px;
-`
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 42px;
+  margin-bottom: 16px;
+`;
 
-const Input = styled.input`
-background-color: #F2F2F2;
-box-sizing: border-box;
-width: 419.93px;
-height: 36px;
-letter-spacing: 0.25px;
-font-weight: 400;
-font-size: 14px;
-line-height: 20px;
-font-family: ${fonts.chiron};
-color: #8E8E8E;
-::placeholder {
-	letter-spacing: 0.25px;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 20px;
-	font-family: ${fonts.chiron};
-	color: #8E8E8E;
-}
-padding: 12px 0px 12px 42px;
-outline: #F48FB1;
-border: 1px solid #F48FB1;
-border-radius: 8px;
-`
+const Subtitle = styled.div`
+  font-family: Montserrat;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.15px;
+  margin-bottom: 8px;
+`;
 
+const ContainerCard = styled.div`
+  display: grid;
+  grid-gap: 10px;
+  //   grid-template-columns: repeat(3, 290px);
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
 
-const GroupInput = styled.div`
-position: relative;
-`
+  //   grid-auto-rows: minmax(170px, auto);
+`;
 
-function Following() {
-	const [jobs] = useState(data);
-    
+function Following({ handlefollowing }) {
+  let followingJobs = handlefollowing();
 
-// 	let allCategories = jobs.reduce((accu, current) => {
-//     if (!accu.includes(current.follow)) accu.push(current.follow);
-//    console.log(Following)
-// 		return accu;
-//   }, []);
-
-
-	return (
-		<>
-			<Wrapper>
-				<Tittle>Following</Tittle>
-					{/* <FilterJob categories={allCategories}/> */}
-				<JobFollow jobs={jobs}/>
-			</Wrapper>
-		</>
-	);
+  return (
+    <Wrapper>
+      <Tittle>Following</Tittle>
+      <Subtitle>You are following {followingJobs.length} jobs</Subtitle>
+      <ContainerCard>
+        {followingJobs?.map((job) => (
+          <JobFollow key={job.id} {...job} />
+        ))}
+      </ContainerCard>
+    </Wrapper>
+  );
 }
 export default Following;
-
-
