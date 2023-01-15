@@ -1,15 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React from "react"
-import styled from "@emotion/styled";
-import { Spinner } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import  "./styles.css"
 
 function Loading() {
   return (
-    <div>
-      <Spinner color="primary"/>
+<div className="wrapper" >
+    <div className="box-wrap">
+        <div className="box one"></div>
+        <div className="box two"></div>
+        <div className="box three"></div>
+        <div className="box four"></div>
+        <div className="box five"></div>
+        <div className="box six"></div>
     </div>
+</div>
   );
 }
 
