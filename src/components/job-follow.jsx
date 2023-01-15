@@ -13,7 +13,7 @@ const CardData = styled("div")`
   padding: 1rem;
   background-color: #ffffff;
   border-radius: 8px;
-  position: relative;
+  width: 352px;
   overflow: hidden;
   transition: all 400ms ease;
   &:hover {
@@ -47,7 +47,7 @@ const TextCategory = styled.p`
 `;
 
 const TextTitle = styled.p`
-  font-family: ${fonts.bedroom};
+  font-family: Montserrat;
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
@@ -133,11 +133,6 @@ const ButtonIcon = styled.button`
       ? " background: #f48fb1; color: #fff; border: 1px solid #F48FB1;  &:hover {	background-color: #F48FB1;	box-shadow: 0 0 10px #F48FB1, 0 0 10px #F48FB1, 0 0 15px #F48FB1;	color: #fff;}"
       : " color:#00000; background: #fff; &:hover {	border: 1px solid #F48FB1;}"}
 `;
-// &:hover {
-// 	background-color: #F48FB1;
-// 	box-shadow: 0 0 10px #F48FB1, 0 0 10px #F48FB1, 0 0 15px #F48FB1;
-// 	color: #fff;
-// }
 
 function JobFollow({
   id,

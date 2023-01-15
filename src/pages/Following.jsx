@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
+import CompanyCard from "../components/company-follow";
 import JobFollow from "../components/job-follow";
+import { useAuth } from "../context/auth-context";
 
 const Wrapper = styled.div`
   margin: 2rem 8.31rem;
@@ -29,13 +31,13 @@ const Subtitle = styled.div`
 const ContainerCard = styled.div`
   display: grid;
   grid-gap: 10px;
-  //   grid-template-columns: repeat(3, 290px);
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
-  //   grid-auto-rows: minmax(170px, auto);
+  margin-bottom: 2rem;
 `;
 
 function Following({ handlefollowing }) {
+  const { user } = useAuth();
   let followingJobs = handlefollowing();
 
   return (
@@ -45,6 +47,16 @@ function Following({ handlefollowing }) {
       <ContainerCard>
         {followingJobs?.map((job) => (
           <JobFollow key={job.id} {...job} />
+        ))}
+      </ContainerCard>
+      <Subtitle>You are following 0 company</Subtitle>
+      <ContainerCard>
+        {user.follows_company?.map((follow) => (
+          <CompanyCard
+            job_id={follow?.job_id}
+            follow_id={follow?.id}
+            company_data={follow?.data}
+          />
         ))}
       </ContainerCard>
     </Wrapper>
