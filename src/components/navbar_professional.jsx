@@ -98,7 +98,7 @@ function NavbarProfessional() {
             icon={optionIcon.following}
           />
           <NavBarItem
-            to={"profile"}
+            to={"/userProfile"}
             name={"Profile"}
             icon={optionIcon.profile}
           />
@@ -119,29 +119,36 @@ function NavbarProfessional() {
           <p>Build with by:</p>
           <Authors>
             <Github>
-             <a href="https://github.com/sebastianterleira" target="_blank"><RiGithubFill /></a>
+             <a href="https://github.com/sebastianterleira"><RiGithubFill /></a>
             </Github>
-            <a href="https://github.com/eliasmaq" target="_blank"><p>Sebastian Terleira</p></a>
+            <a href="https://github.com/sebastianterleira"><p>Sebastian Terleira</p></a>
           </Authors>
 
           <Authors>
             <Github>
-            <a href="https://github.com/eliasmaq" target="_blank"><RiGithubFill /></a>
+            <a href="https://github.com/eliasmaq"><RiGithubFill /></a>
             </Github>
-            <a href="https://github.com/eliasmaq" target="_blank"><p>Elias Mesones</p></a>
+            <a href="https://github.com/eliasmaq"><p>Elias Mesones</p></a>
           </Authors>
           <Authors>
             <Github>
-            <a href="https://github.com/patico14" target="_blank"><RiGithubFill /></a>
+            <a href="https://github.com/patico14"><RiGithubFill /></a>
             </Github>
-            <a href="https://github.com/eliasmaq" target="_blank"><p>Patricia Mendoza</p></a>
+            <a href="https://github.com/patico14"><p>Patricia Mendoza</p></a>
           </Authors>
 
           <Authors>
             <Github>
-            <a href="https://github.com/Camilo-J" target="_blank"><RiGithubFill /></a>
+            <a href="https://github.com/Camilo-J"><RiGithubFill /></a>
             </Github>
-            <a href="https://github.com/eliasmaq" target="_blank"><p>Camilo Huanca</p></a>
+            <a href="https://github.com/Camilo-J"><p>Camilo Huanca</p></a>
+          </Authors>
+
+          <Authors>
+            <Github>
+            <a href="https://github.com/bettysl20"><RiGithubFill /></a>
+            </Github>
+            <a href="https://github.com/bettysl20"><p>Beatriz Secca</p></a>
           </Authors>
         </div>
         <div>

@@ -18,6 +18,7 @@ import NewJob from "./pages/newJob";
 import Application from "./components/ApplicationPage";
 import SeeMore from "./pages/SeeMoreJobPage";
 import Loading from "./components/Loading/loading";
+import ProfileUser from "./pages/userProfilePage";
 
 const Container = styled.div`
   display: flex;
@@ -93,7 +94,7 @@ function AuthenticatedApp() {
       return accu;
     }, []);
   }
-
+  console.log(user)
   return (
     <Container>
       {user ? (
@@ -112,6 +113,10 @@ function AuthenticatedApp() {
             <Route
               path={"jobs/:id"}
               element={<SeeMore findJob={searchJob} />}
+            />
+            <Route
+              path={"/userProfile"}
+              element={<ProfileUser user={user}/>}
             />
           </Routes>
         </>
