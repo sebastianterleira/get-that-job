@@ -53,9 +53,11 @@ function Following({ handlefollowing }) {
       <ContainerCard>
         {user.follows_company?.map((follow) => (
           <CompanyCard
+            key={follow?.id}
             job_id={follow?.job_id}
             follow_id={follow?.id}
             company_data={follow?.data}
+            following={true}
           />
         ))}
       </ContainerCard>

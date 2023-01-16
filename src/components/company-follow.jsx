@@ -5,6 +5,10 @@ import { fonts } from "../styles";
 import { RiFocus3Line, RiSuitcaseLine } from "react-icons/ri";
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
+import {
+  createFollowing,
+  deleteFollowing,
+} from "../service/following-services";
 
 const CardData = styled("div")`
   display: flex;
@@ -125,8 +129,8 @@ const ButtonIcon = styled.button`
       : " color:#00000; background: #fff; &:hover {	border: 1px solid #F48FB1;}"}
 `;
 
-function CompanyCard({ job_id, follow_id, company_data }) {
-  const [activeButton, setActiveButton] = useState(true);
+function CompanyCard({ job_id, follow_id, company_data, following }) {
+  const [activeButton, setActiveButton] = useState(following);
   const { navigate } = useAuth();
   function handleLinkChange(event) {
     event.preventDefault();
@@ -135,12 +139,14 @@ function CompanyCard({ job_id, follow_id, company_data }) {
   }
 
   function handleNavigate() {
-    navigate(`/jobs/${job_id}`);
+    console.log("redirect to show Company page");
+    // navigate(`/companies/${job_id}`);
   }
 
-  // function handleFollowing() {
-
-  // }
+  function handleFollowing() {
+    if (activeButton) deleteFollowing(job_id, "companies", follow_id);
+    if (!activeButton) createFollowing(job_id, "companies");
+  }
 
   return (
     <CardData>
@@ -184,7 +190,7 @@ function CompanyCard({ job_id, follow_id, company_data }) {
         `}
       >
         <div onClick={handleLinkChange}>
-          <ButtonIcon follow={activeButton}>
+          <ButtonIcon follow={activeButton} onClick={handleFollowing}>
             <RiFocus3Line
               css={css`
                 font-size: 22px;
