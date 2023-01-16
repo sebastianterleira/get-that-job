@@ -16,7 +16,7 @@ import { getJobsRecruiter, updateJob } from "./service/jobsRecruiter-services";
 import { useLocalStorage } from "./hook";
 import NewJob from "./pages/newJob";
 import Application from "./components/ApplicationPage";
-import SeeMore from "./components/SeeMoreJob";
+import SeeMore from "./pages/SeeMoreJobPage";
 import Loading from "./components/Loading/loading";
 
 const Container = styled.div`

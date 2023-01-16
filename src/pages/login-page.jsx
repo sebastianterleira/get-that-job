@@ -87,6 +87,7 @@ const Card = styled.div`
 		border-radius: 22% 78% 32% 68% / 59% 14% 86% 41%;
 		background-image: radial-gradient(circle at 13.51% 93.49%, #a4dbef 0, #a7daf2 5%, #abd9f4 10%, #b0d8f6 15%, #b5d7f8 20%, #bbd5f8 25%, #c1d3f8 30%, #c7d2f8 35%, #ced0f6 40%, #d4cff4 45%, #dacdf2 50%, #e0cbef 55%, #e5caec 60%, #eac9e8 65%, #eec8e3 70%, #f2c7df 75%, #f5c6da 80%, #f8c6d5 85%, #f9c6d0 90%, #fac6cb 95%, #fbc6c7 100%);
 	}
+	margin-top: 35px;
 `
 
 function LoginPage() {

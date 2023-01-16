@@ -10,7 +10,7 @@ function App() {
 
   setTimeout(() => {
     setShowVIew(false);
-  }, 5500);
+  }, 1300);
 
   if (showView) {
     return <Loading />;
