@@ -96,6 +96,7 @@ const Img = styled.img`
 
 const ProfileRecruiter = ({ recruiter }) => {
   const { navigate, updateRecruiterProfile } = useAuth();
+  const [imageReview, setImageReview] = useState(null);
   const [formData, setFormData] = useState({
     email: recruiter?.email,
     name: recruiter?.name,
@@ -112,8 +113,15 @@ const ProfileRecruiter = ({ recruiter }) => {
   }
 
   function handleChangeFile(event) {
-    console.log(event.target.files[0]);
-    setFormData({ ...formData, profile: event.target.files[0] });
+    const file = event.target.files[0];
+
+    setFormData({ ...formData, profile: file });
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImageReview(reader.result);
+    };
+    reader.readAsDataURL(file);
   }
 
   function handleSubmit(event) {
@@ -130,15 +138,13 @@ const ProfileRecruiter = ({ recruiter }) => {
     updateRecruiterProfile(formData1);
     navigate("/");
   }
-  
-  console.log(recruiter)
-  
+
   return (
     <Container>
       <Title>Profile</Title>
       <Form onSubmit={handleSubmit}>
         <ContainerFile>
-          <Img src={profile} />
+          <Img src={typeof profile === "string" ? profile : imageReview} />
 
           <div>
             <AreaContainer>

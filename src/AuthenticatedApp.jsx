@@ -31,6 +31,12 @@ function AuthenticatedApp() {
 
   useEffect(() => {
     if (user) {
+      getJobsRecruiter()
+        .then((data) => {
+          setJobs(data);
+          setLocalSto(data);
+        })
+        .catch(console.log);
     }
     if (recruiter) {
       getJobsRecruiter()
@@ -79,6 +85,15 @@ function AuthenticatedApp() {
     setJobs([...jobs, job]);
   }
 
+  function followingJobs() {
+    return jobs.reduce((accu, current, currentIndex) => {
+      current.followings.forEach((elem) => {
+        if (elem.user_id === 3) accu.push(jobs[currentIndex]);
+      });
+      return accu;
+    }, []);
+  }
+
   return (
     <Container>
       {user ? (
@@ -89,12 +104,15 @@ function AuthenticatedApp() {
             <Route path={"/home"} element={<Search />} />
             <Route path={"*"} element={<Search />} />
             <Route path={"Appli"} element={<Application />} />
-            <Route path={"following"} element={<Following />} />
-            <Route path={"componente"} element={<Loading />} />
-            <Route path={"jobs/:id"} element={<SeeMore 
-            findJob={searchJob}
+            <Route
+              path={"following"}
+              element={<Following handlefollowing={followingJobs} />}
             />
-            } />
+            <Route path={"componente"} element={<Loading />} />
+            <Route
+              path={"jobs/:id"}
+              element={<SeeMore findJob={searchJob} />}
+            />
           </Routes>
         </>
       ) : (

@@ -1,7 +1,10 @@
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import CompanyCard from "../components/company-follow";
 import JobFollow from "../components/job-follow";
 import { useAuth } from "../context/auth-context";
+import { getCompany } from "../service/user-services";
 
 const Wrapper = styled.div`
   margin: 2rem 8.31rem;
@@ -36,32 +39,32 @@ const ContainerCard = styled.div`
   margin-bottom: 2rem;
 `;
 
-function Following({ handlefollowing }) {
+function ShowCompany({ handlefollowing }) {
   const { user } = useAuth();
-  let followingJobs = handlefollowing();
+  const [company, setCompany] = useState({});
+  const { id } = useParams();
+
+  useEffect(() => {
+    getCompany(id).then(setCompany).catch(console.log);
+  }, [id]);
 
   return (
     <Wrapper>
       <Tittle>Following</Tittle>
-      <Subtitle>You are following {followingJobs.length} jobs</Subtitle>
+      <Subtitle>{company?.jobs?.length} job openings</Subtitle>
       <ContainerCard>
-        {followingJobs?.map((job) => (
-          <JobFollow key={job.id} {...job} />
-        ))}
-      </ContainerCard>
-      <Subtitle>You are following 0 company</Subtitle>
-      <ContainerCard>
-        {user.follows_company?.map((follow) => (
-          <CompanyCard
-            key={follow?.id}
-            job_id={follow?.job_id}
-            follow_id={follow?.id}
-            company_data={follow?.data}
-            following={true}
+        {company?.jobs?.map((job) => (
+          <JobFollow
+            key={job.id}
+            {...job}
+            company_data={{
+              profile: company.profile_image,
+              name: company.name,
+            }}
           />
         ))}
       </ContainerCard>
     </Wrapper>
   );
 }
-export default Following;
+export default ShowCompany;

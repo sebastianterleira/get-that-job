@@ -2,10 +2,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { fonts } from "../styles";
-import { MdOutlineDateRange } from "react-icons/md";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { FaIndustry } from "react-icons/fa";
-import { RiFocus3Line } from "react-icons/ri";
+import { RiFocus3Line, RiSuitcaseLine } from "react-icons/ri";
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import {
@@ -14,10 +11,13 @@ import {
 } from "../service/following-services";
 
 const CardData = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   padding: 1rem;
   background-color: #ffffff;
   border-radius: 8px;
-  width: 376px;
+  width: 300px;
   overflow: hidden;
   transition: all 400ms ease;
   &:hover {
@@ -39,15 +39,6 @@ const ContentRow = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 4px;
-`;
-
-const TextCategory = styled.p`
-  font-family: ${fonts.bedroom};
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.4px;
-  color: #8e8e8e;
 `;
 
 const TextTitle = styled.p`
@@ -138,16 +129,8 @@ const ButtonIcon = styled.button`
       : " color:#00000; background: #fff; &:hover {	border: 1px solid #F48FB1;}"}
 `;
 
-function JobFollow({
-  id,
-  type_job,
-  category,
-  name,
-  min_salary,
-  max_salary,
-  company_data,
-}) {
-  const [activeButton, setActiveButton] = useState(true);
+function CompanyCard({ job_id, follow_id, company_data, following }) {
+  const [activeButton, setActiveButton] = useState(following);
   const { navigate } = useAuth();
   function handleLinkChange(event) {
     event.preventDefault();
@@ -156,12 +139,13 @@ function JobFollow({
   }
 
   function handleNavigate() {
-    navigate(`/jobs/${id}`);
+    console.log("redirect to show Company page");
+    // navigate(`/companies/${job_id}`);
   }
 
   function handleFollowing() {
-    // if (activeButton) deleteFollowing(id, "jobs", follow_id);
-    if (!activeButton) createFollowing(id, "jobs");
+    if (activeButton) deleteFollowing(job_id, "companies", follow_id);
+    if (!activeButton) createFollowing(job_id, "companies");
   }
 
   return (
@@ -173,7 +157,7 @@ function JobFollow({
         `}
       >
         <img
-          src={company_data.profile}
+          src={company_data?.profile}
           css={css`
             width: 75px;
             height: 75px;
@@ -182,31 +166,17 @@ function JobFollow({
           alt={"job"}
         />
         <ContentJob>
+          <TextTitle>{company_data?.name}</TextTitle>
+
           <ContentRow>
-            <FaIndustry
+            <RiSuitcaseLine
               css={css`
                 font-size: 12.5px;
               `}
             />
-            <TextCategory>{category}</TextCategory>
-          </ContentRow>
-          <TextTitle>{name}</TextTitle>
-          <TextCompanyName>{company_data.name}</TextCompanyName>
-          <ContentRow>
-            <MdOutlineDateRange
-              css={css`
-                font-size: 12.5px;
-              `}
-            />
-            <TextCompanyName>{type_job}</TextCompanyName>
-            <RiMoneyDollarCircleLine
-              css={css`
-                font-size: 12.5px;
-              `}
-            />
-            <TextCompanyName>{`${((min_salary || 1000) / 1000).toFixed(
-              1
-            )}k - ${(max_salary / 1000).toFixed(1)}k`}</TextCompanyName>
+            <TextCompanyName>
+              {company_data?.jobs.length} jobs opening
+            </TextCompanyName>
           </ContentRow>
         </ContentJob>
       </div>
@@ -220,7 +190,7 @@ function JobFollow({
         `}
       >
         <div onClick={handleLinkChange}>
-          <ButtonIcon follow={activeButton}>
+          <ButtonIcon follow={activeButton} onClick={handleFollowing}>
             <RiFocus3Line
               css={css`
                 font-size: 22px;
@@ -247,4 +217,4 @@ function JobFollow({
     </CardData>
   );
 }
-export default JobFollow;
+export default CompanyCard;

@@ -36,6 +36,10 @@ export async function getRecruiter() {
   return user;
 }
 
+export async function getCompany(id) {
+  return await collectionClient(`/profile_company/${id}`);
+}
+
 export async function updateRecruiter(body) {
   const { data } = await collectionClient("/company", {
     body: body,
