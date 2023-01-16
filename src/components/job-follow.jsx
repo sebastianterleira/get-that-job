@@ -8,12 +8,16 @@ import { FaIndustry } from "react-icons/fa";
 import { RiFocus3Line } from "react-icons/ri";
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
+import {
+  createFollowing,
+  deleteFollowing,
+} from "../service/following-services";
 
 const CardData = styled("div")`
   padding: 1rem;
   background-color: #ffffff;
   border-radius: 8px;
-  width: 352px;
+  width: 376px;
   overflow: hidden;
   transition: all 400ms ease;
   &:hover {
@@ -155,9 +159,10 @@ function JobFollow({
     navigate(`/jobs/${id}`);
   }
 
-  // function handleFollowing() {
-
-  // }
+  function handleFollowing() {
+    // if (activeButton) deleteFollowing(id, "jobs", follow_id);
+    if (!activeButton) createFollowing(id, "jobs");
+  }
 
   return (
     <CardData>
