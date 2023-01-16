@@ -2,21 +2,23 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { fonts } from "../styles";
-import { MdOutlineDateRange } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { MdOutlineDateRange } from "react-icons/md";
 import { FaIndustry } from "react-icons/fa";
 import { RiFocus3Line } from "react-icons/ri";
 import { useState } from "react";
+import Company from "../static/img/Companies-Logos/Rectangle1.png";
 import { useAuth } from "../context/auth-context";
-import {
-  createFollowing,
-  deleteFollowing,
-} from "../service/following-services";
 
 const CardData = styled("div")`
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #ffffff;
   border-radius: 8px;
+  margin-bottom: 45px;
+  margin-top: 9px;
+  position: relative;
   overflow: hidden;
   transition: all 400ms ease;
   &:hover {
@@ -25,12 +27,14 @@ const CardData = styled("div")`
     transform: translateY(-3%);
   }
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  justify-content: center;
 `;
 
 const ContentJob = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 10px 16px 10px;
+  padding: 12px 0px 12px 85px;
+  margin-left: 20px;
 `;
 
 const ContentRow = styled.div`
@@ -50,7 +54,7 @@ const TextCategory = styled.p`
 `;
 
 const TextTitle = styled.p`
-  font-family: Montserrat;
+  font-family: ${fonts.bedroom};
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
@@ -118,6 +122,35 @@ const ButtonSeeMore = styled.button`
 `;
 
 const ButtonIcon = styled.button`
+display: flex;
+justify-content: center;
+align-items: center;
+border: 1px solid #F48FB1;
+border-radius: 50px;
+font-family: ${fonts.chiron};
+width: 40;
+height: 40px;
+font-weight: 500;
+font-size: 14px;
+line-height: 24px;
+letter-spacing: 1.25px;
+text-transform: uppercase;
+color: #fff
+background: #F48FB1;
+padding: 8px;
+cursor: pointer;
+overflow: hidden;
+transition: all 500ms ease;
+z-index: 0;
+
+&:hover {
+	background-color: #F48FB1;
+	box-shadow: 0 0 10px #F48FB1, 0 0 10px #F48FB1, 0 0 15px #F48FB1;
+	color: #616161;
+}
+`;
+
+const ButtonFollow = styled.button`
   all: unset;
   display: flex;
   justify-content: center;
@@ -137,113 +170,88 @@ const ButtonIcon = styled.button`
       : " color:#00000; background: #fff; &:hover {	border: 1px solid #F48FB1;}"}
 `;
 
-function JobFollow({
-  id,
-  type_job,
-  category,
-  name,
-  min_salary,
-  max_salary,
-  company_data,
-}) {
-  const [activeButton, setActiveButton] = useState(true);
+function JobCard({job}) {
+	const [activeButton, setActiveButton] = useState(true);
   const { navigate } = useAuth();
+
   function handleLinkChange(event) {
     event.preventDefault();
 
     setActiveButton(!activeButton);
   }
 
-  function handleNavigate() {
-    navigate(`/jobs/${id}`);
-  }
-
-  function handleFollowing() {
-    // if (activeButton) deleteFollowing(id, "jobs", follow_id);
-    if (!activeButton) createFollowing(id, "jobs");
-  }
-
   return (
-    <CardData>
-      <div
-        css={css`
-          display: flex;
-          gap: 1rem;
-        `}
-      >
+    <CardData key={job?.id}>
+      <ContentJob>
         <img
-          src={company_data.profile}
+          src={Company}
           css={css`
             width: 75px;
             height: 75px;
+            position: absolute;
+            left: 15px;
+            top: 20px;
             border-radius: 50%;
           `}
-          alt={"job"}
         />
-        <ContentJob>
-          <ContentRow>
-            <FaIndustry
-              css={css`
-                font-size: 12.5px;
-              `}
-            />
-            <TextCategory>{category}</TextCategory>
-          </ContentRow>
-          <TextTitle>{name}</TextTitle>
-          <TextCompanyName>{company_data.name}</TextCompanyName>
-          <ContentRow>
-            <MdOutlineDateRange
-              css={css`
-                font-size: 12.5px;
-              `}
-            />
-            <TextCompanyName>{type_job}</TextCompanyName>
-            <RiMoneyDollarCircleLine
-              css={css`
-                font-size: 12.5px;
-              `}
-            />
-            <TextCompanyName>{`${((min_salary || 1000) / 1000).toFixed(
-              1
-            )}k - ${(max_salary / 1000).toFixed(1)}k`}</TextCompanyName>
-          </ContentRow>
-        </ContentJob>
-      </div>
+        <ContentRow>
+          <FaIndustry
+            css={css`
+              font-size: 12.5px;
+            `}
+          />
+          <TextCategory>{job?.category}</TextCategory>
+        </ContentRow>
+        <TextTitle>{job?.name}</TextTitle>
+        <TextCompanyName>{job?.company_data.name}</TextCompanyName>
+        <ContentRow>
+          <MdOutlineDateRange
+            css={css`
+              font-size: 12.5px;
+            `}
+          />
+          <TextCompanyName>{job?.type_job}</TextCompanyName>
+          <RiMoneyDollarCircleLine
+            css={css`
+              font-size: 12.5px;
+            `}
+          />
+          <TextCompanyName>
+            {`${((job?.min_salary || 1000) / 1000).toFixed(1)}k`}
+          </TextCompanyName>
+          <p>-</p>
+          <TextCompanyName>{`${(job?.max_salary / 1000).toFixed(
+            1
+          )}k`}</TextCompanyName>
+        </ContentRow>
+      </ContentJob>
       <div
         css={css`
           display: flex;
           flex-direction: row;
           align-items: center;
-          gap: 6px;
-          margin-left: 0.25rem;
+          gap: 20px;
+          margin-bottom: 20px;
         `}
       >
         <div onClick={handleLinkChange}>
-          <ButtonIcon follow={activeButton}>
+          <ButtonFollow follow={activeButton}>
             <RiFocus3Line
               css={css`
                 font-size: 22px;
               `}
             />
-          </ButtonIcon>
+          </ButtonFollow>
         </div>
-        <TextButtonFollow
-          css={css`
-            width: 94px;
-          `}
-        >
+        <TextButtonFollow>
           {activeButton ? "FOLLOWING" : "FOLLOW"}
         </TextButtonFollow>
-        <ButtonSeeMore
-          onClick={handleNavigate}
-          css={css`
-            margin-left: 1rem;
-          `}
-        >
+        <ButtonSeeMore onClick={() => navigate(`jobs/${job?.id}`)}>
           See More
         </ButtonSeeMore>
       </div>
     </CardData>
   );
 }
-export default JobFollow;
+
+export default JobCard;
