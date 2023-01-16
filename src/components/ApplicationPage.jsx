@@ -189,7 +189,7 @@ function Application() {
 			<h1>The Job title </h1>
 			<p >Posted 2 days ago</p>
 		</StyledDiv3>	
-		    <div style={{display:"flex", flexDirection: "row", justifyContent: "space-between", gap: "38px", marginTop: "18px"}}>
+		    <div style={{display:"flex", flexDirection: "row", justifyContent: "center", gap: "32px", marginTop: "18px", width: "960px"}}>
 				<StyledButton>
 					<StyledLabel2 >Category</StyledLabel2 >
 					<FaIndustry/>Manufacturing
