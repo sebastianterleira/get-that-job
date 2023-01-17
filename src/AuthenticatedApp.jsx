@@ -3,11 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
 import NavbarProfessional from "./components/navbar_professional";
 import { useAuth } from "./context/auth-context";
-
 import Following from "./pages/Following";
-
 import JobPage from "./pages/jobPage";
-
 import ProfileRecruiter from "./pages/profilePage";
 import Search from "./pages/search";
 import JobsPage from "./pages/jobsPage";
@@ -15,12 +12,9 @@ import { useEffect, useState } from "react";
 import { getJobsRecruiter, updateJob } from "./service/jobsRecruiter-services";
 import { useLocalStorage } from "./hook";
 import NewJob from "./pages/newJob";
-import Application from "./components/ApplicationPage";
 import SeeMore from "./pages/SeeMoreJobPage";
-import Loading from "./components/Loading/loading";
-
+import ApplicationJob from "./components/ApplicationPage";
 import ProfileUser from "./pages/userProfilePage";
-
 import ShowCompany from "./pages/showCompany";
 
 const Container = styled.div`
@@ -122,12 +116,10 @@ function AuthenticatedApp() {
             <Route path={"/"} element={<Search />} />
             <Route path={"/home"} element={<Search />} />
             <Route path={"*"} element={<Search />} />
-            <Route path={"Appli"} element={<Application />} />
             <Route
               path={"following"}
               element={<Following handlefollowing={followingJobs} />}
             />
-            <Route path={"componente"} element={<Loading />} />
             <Route
               path={"jobs/:id"}
               element={<SeeMore findJob={searchJob} />}
@@ -139,6 +131,10 @@ function AuthenticatedApp() {
             <Route
               path={"companies/:id"}
               element={<ShowCompany following={getFollowingCompany} />}
+            />
+            <Route
+              path={"application/:id"}
+              element={<ApplicationJob findJob={searchJob} />}
             />
           </Routes>
         </>

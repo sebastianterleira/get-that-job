@@ -13,6 +13,7 @@ import { FaIndustry } from "react-icons/fa";
 import { RiFocus3Line } from "react-icons/ri";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import Company from "../static/img/Companies-Logos/Rectangle1.png";
+import { useAuth } from "../context/auth-context";
 
 const Container = styled.div`
   margin: 2rem 7rem 2rem 7rem;
@@ -241,6 +242,9 @@ function SeeMore({ findJob }) {
   const job = findJob(Number.parseInt(id));
   const [activeButton, setActiveButton] = useState(true);
   const history = useNavigate();
+  const { navigate } = useAuth();
+
+
 
   function handleLinkChange(event) {
     event.preventDefault();
@@ -302,7 +306,7 @@ function SeeMore({ findJob }) {
           </div>
         </ContentText>
       </ConteinerCompany>
-      <ButtonIcon
+      <ButtonIcon onClick={() => navigate(`application/${job.id}`)}
         css={css`
           position: absolute;
           top: 85px;
@@ -374,18 +378,7 @@ function SeeMore({ findJob }) {
         </ContainerCards>
       </ContainerJobInfo>
       <SubTitle>About The company name SA</SubTitle>
-      <ParrafoText>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-        porta nunc viverra velit tincidunt, non vehicula augue vehicula. Donec
-        viverra luctus nisl, sed vehicula ligula. Vivamus maximus metus a magna
-        fermentum ullamcorper. Phasellus ultrices vestibulum ligula ut
-        pellentesque. Quisque quis congue quam. Nunc porttitor risus lorem, in
-        blandit augue iaculis vitae. Cras sit amet fringilla neque. Fusce ac
-        elit ut quam ultrices bibendum. Curabitur vitae dignissim quam.
-        Suspendisse aliquet massa id orci volutpat ullamcorper. Nunc at ante
-        sem. Etiam elementum, mi eget aliquam lobortis, elit libero tempus ex,
-        vel pretium nisi risus ac augue.
-      </ParrafoText>
+      <ParrafoText>{job.company_data.description}</ParrafoText>
       <SubTitle>About the job position</SubTitle>
       <ParrafoText>{job.description}</ParrafoText>
       <SubTitle>Mandatory Requirements</SubTitle>
@@ -399,7 +392,7 @@ function SeeMore({ findJob }) {
           align-items: center;
         `}
       >
-        <ButtonIcon css={css`margin-bottom: 20px;`}>
+        <ButtonIcon css={css`margin-bottom: 25px; margin-bottom: 15px;`} onClick={() => navigate(`application/${job.id}`)}>
           <RiSendPlaneLine
             css={css`
               font-size: 22px;
