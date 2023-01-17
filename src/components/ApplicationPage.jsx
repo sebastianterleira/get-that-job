@@ -16,6 +16,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { useAuth } from "../context/auth-context";
 import Company from "../static/img/Companies-Logos/Rectangle1.png";
+import { createApplicationJob } from "../service/applicationJobs";
 
 // ##################################################
 
@@ -399,9 +400,8 @@ function ApplicationJob({ findJob }) {
   const history = useNavigate();
   const { navigate, user } = useAuth();
   // const { navigate, updateRecruiterProfile } = useAuth();
-  const [imageReview, setImageReview] = useState(null);
   const [formData, setFormData] = useState({
-    profile: job?.profile_image,
+    profile: user?.user_cv,
     experience: user?.experience,
     interested: user?.interested,
   });
@@ -417,12 +417,6 @@ function ApplicationJob({ findJob }) {
     const file = event.target.files[0];
 
     setFormData({ ...formData, profile: file });
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImageReview(reader.result);
-    };
-    reader.readAsDataURL(file);
   }
 
   function handleSubmit(event) {
@@ -430,11 +424,13 @@ function ApplicationJob({ findJob }) {
     // console.log(formData);
     // const fileUploaded = event.target.files[0];
     const formData1 = new FormData();
-    formData1.append("profile", profile);
-    formData1.append("experience", experience);
-    formData1.append("interested", interested);
+    formData1.append("user_cv", profile);
+    formData1.append("user_experience", experience);
+    formData1.append("interest", interested);
+    formData1.append("user_id", user.id);
+    formData1.append("job_id", id);
 
-    // updateRecruiterProfile(formData1);
+    createApplicationJob(formData1);
     // navigate("/");
   }
 

@@ -21,6 +21,10 @@ function AuthProvider(props) {
   const [jobs, setJobs] = useState(null);
 
   useEffect(() => {
+    if (recruiter) getRecruiter().then(setRecruiter).catch(console.log);
+  }, []);
+
+  useEffect(() => {
     getUser().then(setUser).catch(console.log);
   }, []);
 
@@ -31,10 +35,6 @@ function AuthProvider(props) {
   // useEffect(() => {
   //   getUser().then(setUser).catch(console.log);
   // }, []);
-
-  useEffect(() => {
-    if (recruiter) getRecruiter().then(setRecruiter).catch(console.log);
-  }, [recruiter]);
 
   function loginProfessional(credentials) {
     auth.loginProfessional(credentials).then(setUser).catch(console.log);
