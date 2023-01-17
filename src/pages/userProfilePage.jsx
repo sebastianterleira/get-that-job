@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import CustomButton from "../components/button";
@@ -9,7 +11,6 @@ import { useAuth } from "../context/auth-context";
 const Container = styled.div`
   margin: 2rem auto;
   width: 960px;
-  height: 630px;
   background-color: ;
 `;
 
@@ -21,14 +22,13 @@ const Title = styled.p`
 
 const Subtitle = styled.p`
   font-size: 24px;
-  font-family:Montserrat;
+  font-family: Montserrat;
   margin-bottom: 10px;
 `;
 
 const Comment = styled.p`
   font-size: 12px;
-  font-family:Montserrat;
-  margin-bottom: 10px;
+  font-family: Montserrat;
   font-weight: 400;
 `;
 
@@ -37,7 +37,6 @@ const AreaContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
 `;
 
 const StyledInput = styled.textarea`
@@ -100,17 +99,8 @@ const Form = styled.form`
   gap: 1rem;
 `;
 
-const Img = styled.img`
-  width: 74.67px;
-  height: 74.67px;
-  objetive-fit: cover;
-  border-radius: 8px;
-  filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.25));
-`;
-
 const ProfileUser = ({ user }) => {
   const { navigate, updateUserProfile } = useAuth();
-  const [imageReview, setImageReview] = useState(null);
   const [formData, setFormData] = useState({
     email: user?.email,
     name: user?.name,
@@ -121,8 +111,19 @@ const ProfileUser = ({ user }) => {
     education: user?.education,
     experience: user?.experience,
     linkedin: user?.linkedin,
+    curriculum: user?.user_cv,
   });
-  const { email, name, phone, birthdate, linkedin, title, experience, education } = formData;
+  const {
+    email,
+    name,
+    phone,
+    birthdate,
+    linkedin,
+    title,
+    experience,
+    education,
+    curriculum,
+  } = formData;
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -133,13 +134,14 @@ const ProfileUser = ({ user }) => {
   function handleChangeFile(event) {
     const file = event.target.files[0];
 
-    setFormData({ ...formData, profile: file });
+    if (file.size > 5000000) {
+      file.value = "";
+      return alert(
+        "El archivo es demasiado grande. El tamaño máximo permitido es de 5MB."
+      );
+    }
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImageReview(reader.result);
-    };
-    reader.readAsDataURL(file);
+    setFormData({ ...formData, curriculum: file });
   }
   function handleSubmit(event) {
     event.preventDefault();
@@ -154,9 +156,11 @@ const ProfileUser = ({ user }) => {
     formData1.append("title", title);
     formData1.append("experience", experience);
     formData1.append("education", education);
+    formData1.append("curriculum", curriculum);
 
     updateUserProfile(formData1);
     navigate("/");
+    // console.log(curriculum);
   }
 
   return (
@@ -213,57 +217,68 @@ const ProfileUser = ({ user }) => {
           label="LINKEDIN URL"
         />
         <div>
-        <Subtitle>Professional Information</Subtitle>
-        <Comment>Changes made here will be reflected in your future applications</Comment>
+          <Subtitle>Professional Information</Subtitle>
+          <Comment>
+            Changes made here will be reflected in your future applications
+          </Comment>
         </div>
-        <InputStyledut
-          id="title"
-          name="title"
-          type="text"
-          value={title}
-          onChange={handleChange}
-          placeholder=""
-          label="TITLE"
-        />
-
-        <AreaContainer>
-          <Label htmlFor={"experience"}>PROFESSIONAL EXPERIENCE</Label>
-          <StyledInput
-            id="experience"
-            name="experience"
-            value={experience}
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          `}
+        >
+          <InputStyledut
+            id="title"
+            name="title"
+            type="text"
+            value={title}
             onChange={handleChange}
+            placeholder=""
+            label="TITLE"
           />
-        </AreaContainer>
 
-        <AreaContainer>
-          <Label htmlFor={"education"}>EDUCATION</Label>
-          <StyledInput
-            id="education"
-            name="education"
-            value={education}
-            onChange={handleChange}
-          />
-        </AreaContainer>  
-        <ContainerFile>
-          <div>
-            <AreaContainer>
-              <Label>UPLOAD/UPDATE YOUR CV</Label>
-              <LabelFile htmlFor={"profile"}>
-                <RiUploadLine />
-                <span> Choose a file</span>
-              </LabelFile>
-              <FileInput
-                id="profile"
-                name="profile"
-                type="file"
-                placeholder="Choose a file"
-                onChange={handleChangeFile}
-              />
-            </AreaContainer>
-            <Label>PDF</Label>
-          </div>
-        </ContainerFile>
+          <AreaContainer>
+            <Label htmlFor={"experience"}>PROFESSIONAL EXPERIENCE</Label>
+            <StyledInput
+              id="experience"
+              name="experience"
+              value={experience}
+              onChange={handleChange}
+            />
+          </AreaContainer>
+
+          <AreaContainer>
+            <Label htmlFor={"education"}>EDUCATION</Label>
+            <StyledInput
+              id="education"
+              name="education"
+              value={education}
+              onChange={handleChange}
+            />
+          </AreaContainer>
+          <ContainerFile>
+            <div>
+              <AreaContainer>
+                <Label>UPLOAD/UPDATE YOUR CV</Label>
+                <LabelFile htmlFor={"curriculum"}>
+                  <RiUploadLine />
+                  <span> Choose a file</span>
+                </LabelFile>
+                <FileInput
+                  id="curriculum"
+                  name="curriculum"
+                  type="file"
+                  accept="application/pdf"
+                  placeholder="Choose a file"
+                  onChange={handleChangeFile}
+                />
+              </AreaContainer>
+              <Label>Only PDF. Max size 5MB</Label>
+            </div>
+          </ContainerFile>
+        </div>
 
         <CustomButton>Update Profile</CustomButton>
       </Form>
