@@ -28,6 +28,7 @@ const CardData = styled("div")`
   }
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   justify-content: center;
+  cursor: default;
 `;
 
 const ContentJob = styled.div`
@@ -121,35 +122,6 @@ const ButtonSeeMore = styled.button`
   }
 `;
 
-const ButtonIcon = styled.button`
-display: flex;
-justify-content: center;
-align-items: center;
-border: 1px solid #F48FB1;
-border-radius: 50px;
-font-family: ${fonts.chiron};
-width: 40;
-height: 40px;
-font-weight: 500;
-font-size: 14px;
-line-height: 24px;
-letter-spacing: 1.25px;
-text-transform: uppercase;
-color: #fff
-background: #F48FB1;
-padding: 8px;
-cursor: pointer;
-overflow: hidden;
-transition: all 500ms ease;
-z-index: 0;
-
-&:hover {
-	background-color: #F48FB1;
-	box-shadow: 0 0 10px #F48FB1, 0 0 10px #F48FB1, 0 0 15px #F48FB1;
-	color: #616161;
-}
-`;
-
 const ButtonFollow = styled.button`
   all: unset;
   display: flex;
@@ -171,7 +143,7 @@ const ButtonFollow = styled.button`
 `;
 
 function JobCard(job) {
-	const [activeButton, setActiveButton] = useState(true);
+  const [activeButton, setActiveButton] = useState(true);
   const { navigate } = useAuth();
 
   function handleLinkChange(event) {
@@ -183,15 +155,22 @@ function JobCard(job) {
   return (
     <CardData key={job?.id}>
       <ContentJob>
-        <img src={job?.company_data.profile === null ? Company : job?.company_data.profile} alt={""} 
-				css={css` 
-            width: 75px; 
+        <img
+          src={
+            job?.company_data.profile === null
+              ? Company
+              : job?.company_data.profile
+          }
+          alt={""}
+          css={css`
+            width: 75px;
             height: 75px;
             position: absolute;
             left: 15px;
             top: 20px;
             border-radius: 50%;
-          `}/>
+          `}
+        />
         <ContentRow>
           <FaIndustry
             css={css`

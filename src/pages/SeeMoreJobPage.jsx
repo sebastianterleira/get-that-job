@@ -34,6 +34,14 @@ const CardImagenCompany = styled.div`
   height: 74px;
   background-color: #fff;
   border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: all 400ms ease;
+  &:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    transform: translateY(-3%);
+  }
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 `;
@@ -244,8 +252,6 @@ function SeeMore({ findJob }) {
   const history = useNavigate();
   const { navigate } = useAuth();
 
-
-
   function handleLinkChange(event) {
     event.preventDefault();
 
@@ -294,19 +300,22 @@ function SeeMore({ findJob }) {
             `}
           >
             <div onClick={handleLinkChange}>
-                <ButtonFollow follow={activeButton}>
-                  <RiFocus3Line
-                    css={css`
-                      font-size: 22px;
-                    `}
-                  />
-                </ButtonFollow>
+              <ButtonFollow follow={activeButton}>
+                <RiFocus3Line
+                  css={css`
+                    font-size: 22px;
+                  `}
+                />
+              </ButtonFollow>
             </div>
-            <TextButtonFollow>{activeButton ? "FOLLOWING" : "FOLLOW"}</TextButtonFollow>
+            <TextButtonFollow>
+              {activeButton ? "FOLLOWING" : "FOLLOW"}
+            </TextButtonFollow>
           </div>
         </ContentText>
       </ConteinerCompany>
-      <ButtonIcon onClick={() => navigate(`application/${job.id}`)}
+      <ButtonIcon
+        onClick={() => navigate(`application/${job.id}`)}
         css={css`
           position: absolute;
           top: 85px;
@@ -316,6 +325,7 @@ function SeeMore({ findJob }) {
         <RiSendPlaneLine
           css={css`
             font-size: 22px;
+            margin-right: 10px;
           `}
         />
         APPLY NOW
@@ -392,10 +402,17 @@ function SeeMore({ findJob }) {
           align-items: center;
         `}
       >
-        <ButtonIcon css={css`margin-bottom: 25px; margin-bottom: 15px;`} onClick={() => navigate(`application/${job.id}`)}>
+        <ButtonIcon
+          css={css`
+            margin-bottom: 25px;
+            margin-top: 15px;
+          `}
+          onClick={() => navigate(`application/${job.id}`)}
+        >
           <RiSendPlaneLine
             css={css`
               font-size: 22px;
+              margin-right: 10px;
             `}
           />
           APPLY NOW

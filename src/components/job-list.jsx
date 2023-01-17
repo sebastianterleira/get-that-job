@@ -14,7 +14,7 @@ const Tittle = styled.div`
 const ContainerCard = styled.div`
   display: grid;
   grid-gap: 15px;
-  grid-template-columns: repeat(3, 335px);
+  grid-template-columns: repeat(3, 318px);
   grid-auto-rows: minmax(170px, auto);
 `;
 
@@ -24,7 +24,7 @@ function JobList({ jobs }) {
       <Tittle>{jobs?.length} jobs for you</Tittle>
       <ContainerCard>
         {jobs?.map((job) => (
-          <JobCard {...job}/>
+          <JobCard {...job} />
         ))}
       </ContainerCard>
     </>
