@@ -27,7 +27,6 @@ export default async function collectionClient(
   // };
   let config;
   if (body) {
-    console.log(body instanceof FormData);
     if (body instanceof FormData) {
       config = {
         method: method || "POST",
