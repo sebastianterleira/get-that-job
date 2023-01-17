@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { RiFocus3Line } from "react-icons/ri";
-import { MdRadioButtonChecked } from "react-icons/md";
+import { MdRadioButtonChecked, MdOutlineWatchLater } from "react-icons/md";
+import { CiMail } from "react-icons/ci";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { FaIndustry } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
@@ -86,6 +87,7 @@ const ButtonNav = styled.button`
 display: flex;
 flex-direction: row;
 align-items: center;
+justify-content: center;
 padding: 16px 24px;
 gap: 8px;
 width: 233px;
@@ -123,7 +125,7 @@ color: #373737;
 const ButtonNa = styled.button`
 display: flex;
 flex-direction: row;
-
+justify-content: center;
 align-items: center;
 padding: 8px;
 gap: 8px;
@@ -170,37 +172,43 @@ function Application() {
 	<StyledDiv>
 		<StyledDiv2>
 			<div style={{display: "flex", gap: "20px"}}>
-				<img src={Rectangle1} css={css`width: 75px; height: 75px; position: absolute; left: 15px; top: 20px; border-radius: 50%;`} />					
+				<img src={Rectangle1} css={css`width: 75px; height: 75px; position: absolute; left: 15px; top: 20px; borderRadius: 50%;`} />					
 			    <StyledThe>
 					<StyleDh1>The company name SA</StyleDh1>
 					<div style={{width: "138px", height: "40px"}}>
-						<StyledPa><RiFocus3Line style={{background: "#F48FB1", borderRadius: "50px",width: "30px",height: "30px",color: "white"}}></RiFocus3Line>FOLLOWING</StyledPa>
+						<StyledPa><RiFocus3Line style={{ background: "#F48FB1", borderRadius: "50px",width: "30px",height: "30px",color: "white"}}></RiFocus3Line>FOLLOWING</StyledPa>
 					</div>
 					
 				</StyledThe>
 			</div>
 				
 					<div>
-						<ButtonNav> SEND APLICATION</ButtonNav>
+						<ButtonNav><CiMail/> SEND APLICATION</ButtonNav>
 					</div>
 		</StyledDiv2>
 
 	    <StyledDiv3>
-			<h1>The Job title </h1>
-			<p >Posted 2 days ago</p>
+			<h1 style={{marginTop: "16px"}}>The Job title </h1>
+			<p> <MdOutlineWatchLater/>POSTED 2 DAYS AGO</p>
 		</StyledDiv3>	
-		    <div style={{display:"flex", flexDirection: "row", justifyContent: "space-between", gap: "38px", marginTop: "18px"}}>
+		    <div style={{display:"flex", flexDirection: "row", justifyContent: "center", gap: "32px", marginTop: "18px", width: "960px"}}>
 				<StyledButton>
 					<StyledLabel2 >Category</StyledLabel2 >
-					<FaIndustry/>Manufacturing
+					<div style={{width: "217px", height: "29px", gap: "130px"}}>
+						<FaIndustry/>Manufacturing
+					</div>
 				</StyledButton>
 				<StyledButton>
 					<StyledLabel2 >Type</StyledLabel2 >
-					<AiOutlineCalendar/>Full time
+					<div style={{width: "217px", height: "29px"}} >
+						<AiOutlineCalendar/>Full time
+					</div>
 				</StyledButton>
 				<StyledButton>
 					<StyledLabel2 >Salary</StyledLabel2 >
-					<RiMoneyDollarCircleLine/>	2,000 - 2,500
+					<div style={{width: "217px", height: "29px"}}>
+						<RiMoneyDollarCircleLine/>2,000 - 2,500
+					</div>
 				</StyledButton>
 			</div>
 		
@@ -219,20 +227,15 @@ function Application() {
                     </form>  
 		</StyledDiv4>		
 			<StyledDiv5>
-				<p>Professional experience (taken from your profile)</p>
-				<textarea rows="16" cols="">					
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.									 
-				</textarea>
+				<label>Professional experience (taken from your profile)</label>
+				<textarea style={{border: "1px solid #F48FB1", borderRadius: "8px"}} name="description" defaultValue="This is a description." />
 				
-				<p style={{marginTop: "16px"}}>Why are you interested in working at The company name SA</p>
-				<textarea>         
-						Mention things about The Company Name SA that excite you. 
-						Why would you be a good candidate?					
-				</textarea>
+				<label style={{marginTop: "16px"}}>Why are you interested in working at The company name SA</label>
+				<textarea style={{border: "1px solid #F48FB1",borderRadius: "8px"}} name="description" defaultValue="This is a description." />
 
 			</StyledDiv5>
 				
-				<ButtonNa style={{marginTop: "36px"}}>SEND APLICATION</ButtonNa>
+				<ButtonNa style={{marginTop: "36px"}}><CiMail/>SEND APLICATION</ButtonNa>
 			
 	</StyledDiv>	
 </div>
