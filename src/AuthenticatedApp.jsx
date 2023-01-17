@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { getJobsRecruiter, updateJob } from "./service/jobsRecruiter-services";
 import { useLocalStorage } from "./hook";
 import NewJob from "./pages/newJob";
+import YourApplication from "./components/yourApplicationPage";
 import SeeMore from "./pages/SeeMoreJobPage";
 import ApplicationJob from "./components/ApplicationPage";
 import ProfileUser from "./pages/userProfilePage";
@@ -116,6 +117,7 @@ function AuthenticatedApp() {
             <Route path={"/"} element={<Search />} />
             <Route path={"/home"} element={<Search />} />
             <Route path={"*"} element={<Search />} />
+            <Route path={"Applications"} element={<YourApplication />} />
             <Route
               path={"following"}
               element={<Following handlefollowing={followingJobs} />}

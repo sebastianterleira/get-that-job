@@ -6,12 +6,8 @@ import {
   RiGithubFill,
   RiFileList2Line,
 } from "react-icons/ri";
-import {
-  AiOutlineSearch,
-} from "react-icons/ai";
-import {
-  BiTargetLock,
-} from "react-icons/bi";
+import { AiOutlineSearch } from "react-icons/ai";
+import { BiTargetLock } from "react-icons/bi";
 
 import { VscNewFile } from "react-icons/vsc";
 import NavBarItem from "./navbarItem";
@@ -20,8 +16,8 @@ import getJob from "../static/img/logoNavbar.svg";
 import { useAuth } from "../context/auth-context";
 
 const NavbarC = styled("div")`
-  height: 1000px;
-  width: 250px;
+  min-height: 100vh;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -67,7 +63,7 @@ const Main = styled.div`
 function NavbarProfessional() {
   const { logout } = useAuth();
   const optionIcon = {
-    following: <BiTargetLock/>,
+    following: <BiTargetLock />,
     search: <AiOutlineSearch />,
     application: <RiFileList2Line />,
     job: <RiSuitcaseLine />,
@@ -88,7 +84,7 @@ function NavbarProfessional() {
             icon={optionIcon.search}
           />
           <NavBarItem
-            to={"/"}
+            to={"/Applications"}
             name={"Your applications"}
             icon={optionIcon.application}
           />
@@ -119,36 +115,56 @@ function NavbarProfessional() {
           <p>Build with by:</p>
           <Authors>
             <Github>
-             <a href="https://github.com/sebastianterleira"><RiGithubFill /></a>
+              <a href="https://github.com/sebastianterleira">
+                <RiGithubFill />
+              </a>
             </Github>
-            <a href="https://github.com/sebastianterleira"><p>Sebastian Terleira</p></a>
+            <a href="https://github.com/sebastianterleira">
+              <p>Sebastian Terleira</p>
+            </a>
           </Authors>
 
           <Authors>
             <Github>
-            <a href="https://github.com/eliasmaq"><RiGithubFill /></a>
+              <a href="https://github.com/eliasmaq">
+                <RiGithubFill />
+              </a>
             </Github>
-            <a href="https://github.com/eliasmaq"><p>Elias Mesones</p></a>
+            <a href="https://github.com/eliasmaq">
+              <p>Elias Mesones</p>
+            </a>
           </Authors>
           <Authors>
             <Github>
-            <a href="https://github.com/patico14"><RiGithubFill /></a>
+              <a href="https://github.com/patico14">
+                <RiGithubFill />
+              </a>
             </Github>
-            <a href="https://github.com/patico14"><p>Patricia Mendoza</p></a>
+            <a href="https://github.com/patico14">
+              <p>Patricia Mendoza</p>
+            </a>
           </Authors>
 
           <Authors>
             <Github>
-            <a href="https://github.com/Camilo-J"><RiGithubFill /></a>
+              <a href="https://github.com/Camilo-J">
+                <RiGithubFill />
+              </a>
             </Github>
-            <a href="https://github.com/Camilo-J"><p>Camilo Huanca</p></a>
+            <a href="https://github.com/Camilo-J">
+              <p>Camilo Huanca</p>
+            </a>
           </Authors>
 
           <Authors>
             <Github>
-            <a href="https://github.com/bettysl20"><RiGithubFill /></a>
+              <a href="https://github.com/bettysl20">
+                <RiGithubFill />
+              </a>
             </Github>
-            <a href="https://github.com/bettysl20"><p>Beatriz Secca</p></a>
+            <a href="https://github.com/bettysl20">
+              <p>Beatriz Secca</p>
+            </a>
           </Authors>
         </div>
         <div>
