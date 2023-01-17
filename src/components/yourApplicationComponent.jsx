@@ -1,155 +1,307 @@
 import styled from "@emotion/styled";
 import IconExample from "../styles/img/iconoexample.svg";
-import { RiArrowDownSLine, RiPauseCircleLine , RiMailLine , RiTimeLine , RiBuilding3Line, RiCalendar2Line, RiMoneyDollarCircleLine } from "react-icons/ri";
+import {
+  RiArrowDownSLine,
+  RiPauseCircleLine,
+  RiMailLine,
+  RiTimeLine,
+  RiBuilding3Line,
+  RiCalendar2Line,
+  RiMoneyDollarCircleLine,
+  RiMailOpenLine,
+  RiCloseCircleLine,
+} from "react-icons/ri";
+import dayjs from "dayjs";
+import { useState } from "react";
+import { updateApplicationJob } from "../service/applicationJobs";
+
+dayjs().format();
 
 const Conteiner = styled("div")`
-    border: 1px solid #E1E2E1;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    width: 97%;
-    padding: 16px;
+  border: 1px solid #e1e2e1;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 944px;
+  padding: 16px;
+  display: flex;
+  gap: 1rem;
 `;
 
 const JobTitle = styled("h4")`
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 28px;
-    letter-spacing: 0.15px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.15px;
 `;
 
 const CompanyName = styled("p")`
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: 0.1px;
-    color: #616161;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: #616161;
 `;
 
 const ExtraDetails = styled("p")`
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-    letter-spacing: 0.4px;
-    color: #8E8E8E;
-    display: flex;
-    align-items: center
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: #8e8e8e;
+  display: flex;
+  align-items: center;
 `;
 
 const MoreDetailsButton = styled("button")`
-    border: none;
-    display: flex;
-    align-items: end;
+  border: none;
+  align-self: end;
 `;
 
 const UpdateDate = styled("p")`
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 12px;
-    letter-spacing: 1.5px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 1.5px;
 `;
 
 const SubTitles = styled("h2")`
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 0.15px;
-    color: #BF5F82;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.15px;
+  color: #bf5f82;
 `;
 
 const Text = styled("p")`
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  margin: 1rem 0;
 `;
 
-const CVButton = styled("button")`
-    width: 183px;
-    height: 40px;
-    border: 1px solid #F48FB1;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 16px;
-    gap: 8px;
+const CVButton = styled("a")`
+  width: 183px;
+  height: 40px;
+  border: 1px solid #f48fb1;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  &:hover {
+    background-color: palevioletred;
+    color: white;
+  }
 `;
 
 const DeclineButton = styled("button")`
-    display: flex;
-    align-items: center;
-    padding: 8px 16px;
-    gap: 8px;
-    width: 242px;
-    height: 40px;
-    justify-content: center;
-    background: #BF5F82;
-    border-radius: 16px;
-    color: white;
-    border:none
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  width: 242px;
+  height: 40px;
+  justify-content: center;
+  background: #bf5f82;
+  border-radius: 16px;
+  color: white;
+  border: none;
+  ${({ status }) =>
+    status === "declined"
+      ? "background-color: #E1E2E1; color:#8E8E8E; border:none;"
+      : "cursor: pointer;"}
 `;
 
-export default function YourApplicationComponent(){
+const View = styled.div`
+  gap: "16px";
+  display: ${({ open }) => (open ? "flex" : "none")};
+  flex-direction: column;
+`;
 
-    return (
-        <Conteiner>
-            <div style={{width: "100%", display: "flex", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-                <div style={{display: "flex", gap: "16px", alignItems: "center"}}>
-                    <img src={IconExample} style={{width: "60px", height: "60px"}}></img>
-                    <div>
-                        <JobTitle>The job Title</JobTitle>
-                        <CompanyName>The company Name SA</CompanyName>
-                    </div>
-                </div>
-                <div>
-                    <div style={{display: "flex", gap: "10px"}}>
-                        <ExtraDetails><RiBuilding3Line style={{marginRight: "6px"}}/>Manufactioring</ExtraDetails>
-                        <ExtraDetails><RiCalendar2Line style={{marginRight: "6px"}}/>Full time</ExtraDetails>
-                    </div>
-                    <div style={{display: "flex", gap: "10px"}}>
-                        <ExtraDetails><RiMoneyDollarCircleLine style={{marginRight: "6px"}}/>2.0k - 2.5k</ExtraDetails>
-                        <ExtraDetails><RiTimeLine style={{marginRight: "6px"}}/>Posted 2 days ago</ExtraDetails>
-                    </div>
-                </div>
-                <div style={{display: "flex", gap: "16px",}}>
-                    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <ExtraDetails><RiMailLine/></ExtraDetails>
-                        <ExtraDetails>Sent 1 min.</ExtraDetails>
-                        <ExtraDetails>ago</ExtraDetails>
-                    </div>
-                    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <ExtraDetails style={{color: "#F48FB1"}}><RiPauseCircleLine/></ExtraDetails>
-                        <ExtraDetails style={{color: "#F48FB1"}}>Waiting for</ExtraDetails>
-                        <ExtraDetails style={{color: "#F48FB1"}}>review</ExtraDetails>
-                    </div>
-                    <MoreDetailsButton><RiArrowDownSLine/></MoreDetailsButton>
-                </div>
+export default function YourApplicationComponent({
+  id,
+  interest,
+  state,
+  created_at,
+  cv_url,
+  updated_at,
+  user_data,
+  user_experience,
+  job_data,
+}) {
+  const [statusValue, setStatusValue] = useState(state);
+  const [open, setOpen] = useState(false);
+
+  let message;
+  switch (statusValue) {
+    case "review":
+      message = "Waiting in review";
+      break;
+    case "progress":
+      message = "Review in progress";
+      break;
+    case "finished":
+      message = "Review finished";
+      break;
+    case "declined":
+      message = `Declined in ${dayjs(updated_at).format("MM-DD-YYYY")}`;
+      break;
+    default:
+      break;
+  }
+
+  function handleDeclined() {
+    setStatusValue("declined");
+    updateApplicationJob({ state: "declined" }, id);
+  }
+
+  function handleOpen() {
+    setOpen(!open);
+  }
+
+  return (
+    <Conteiner>
+      <div style={{ width: "100%" }}>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+            <img
+              src={IconExample}
+              style={{ width: "60px", height: "60px" }}
+              alt={"job"}
+            />
+            <div>
+              <JobTitle>{job_data?.name}</JobTitle>
+              <CompanyName>{job_data?.company_name}</CompanyName>
             </div>
-            <div style={{gap: "16px", display: "flex", flexDirection: "column"}}>
-                <UpdateDate>Last Updated on 03/22/21</UpdateDate>
-                <SubTitles>Professional experience</SubTitles>
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In feugiat quam ut tempor maximus. Sed neque arcu, rhoncus elementum sodales a, tristique sed quam. Aliquam nibh velit, pharetra ac faucibus in, ornare eu tortor. Vestibulum lacus ligula, elementum sit amet purus ut, sagittis molestie ex. In hendrerit orci tellus. Integer pharetra porttitor nulla, nec fringilla dolor ultricies et. Integer accumsan feugiat urna, eu hendrerit dui varius sit amet. Mauris eget tristique turpis. Curabitur eget hendrerit turpis. Etiam rutrum dolor eu posuere vehicula.
-                Pellentesque ut mauris neque. Maecenas posuere sit amet erat at placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Donec tempor lobortis nisl. Maecenas sit amet massa in tortor pulvinar sollicitudin. Fusce vitae feugiat felis, ut malesuada purus. Curabitur felis velit, interdum vitae viverra quis, sagittis ac nulla. Quisque tempus pharetra ornare. In sed nulla eget risus cursus facilisis vel quis nibh. Praesent euismod lectus a.</Text>
-                <SubTitles>Why are you interested in working at The company name SA</SubTitles>
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In feugiat quam ut tempor maximus. Sed neque arcu, rhoncus elementum sodales a, tristique sed quam. Aliquam nibh velit, pharetra ac faucibus in, ornare eu tortor. Vestibulum lacus ligula, elementum sit amet purus ut, sagittis molestie ex. In hendrerit orci tellus. Integer pharetra porttitor nulla, nec fringilla dolor ultricies et. Integer accumsan feugiat urna, eu hendrerit dui varius sit amet. Mauris eget tristique turpis. Curabitur eget hendrerit turpis. Etiam rutrum dolor eu posuere vehicula.
-                Pellentesque ut mauris neque. Maecenas posuere sit amet erat at placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Donec tempor lobortis nisl. Maecenas sit amet massa in tortor pulvinar sollicitudin. Fusce vitae feugiat felis, ut malesuada purus. Curabitur felis velit, interdum vitae viverra quis, sagittis ac nulla. Quisque tempus pharetra ornare. In sed nulla eget risus cursus facilisis vel quis nibh. Praesent euismod lectus a.</Text>
-                <div style={{gap: "10px", width: "100%", display: "flex", justifyContent: "end"}}>
-                    <CVButton>DOWNLOAD CV</CVButton>
-                    <DeclineButton>DECLINE APPLICATION</DeclineButton>
-                </div>
+          </div>
+          <div>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <ExtraDetails>
+                <RiBuilding3Line style={{ marginRight: "6px" }} />
+                {job_data?.company_name}
+              </ExtraDetails>
+              <ExtraDetails>
+                <RiCalendar2Line style={{ marginRight: "6px" }} />
+                {job_data?.type}
+              </ExtraDetails>
             </div>
-        </Conteiner>
-    )
+            <div style={{ display: "flex", gap: "10px" }}>
+              <ExtraDetails>
+                <RiMoneyDollarCircleLine style={{ marginRight: "6px" }} />
+                {`${((job_data?.min_salary || 1000) / 1000).toFixed(1)}k - ${(
+                  job_data?.max_salary / 1000
+                ).toFixed(1)}k`}
+              </ExtraDetails>
+              <ExtraDetails>
+                <RiTimeLine style={{ marginRight: "6px" }} />
+                Posted {`${dayjs(job_data?.created_at).format("MM/DD/YYYY")}`}
+              </ExtraDetails>
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: "16px" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <ExtraDetails>
+                <RiMailLine />
+              </ExtraDetails>
+              <ExtraDetails>days ago</ExtraDetails>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <ExtraDetails
+                style={{
+                  color: statusValue === "declined" ? "#BF5F82" : "#F48FB1",
+                  width: "80px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                {statusValue === "review" ? (
+                  <RiPauseCircleLine style={{ fontSize: "1rem" }} />
+                ) : statusValue === "declined" ? (
+                  <RiCloseCircleLine
+                    style={{ fontSize: "1rem", color: "#BF5F82" }}
+                  />
+                ) : (
+                  <RiMailOpenLine style={{ fontSize: "1rem" }} />
+                )}
+                {message}
+              </ExtraDetails>
+            </div>
+          </div>
+        </div>
+        <View open={open}>
+          <UpdateDate>
+            Last Updated on{" "}
+            {`${dayjs(job_data?.updated_at).format("MM/DD/YYYY")}`}
+          </UpdateDate>
+
+          <SubTitles>Professional experience</SubTitles>
+          <Text>{user_experience}</Text>
+          <SubTitles>
+            Why are you interested in working at The company name SA
+          </SubTitles>
+          <Text>{interest}</Text>
+          <div
+            style={{
+              gap: "10px",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <CVButton href={cv_url} download>
+              DOWNLOAD CV
+            </CVButton>
+            <DeclineButton
+              disabled={statusValue === "declined"}
+              status={statusValue}
+              onClick={handleDeclined}
+            >
+              DECLINE APPLICATION
+            </DeclineButton>
+          </div>
+        </View>
+      </div>
+      <MoreDetailsButton onClick={handleOpen}>
+        <RiArrowDownSLine />
+      </MoreDetailsButton>
+    </Conteiner>
+  );
 }

@@ -431,7 +431,7 @@ function ApplicationJob({ findJob }) {
     formData1.append("job_id", id);
 
     createApplicationJob(formData1);
-    // navigate("/");
+    navigate("/Applications");
   }
 
   function handleLinkChange(event) {
