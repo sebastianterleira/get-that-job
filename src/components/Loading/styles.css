@@ -19,8 +19,8 @@ body {
   height: 200px;
   background-color: transparent;
   border: none;
-  -webkit-user-select: none;
 }
+
 .wrapper .box-wrap {
   width: 70%;
   height: 70%;

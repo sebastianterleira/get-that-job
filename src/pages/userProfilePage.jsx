@@ -125,6 +125,8 @@ const ProfileUser = ({ user }) => {
     curriculum,
   } = formData;
 
+  console.log(curriculum);
+
   function handleChange(event) {
     const { name, value } = event.target;
 

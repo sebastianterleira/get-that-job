@@ -4,14 +4,12 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { RiFocus3Line } from "react-icons/ri";
 import { MdOutlineMail } from "react-icons/md";
-import { AiOutlineCalendar } from "react-icons/ai";
 import { fonts, colors } from "../styles";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { FaIndustry } from "react-icons/fa";
 import { CiClock2 } from "react-icons/ci";
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import { MdOutlineDateRange } from "react-icons/md";
-import { RiSendPlaneLine } from "react-icons/ri";
 import { RiUploadLine } from "react-icons/ri";
 import { typography } from "../styles";
 import { useParams, useNavigate } from "react-router-dom";
@@ -40,6 +38,14 @@ const CardImagenCompany = styled.div`
   height: 74px;
   background-color: #fff;
   border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: all 400ms ease;
+  &:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    transform: translateY(-3%);
+  }
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
     rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 `;
@@ -249,14 +255,6 @@ const ContainerFile = styled.div`
   gap: 1rem;
 `;
 
-const Img = styled.img`
-  width: 74.67px;
-  height: 74.67px;
-  objetive-fit: cover;
-  border-radius: 8px;
-  filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.25));
-`;
-
 const AreaContainer = styled.div`
   width: 310px;
   display: flex;
@@ -302,40 +300,40 @@ const FileInput = styled.input`
 `;
 
 const CheckboxInput = styled.input`
-appearance: none;
-height: 15px;
-width: 15px;
-border: 1px solid palevioletred;
-border-radius: 8px;
-&:checked {
-  height: 13px;
-  width: 13px;
-  background-color: palevioletred;
-}
+  appearance: none;
+  height: 15px;
+  width: 15px;
+  border: 1px solid palevioletred;
+  border-radius: 8px;
+  &:checked {
+    height: 13px;
+    width: 13px;
+    background-color: palevioletred;
+  }
 
-&:active,
-&:focus {
-  outline: 1px solid palevioletred;
-  outline-offset: 3px;
-}
+  &:active,
+  &:focus {
+    outline: 1px solid palevioletred;
+    outline-offset: 3px;
+  }
 `;
 
 const MenssageFile = styled.label`
-font-family: ${fonts.bedroom};
-font-weight: 400;
-font-size: 14px;
-line-height: 20px;
-letter-spacing: 0.25px;
-color: #616161;
-`
+  font-family: ${fonts.bedroom};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #616161;
+`;
 
 const Label = styled.label`
-font-family: ${fonts.bedroom};
-font-weight: 400;
-font-size: 12px;
-line-height: 16px;
-letter-spacing: 0.4px;
-color: #8E8E8E;
+  font-family: ${fonts.bedroom};
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: #8e8e8e;
 `;
 
 const ContentRowInput = styled.div`
@@ -347,13 +345,13 @@ const ContentRowInput = styled.div`
 `;
 
 const RadioInputLAbel = styled.label`
-font-family: ${fonts.bedroom};
-font-weight: 400;
-font-size: 14px;
-line-height: 20px;
-letter-spacing: 0.25px;
-color: #616161;
-`
+  font-family: ${fonts.bedroom};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #616161;
+`;
 
 const StyledInput = styled.textarea`
   resize: none;
@@ -370,14 +368,14 @@ const StyledInput = styled.textarea`
 `;
 
 const LabelTextFiel = styled.label`
-font-family: ${fonts.bedroom};
-font-weight: 400;
-font-size: 11px;
-line-height: 12px;
-letter-spacing: 1.5px;
-color: #373737;
-text-transform: uppercase;
-margin-top: 16px;
+  font-family: ${fonts.bedroom};
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 12px;
+  letter-spacing: 1.5px;
+  color: #373737;
+  text-transform: uppercase;
+  margin-top: 16px;
 `;
 
 const StyledInput2 = styled.textarea`
@@ -394,9 +392,8 @@ const StyledInput2 = styled.textarea`
   }
 `;
 
-
 function ApplicationJob({ findJob }) {
-	const { id } = useParams();
+  const { id } = useParams();
   const job = findJob(Number.parseInt(id));
   const [activeButton, setActiveButton] = useState(true);
   const history = useNavigate();
@@ -441,7 +438,6 @@ function ApplicationJob({ findJob }) {
     // navigate("/");
   }
 
-
   function handleLinkChange(event) {
     event.preventDefault();
 
@@ -454,7 +450,7 @@ function ApplicationJob({ findJob }) {
   const Ago = dayjs(`${job.created_at}`).fromNow(true);
 
   return (
-<Container>
+    <Container>
       <button
         onClick={() => history(-1)}
         css={css`
@@ -490,15 +486,17 @@ function ApplicationJob({ findJob }) {
             `}
           >
             <div onClick={handleLinkChange}>
-                <ButtonFollow follow={activeButton}>
-                  <RiFocus3Line
-                    css={css`
-                      font-size: 22px;
-                    `}
-                  />
-                </ButtonFollow>
+              <ButtonFollow follow={activeButton}>
+                <RiFocus3Line
+                  css={css`
+                    font-size: 22px;
+                  `}
+                />
+              </ButtonFollow>
             </div>
-            <TextButtonFollow>{activeButton ? "FOLLOWING" : "FOLLOW"}</TextButtonFollow>
+            <TextButtonFollow>
+              {activeButton ? "FOLLOWING" : "FOLLOW"}
+            </TextButtonFollow>
           </div>
         </ContentText>
       </ConteinerCompany>
@@ -575,12 +573,28 @@ function ApplicationJob({ findJob }) {
         </ContainerCards>
       </ContainerJobInfo>
       <SubTitle>Complete Your application</SubTitle>
-        <LabelCV>Send your cv updated</LabelCV>
-        <ContentRowInput>
-        <RadioInputLAbel><CheckboxInput type="radio" id="profileradio" value="profileradio" name="profileradio"/>  Use current CV</RadioInputLAbel>
-        <RadioInputLAbel><CheckboxInput type="radio" id="profileradio" value="profileradio" name="profileradio"/>  Upload new CV</RadioInputLAbel>
-        </ContentRowInput>
-        <form onSubmit={handleSubmit}>
+      <LabelCV>Send your cv updated</LabelCV>
+      <ContentRowInput>
+        <RadioInputLAbel>
+          <CheckboxInput
+            type="radio"
+            id="profileradio"
+            value="profileradio"
+            name="profileradio"
+          />{" "}
+          Use current CV
+        </RadioInputLAbel>
+        <RadioInputLAbel>
+          <CheckboxInput
+            type="radio"
+            id="profileradio"
+            value="profileradio"
+            name="profileradio"
+          />{" "}
+          Upload new CV
+        </RadioInputLAbel>
+      </ContentRowInput>
+      <form onSubmit={handleSubmit}>
         <ContainerFile>
           <div>
             <AreaContainer>
@@ -600,9 +614,11 @@ function ApplicationJob({ findJob }) {
             <Label>Only PDF. Max size 5MB</Label>
           </div>
         </ContainerFile>
-        
+
         <AreaContainerColumn>
-          <LabelTextFiel htmlFor={"experience"}>Professional experience (taken from your profile)</LabelTextFiel>
+          <LabelTextFiel htmlFor={"experience"}>
+            Professional experience (taken from your profile)
+          </LabelTextFiel>
           <StyledInput
             id="experience"
             name="experience"
@@ -614,7 +630,9 @@ function ApplicationJob({ findJob }) {
           />
         </AreaContainerColumn>
         <AreaContainerColumn>
-          <LabelTextFiel htmlFor={"interested"}>Why are you interested in working at The company name SA</LabelTextFiel>
+          <LabelTextFiel htmlFor={"interested"}>
+            Why are you interested in working at The company name SA
+          </LabelTextFiel>
           <StyledInput2
             id="interested"
             name="interested"
@@ -626,26 +644,32 @@ function ApplicationJob({ findJob }) {
           />
         </AreaContainerColumn>
         <Label>Between 50 and 1000 characters</Label>
-      <div
-        css={css`
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        `}
-      >
-        <ButtonIcon css={css`margin-bottom: 25px; margin-top: 25px;`} onClick={() => navigate(`application/${job.id}`)}>
-          <MdOutlineMail
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+          `}
+        >
+          <ButtonIcon
             css={css`
-              font-size: 22px;
-              margin-right: 10px;
+              margin-bottom: 25px;
+              margin-top: 25px;
             `}
-          />
-          Send Application
-        </ButtonIcon>
-      </div>
+            onClick={() => navigate(`application/${job.id}`)}
+          >
+            <MdOutlineMail
+              css={css`
+                font-size: 22px;
+                margin-right: 10px;
+              `}
+            />
+            Send Application
+          </ButtonIcon>
+        </div>
       </form>
     </Container>
-	);
+  );
 }
 
 export default ApplicationJob;

@@ -5,10 +5,8 @@ import { BiSearch } from "react-icons/bi";
 import { fonts } from "../styles/typography";
 import JobList from "../components/job-list";
 import FilterJob from "../components/filters-job";
-import data from "../data/data";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/auth-context";
-// import axios from "axios";
 import { getJobs } from "../service/user-services";
 
 const Wrapper = styled.div`
@@ -71,7 +69,6 @@ const GroupInput = styled.div`
 function Search() {
   const { jobs, setJobs } = useAuth([]);
   const [tablaProducts, setTablaProducts] = useState([]);
-  const [query, setQuery] = useState("");
   const [state, setState] = useState({
     status: "idle",
     data: null,
@@ -83,40 +80,25 @@ function Search() {
     getJobs().then(setTablaProducts).catch(console.log);
   }, []);
 
-  useEffect(() => {
-    if (query === "") return;
-    setState({ status: "pending" })
-      .then((data) => {
-        setState({
-          status: "success",
-          data: data,
-          error: null,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        setState({
-          status: "error",
-          data: null,
-          error: "El usuario no existe! Intenta de nuevo o perdio Conexion 💀",
-        });
-      });
-  }, [query]);
-
-  const filterSearch =(terminoBusqueda) => {
-		var searchResults=tablaProducts.filter((elemento) => {
-			if(elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())){
-				return elemento;
-			}
-		});
-		setJobs(searchResults);
-	}
+  const filterSearch = (terminoBusqueda) => {
+    var searchResults = tablaProducts.filter((elemento) => {
+      if (
+        elemento.name
+          .toString()
+          .toLowerCase()
+          .includes(terminoBusqueda.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setJobs(searchResults);
+  };
 
   // let allCategories = jobs.reduce((accu, current) => {
-	// 	if (!accu.includes(current.category)) accu.push(current.category);
+  // 	if (!accu.includes(current.category)) accu.push(current.category);
 
-	// 	return accu;
-	// }, ["All"]);
+  // 	return accu;
+  // }, ["All"]);
 
   // console.log(tablaProducts);
 

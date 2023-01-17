@@ -2,19 +2,18 @@
 import { css } from "@emotion/react";
 import React, { useState } from "react";
 import Group from "../static/img/HomePage/G.png";
-import Sebastian from "../static/img/HomePage/sebastian.jpeg";
+import Sebastian from "../static/img/HomePage/Sebastian.png";
 import Patricia from "../static/img/HomePage/patricia.jpeg";
 import Camilo from "../static/img/HomePage/camilo.png";
 import Beatriz from "../static/img/HomePage/bea.png";
+import Elias from "../static/img/HomePage/Elias.png";
+import Catode from "../static/img/HomePage/T1.png";
 import Search from "../static/img/HomePage/search.png";
 import styled from "@emotion/styled";
 import { fonts } from "../styles";
 import { typography } from "../styles";
 import { DiGithubBadge, DiReact, DiRuby } from "react-icons/di";
 import { AiFillLinkedin } from "react-icons/ai";
-import SignUpPage from "./signup-page";
-import { Link, useNavigate } from "react-router-dom";
-import Loading from "../components/Loading/loading";
 import { useAuth } from "../context/auth-context";
 
 const Wrapper = styled.div`
@@ -22,15 +21,6 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-`;
-
-const Wrapper2 = styled.div`
-  margin: auto;
-  display: flex;
-  flex-direction: row;
-  padding: 20px 0px 0px 0px;
-  align-items: center;
-  justify-content: center;
 `;
 
 const ContentTitle = styled.div`
@@ -157,7 +147,7 @@ const TitleMembers = styled.p`
 const GridMembers = styled.div`
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(4, 320px);
+  grid-template-columns: repeat(6, 205px);
   grid-auto-rows: minmax(170px, auto);
   justify-items: center;
   align-items: center;
@@ -264,7 +254,6 @@ function Home() {
                     css={css`
                       text-decoration: none;
                     `}
-                    target="blank_"
                   >
                     {" "}
                     <DiGithubBadge
@@ -272,6 +261,9 @@ function Home() {
                         font-size: 30px;
                         text-decoration: none;
                         color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
                       `}
                     />{" "}
                   </a>
@@ -280,7 +272,6 @@ function Home() {
                     css={css`
                       text-decoration: none;
                     `}
-                    target="blank_"
                   >
                     {" "}
                     <AiFillLinkedin
@@ -288,6 +279,9 @@ function Home() {
                         font-size: 30px;
                         text-decoration: none;
                         color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
                       `}
                     />{" "}
                   </a>
@@ -310,7 +304,6 @@ function Home() {
                     css={css`
                       text-decoration: none;
                     `}
-                    target="blank_"
                   >
                     {" "}
                     <DiGithubBadge
@@ -318,6 +311,9 @@ function Home() {
                         font-size: 30px;
                         text-decoration: none;
                         color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
                       `}
                     />{" "}
                   </a>
@@ -326,7 +322,6 @@ function Home() {
                     css={css`
                       text-decoration: none;
                     `}
-                    target="blank_"
                   >
                     {" "}
                     <AiFillLinkedin
@@ -334,6 +329,9 @@ function Home() {
                         font-size: 30px;
                         text-decoration: none;
                         color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
                       `}
                     />{" "}
                   </a>
@@ -356,7 +354,6 @@ function Home() {
                     css={css`
                       text-decoration: none;
                     `}
-                    target="blank_"
                   >
                     {" "}
                     <DiGithubBadge
@@ -364,6 +361,9 @@ function Home() {
                         font-size: 30px;
                         text-decoration: none;
                         color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
                       `}
                     />{" "}
                   </a>
@@ -372,7 +372,6 @@ function Home() {
                     css={css`
                       text-decoration: none;
                     `}
-                    target="blank_"
                   >
                     {" "}
                     <AiFillLinkedin
@@ -380,6 +379,9 @@ function Home() {
                         font-size: 30px;
                         text-decoration: none;
                         color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
                       `}
                     />{" "}
                   </a>
@@ -402,7 +404,6 @@ function Home() {
                     css={css`
                       text-decoration: none;
                     `}
-                    target="blank_"
                   >
                     {" "}
                     <DiGithubBadge
@@ -410,6 +411,9 @@ function Home() {
                         font-size: 30px;
                         text-decoration: none;
                         color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
                       `}
                     />{" "}
                   </a>
@@ -418,7 +422,6 @@ function Home() {
                     css={css`
                       text-decoration: none;
                     `}
-                    target="blank_"
                   >
                     {" "}
                     <AiFillLinkedin
@@ -426,6 +429,109 @@ function Home() {
                         font-size: 30px;
                         text-decoration: none;
                         color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
+                      `}
+                    />{" "}
+                  </a>
+                </ContentContact>
+              </ContentGrid>
+              <ContentGrid>
+                <img
+                  src={Catode}
+                  alt={"CatodeIMG"}
+                  css={css`
+                    width: 180px;
+                    height: 180px;
+                    border-radius: 50%;
+                  `}
+                />
+                <NameDev>Catode</NameDev>
+                <ContentContact>
+                  <a
+                    href="https://github.com/TyrUmbra"
+                    css={css`
+                      text-decoration: none;
+                    `}
+                  >
+                    {" "}
+                    <DiGithubBadge
+                      css={css`
+                        font-size: 30px;
+                        text-decoration: none;
+                        color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
+                      `}
+                    />{" "}
+                  </a>
+                  <a
+                    href="www.linkedin.com/in/carlosaamm"
+                    css={css`
+                      text-decoration: none;
+                    `}
+                  >
+                    {" "}
+                    <AiFillLinkedin
+                      css={css`
+                        font-size: 30px;
+                        text-decoration: none;
+                        color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
+                      `}
+                    />{" "}
+                  </a>
+                </ContentContact>
+              </ContentGrid>
+              <ContentGrid>
+                <img
+                  src={Elias}
+                  alt={"EliasIMG"}
+                  css={css`
+                    width: 180px;
+                    height: 180px;
+                    border-radius: 50%;
+                  `}
+                />
+                <NameDev>Elias</NameDev>
+                <ContentContact>
+                  <a
+                    href="https://github.com/eliasmaq"
+                    css={css`
+                      text-decoration: none;
+                    `}
+                  >
+                    {" "}
+                    <DiGithubBadge
+                      css={css`
+                        font-size: 30px;
+                        text-decoration: none;
+                        color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
+                      `}
+                    />{" "}
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/elias-mesones-aquije-077603176/"
+                    css={css`
+                      text-decoration: none;
+                    `}
+                  >
+                    {" "}
+                    <AiFillLinkedin
+                      css={css`
+                        font-size: 30px;
+                        text-decoration: none;
+                        color: #616161;
+                        &:hover {
+                          color: #292524;
+                        }
                       `}
                     />{" "}
                   </a>
@@ -449,7 +555,7 @@ function Home() {
               >
                 <p>© 2023 - Get That Job</p>
                 <p>Source Code</p>
-                <p>Codeable - Cohort X Final Project</p>
+                <p>Codeable - Cohort 08 Final Project</p>
               </div>
               <div
                 style={{
