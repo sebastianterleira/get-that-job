@@ -13,3 +13,7 @@ export async function updateApplicationJob(data, id) {
     method: "PATCH",
   });
 }
+
+export async function getApplications() {
+  return await collectionClient(`/applications_jobs`);
+}

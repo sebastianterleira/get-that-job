@@ -13,18 +13,6 @@ export default async function collectionClient(
     };
   }
 
-  // if (body) {
-  //   headers = {
-  //     "Content-Type": "application/json",
-  //     ...headers,
-  //   };
-  // }
-
-  // const config = {
-  //   method: method || (body ? "POST" : "GET"),
-  //   headers,
-  //   body: body ? JSON.stringify(body) : null,
-  // };
   let config;
   if (body) {
     if (body instanceof FormData) {
@@ -50,6 +38,7 @@ export default async function collectionClient(
       headers,
     };
   }
+  console.log(config);
 
   const response = await fetch(BASE_URI + endpoint, config);
 
