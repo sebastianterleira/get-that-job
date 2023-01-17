@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 import CompanyCard from "../components/company-follow";
 import JobFollow from "../components/job-follow";
 import { useAuth } from "../context/auth-context";
@@ -38,7 +39,12 @@ const ContainerCard = styled.div`
 
 function Following({ handlefollowing }) {
   const { user } = useAuth();
-  let followingJobs = handlefollowing();
+  const [followingJobs, setFollowingJobs] = useState(handlefollowing());
+
+  function deleteJobFollowig(id) {
+    let newJobs = followingJobs.filter((elem) => elem.id !== id);
+    setFollowingJobs(newJobs);
+  }
 
   return (
     <Wrapper>
@@ -46,7 +52,12 @@ function Following({ handlefollowing }) {
       <Subtitle>You are following {followingJobs.length} jobs</Subtitle>
       <ContainerCard>
         {followingJobs?.map((job) => (
-          <JobFollow key={job.id} {...job} />
+          <JobFollow
+            key={job.id}
+            {...job}
+            following={true}
+            handleFollows={deleteJobFollowig}
+          />
         ))}
       </ContainerCard>
       <Subtitle>You are following 0 company</Subtitle>

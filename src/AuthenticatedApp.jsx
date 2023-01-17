@@ -18,7 +18,10 @@ import NewJob from "./pages/newJob";
 import Application from "./components/ApplicationPage";
 import SeeMore from "./pages/SeeMoreJobPage";
 import Loading from "./components/Loading/loading";
+
 import ProfileUser from "./pages/userProfilePage";
+
+import ShowCompany from "./pages/showCompany";
 
 const Container = styled.div`
   display: flex;
@@ -89,12 +92,27 @@ function AuthenticatedApp() {
   function followingJobs() {
     return jobs.reduce((accu, current, currentIndex) => {
       current.followings.forEach((elem) => {
-        if (elem.user_id === 3) accu.push(jobs[currentIndex]);
+        if (elem.user_id === user.id) {
+          current["follow_id"] = elem.id;
+          accu.push(jobs[currentIndex]);
+        }
       });
       return accu;
     }, []);
   }
-  console.log(user)
+
+  function getFollowingCompany(id) {
+    return jobs.reduce((accu, current) => {
+      current.followings.forEach((elem) => {
+        if (elem.user_id === user.id && elem.followable_id === id) {
+          current["follow_id"] = elem.id;
+          current["follow"] = true;
+        }
+      });
+      return accu;
+    }, {});
+  }
+
   return (
     <Container>
       {user ? (
@@ -116,7 +134,11 @@ function AuthenticatedApp() {
             />
             <Route
               path={"/userProfile"}
-              element={<ProfileUser user={user}/>}
+              element={<ProfileUser user={user} />}
+            />
+            <Route
+              path={"companies/:id"}
+              element={<ShowCompany following={getFollowingCompany} />}
             />
           </Routes>
         </>

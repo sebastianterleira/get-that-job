@@ -17,6 +17,7 @@ const CardData = styled("div")`
   padding: 1rem;
   background-color: #ffffff;
   border-radius: 8px;
+  width: 365px;
   overflow: hidden;
   transition: all 400ms ease;
   &:hover {
@@ -145,8 +146,12 @@ function JobFollow({
   min_salary,
   max_salary,
   company_data,
+  following,
+  follow_id,
+  handleFollows,
 }) {
-  const [activeButton, setActiveButton] = useState(true);
+  const [activeButton, setActiveButton] = useState(following);
+  const [follow, setFollow] = useState(follow_id);
   const { navigate } = useAuth();
   function handleLinkChange(event) {
     event.preventDefault();
@@ -159,10 +164,15 @@ function JobFollow({
   }
 
   function handleFollowing() {
-    // if (activeButton) deleteFollowing(id, "jobs", follow_id);
-    if (!activeButton) createFollowing(id, "jobs");
+    if (follow) deleteFollowing(id, "jobs", follow).then(() => setFollow(null));
+    if (handleFollows) handleFollows(id);
+    if (!follow)
+      createFollowing(id, "jobs")
+        .then((data) => {
+          setFollow(data.id);
+        })
+        .catch(console.log);
   }
-
   return (
     <CardData>
       <div
@@ -219,7 +229,7 @@ function JobFollow({
         `}
       >
         <div onClick={handleLinkChange}>
-          <ButtonIcon follow={activeButton}>
+          <ButtonIcon follow={activeButton} onClick={handleFollowing}>
             <RiFocus3Line
               css={css`
                 font-size: 22px;

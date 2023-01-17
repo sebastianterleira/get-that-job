@@ -27,17 +27,13 @@ function AuthProvider(props) {
     getJobs().then(setJobs).catch(console.log);
   }, []);
 
-  useEffect(() => {
-    getUser().then(setUser).catch(console.log);
-  }, []);
-
   // useEffect(() => {
   //   getUser().then(setUser).catch(console.log);
   // }, []);
 
   useEffect(() => {
-    getRecruiter().then(setRecruiter).catch(console.log);
-  }, []);
+    if (recruiter) getRecruiter().then(setRecruiter).catch(console.log);
+  }, [recruiter]);
 
   function loginProfessional(credentials) {
     auth.loginProfessional(credentials).then(setUser).catch(console.log);
