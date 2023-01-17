@@ -84,7 +84,7 @@ function NavbarProfessional() {
             icon={optionIcon.search}
           />
           <NavBarItem
-            to={"/Appli"}
+            to={"/Applications"}
             name={"Your applications"}
             icon={optionIcon.application}
           />
