@@ -17,7 +17,7 @@ export async function getUser() {
 }
 
 export async function updateUser(body) {
-  const { data } = await collectionClient("/profile", {
+  const { data } = await collectionClient("/user", {
     body: body,
     method: "PATCH",
   });
