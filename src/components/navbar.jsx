@@ -12,7 +12,7 @@ import getJob from "../static/img/logoNavbar.svg";
 import { useAuth } from "../context/auth-context";
 
 const NavbarC = styled("div")`
-  height: 1000px;
+  min-height: 100vh;
   width: 250px;
   height: 100vh;
   display: flex;
