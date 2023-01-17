@@ -16,14 +16,13 @@ export async function getUser() {
   return data;
 }
 
-export async function updateUser(data) {
-  const { token, ...user } = await collectionClient("/profile", {
-    body: data,
+export async function updateUser(body) {
+  const { data } = await collectionClient("/profile", {
+    body: body,
     method: "PATCH",
   });
 
-  sessionStorage.setItem(tokenKey, token);
-  return user;
+  return data;
 }
 
 export async function getJobs() {
