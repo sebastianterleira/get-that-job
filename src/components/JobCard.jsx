@@ -7,8 +7,8 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { FaIndustry } from "react-icons/fa";
 import { RiFocus3Line } from "react-icons/ri";
 import { useState } from "react";
-import Company from "../static/img/Companies-Logos/Rectangle1.png";
 import { useAuth } from "../context/auth-context";
+import Company from "../static/img/Companies-Logos/Rectangle1.png";
 
 const CardData = styled("div")`
   display: flex;
@@ -170,7 +170,7 @@ const ButtonFollow = styled.button`
       : " color:#00000; background: #fff; &:hover {	border: 1px solid #F48FB1;}"}
 `;
 
-function JobCard({job}) {
+function JobCard(job) {
 	const [activeButton, setActiveButton] = useState(true);
   const { navigate } = useAuth();
 
@@ -183,17 +183,15 @@ function JobCard({job}) {
   return (
     <CardData key={job?.id}>
       <ContentJob>
-        <img
-          src={Company}
-          css={css`
-            width: 75px;
+        <img src={job?.company_data.profile === null ? Company : job?.company_data.profile} alt={""} 
+				css={css` 
+            width: 75px; 
             height: 75px;
             position: absolute;
             left: 15px;
             top: 20px;
             border-radius: 50%;
-          `}
-        />
+          `}/>
         <ContentRow>
           <FaIndustry
             css={css`

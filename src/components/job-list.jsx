@@ -1,15 +1,6 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { fonts } from "../styles";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { MdOutlineDateRange } from "react-icons/md";
-import { FaIndustry } from "react-icons/fa";
-import { RiFocus3Line } from "react-icons/ri";
-import { useState } from "react";
-import Company from "../static/img/Companies-Logos/Rectangle1.png";
-import { useAuth } from "../context/auth-context";
-import JobFollow from "./job-follow";
+import JobCard from "./JobCard";
 
 const Tittle = styled.div`
   font-family: ${fonts.bedroom};
@@ -33,7 +24,7 @@ function JobList({ jobs }) {
       <Tittle>{jobs?.length} jobs for you</Tittle>
       <ContainerCard>
         {jobs?.map((job) => (
-          <JobFollow {...job}/>
+          <JobCard {...job}/>
         ))}
       </ContainerCard>
     </>
