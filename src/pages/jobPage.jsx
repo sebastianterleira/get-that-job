@@ -73,7 +73,7 @@ const Subtitle = styled.h3`
 const JobPage = ({ findJob, setJobs }) => {
   const { id } = useParams();
   const job = findJob(Number.parseInt(id));
-
+  console.log(job.state)
   let applications = job.applications;
 
   return (
@@ -109,7 +109,7 @@ const JobPage = ({ findJob, setJobs }) => {
 
       <ContainerApplications>
         {applications?.map((appli) => (
-          <CardApplies key={appli.id} applications={appli} />
+          <CardApplies key={appli.id} applications={appli} status={job.state} />
         ))}
       </ContainerApplications>
     </Container>

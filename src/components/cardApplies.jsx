@@ -147,31 +147,35 @@ const ContainerButtons = styled.section`
   gap: 1rem;
 `;
 
-const CardApplies = ({ applications }) => {
+const CardApplies = ({ applications, status }) => {
   const [display, setDisplay] = useState(false);
   const [statusValue, setStatusValue] = useState(applications.state);
-
+  console.log(status)
   function handleDisplay() {
     setDisplay(!display);
   }
   let message;
-  switch (statusValue) {
-    case "review":
-      message = "Waiting in review";
-      break;
-    case "progress":
-      message = "Review in progress";
-      break;
-    case "finished":
-      message = "Review finished";
-      break;
-    case "declined":
-      message = `Declined in ${dayjs(applications.updated_at).format(
-        "MM-DD-YYYY"
-      )}`;
-      break;
-    default:
-      break;
+  if (status === "open") {
+    switch (statusValue) {
+      case "review":
+        message = "Waiting in review";
+        break;
+      case "progress":
+        message = "Review in progress";
+        break;
+      case "finished":
+        message = "Review finished";
+        break;
+      case "declined":
+        message = `Declined in ${dayjs(applications.updated_at).format(
+          "MM-DD-YYYY"
+        )}`;
+        break;
+      default:
+        break;
+    }
+  } else if (status === "closed") {
+    message = "finished";
   }
 
   function updateState() {
