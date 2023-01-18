@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 
 import { useParams } from "react-router-dom";
 import CardApplies from "../components/cardApplies";
@@ -9,7 +10,7 @@ import { typography } from "../styles/typography";
 const Container = styled.div`
   margin: 2rem auto;
   width: 1200px;
-  height: 900px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -71,10 +72,23 @@ const Subtitle = styled.h3`
 `;
 
 const JobPage = ({ findJob, setJobs }) => {
+  const [filter, setFilter] = useState("all");
   const { id } = useParams();
   const job = findJob(Number.parseInt(id));
 
   let applications = job.applications;
+
+  let filterApplications = applications;
+
+  if (filter !== "all") {
+    filterApplications = applications.filter(
+      (elem) => elem.state.toLowerCase() === filter
+    );
+  }
+
+  function handleFIlter(event) {
+    setFilter(event.target.value);
+  }
 
   return (
     <Container>
@@ -84,11 +98,23 @@ const JobPage = ({ findJob, setJobs }) => {
       </WrapperJob>
       <Filters>
         <ContainerFilter>
-          <RadioButton type="radio" id="all" name="state" value="all" />
+          <RadioButton
+            type="radio"
+            id="all"
+            name="state"
+            value="all"
+            onClick={handleFIlter}
+          />
           <label htmlFor="all">All</label>
         </ContainerFilter>
         <ContainerFilter>
-          <RadioButton type="radio" id="waiting" name="state" value="waiting" />
+          <RadioButton
+            type="radio"
+            id="waiting"
+            name="state"
+            value="review"
+            onClick={handleFIlter}
+          />
           <label htmlFor="waiting">Waiting</label>
         </ContainerFilter>
         <ContainerFilter>
@@ -96,19 +122,26 @@ const JobPage = ({ findJob, setJobs }) => {
             type="radio"
             id="In progress"
             name="state"
-            value="In progress"
+            value="progress"
+            onClick={handleFIlter}
           />
           <label htmlFor="In progress">In progress</label>
         </ContainerFilter>
         <ContainerFilter>
-          <RadioButton type="radio" id="Finished" name="state" value="closed" />
+          <RadioButton
+            type="radio"
+            id="Finished"
+            name="state"
+            value="finished"
+            onClick={handleFIlter}
+          />
           <label htmlFor="Finished">Finished</label>
         </ContainerFilter>
       </Filters>
-      <Subtitle>{`${applications.length} candidates found`}</Subtitle>
+      <Subtitle>{`${filterApplications.length} candidates found`}</Subtitle>
 
       <ContainerApplications>
-        {applications?.map((appli) => (
+        {filterApplications?.map((appli) => (
           <CardApplies key={appli.id} applications={appli} />
         ))}
       </ContainerApplications>
