@@ -138,7 +138,7 @@ const JobPage = ({ findJob, setJobs }) => {
           <label htmlFor="Finished">Finished</label>
         </ContainerFilter>
       </Filters>
-      <Subtitle>{`${applications.length} candidates found`}</Subtitle>
+      <Subtitle>{`${filterApplications.length} candidates found`}</Subtitle>
 
       <ContainerApplications>
         {filterApplications?.map((appli) => (
