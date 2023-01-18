@@ -188,7 +188,7 @@ export default function YourApplicationComponent({
 
   return (
     <Conteiner>
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "105%" }}>
         <div
           style={{
             width: "100%",
@@ -244,7 +244,7 @@ export default function YourApplicationComponent({
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                width: "86px",
+                width: "116px",
               }}
             >
               <ExtraDetails>

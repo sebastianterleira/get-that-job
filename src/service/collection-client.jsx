@@ -59,6 +59,6 @@ export default async function collectionClient(
   } catch (error) {
     data = response.statusText;
   }
-
+  console.log(data);
   return data;
 }

@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   margin: auto;
   display: flex;
   flex-direction: row;
-  padding: 20px 0px 20px 0px;
+  padding: 12px 0px 20px 0px;
   align-items: center;
   justify-content: center;
 `;

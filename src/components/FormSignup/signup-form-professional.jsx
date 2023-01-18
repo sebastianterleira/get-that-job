@@ -28,6 +28,7 @@ import { useForm,
   useFormContext,
   Controller
 } from "react-hook-form";
+import { useAuth } from "../../context/auth-context";
 
 const ContentButton = emotion.div`
 display: flex;
@@ -303,6 +304,8 @@ const PersonalInformation = () => {
 		};
 	
   const {control} = useFormContext();
+
+
     return (
     <>
     <Controller
@@ -322,10 +325,10 @@ const PersonalInformation = () => {
       )}/>
       <Controller
       control={control}
-      name="phoneNumber"
+      name="phone"
       render={({ field }) => (
       <TextField
-        id="phone-number"
+        id="phone"
         label="Phone"
         pattern="[0-9]+"
         maxLength="9"
@@ -355,10 +358,10 @@ const PersonalInformation = () => {
       )}/>
       <Controller
       control={control}
-      name="linkedin_url"
+      name="linkedin"
       render={({ field }) => (
       <TextField
-        id="linkedin_url"
+        id="linkedin"
         label="Linkedin url"
         variant="standard"
         placeholder="https://www.linkedin.com/in/username"
@@ -373,7 +376,10 @@ const PersonalInformation = () => {
 }
 
 const ProfessionalInformation = () => {
+  const [ file, setFile] = useState("");
   const {control} = useFormContext();
+  console.log(file)
+
   return (
     <>
       <Controller
@@ -393,7 +399,7 @@ const ProfessionalInformation = () => {
         )}/>
 				<Controller
 				control={control}
-				name="experiencia"
+				name="experience"
 				render={({ field }) => (
 					<TextField 
           id="standard-textarea"
@@ -425,12 +431,11 @@ const ProfessionalInformation = () => {
 					)}/>
 				<Controller
       control={control}
-      name="upload_cv"
+      name="user_cv"
       render={({ field }) => (
         <TextField
           id="title"
-          variant="standard"
-          fullWidth
+          onChange={(event) => setFile(event.target.files[0])}
           margin="normal"
 					type="file"
           {...field}
@@ -454,6 +459,7 @@ function getStepContent(step) {
 }
 
 const LinaerStepper = () => {
+  const { signup } = useAuth();
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
@@ -463,13 +469,12 @@ const LinaerStepper = () => {
       password: "",
       password_confirmation: "",
       name: "",
-      phoneNumber: "",
+      phone: "",
       birthdate: "",
-      linkedin_url: "",
+      linkedin: "",
 			title: "",
 			education: "",
-			experiencia: "",
-			upload_cv: "",
+			experience: "",
     },
   });
 
@@ -481,9 +486,30 @@ const LinaerStepper = () => {
     return skippedSteps.includes(step);
   };
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-    setSkippedSteps(skippedSteps.filter((skipItem) => skipItem !== activeStep));
+  const handleNext = (data) => {
+    console.log(data);
+    const formData1 = new FormData();
+      formData1.append("email", data.email);
+      formData1.append("password", data.password);
+      formData1.append("password_confirmation", data.password_confirmation);
+      formData1.append("name", data.name);
+      formData1.append("phone", data.phone);
+      formData1.append("birthdate", data.birthdate);
+      formData1.append("linkedin", data.linkedin);
+      formData1.append("experience", data.experience);
+      formData1.append("title", data.title);
+      formData1.append("education", data.education);
+      formData1.append("user_cv", data.user_cv);
+
+    if (activeStep === steps.length - 1) {
+      setActiveStep(activeStep + 1);
+    } else {
+      setActiveStep(activeStep + 1);
+      setSkippedSteps(skippedSteps.filter((skipItem) => skipItem !== activeStep));
+    }
+    if(activeStep === 2) {                                                                                     
+      signup(formData1);
+    }
   };
 
   const handleBack = () => {
@@ -497,9 +523,9 @@ const LinaerStepper = () => {
     setActiveStep(activeStep + 1);
   };
 
-  const onSubmit = (data) => {
-    console.log(data)
-  };
+  // const onSubmit = (data) => {
+  //   console.log(data)
+  // };
 
   return (
     <div>
@@ -539,7 +565,7 @@ const LinaerStepper = () => {
 				) : (
 					<>
 						<FormProvider {...methods}>
-							<StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
+							<StyledForm onSubmit={methods.handleSubmit(handleNext)}>
 								{getStepContent(activeStep)}
 								<ContentButton>
 									{activeStep === 0 || activeStep === 1 ? ""
@@ -561,7 +587,7 @@ const LinaerStepper = () => {
 							<ButtonForm
 								variant="contained"
 								color="primary"
-								onClick={handleNext}
+								// onClick={handleNext}
 								type="submit"
 							>
 								{activeStep === steps.length - 1 ? "Finish    >" : "Next    >"}
