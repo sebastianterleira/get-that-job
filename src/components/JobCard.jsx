@@ -9,6 +9,10 @@ import { RiFocus3Line } from "react-icons/ri";
 import { useState } from "react";
 import { useAuth } from "../context/auth-context";
 import Company from "../static/img/Companies-Logos/Rectangle1.png";
+import {
+  createFollowing,
+  deleteFollowing,
+} from "../service/following-services";
 
 const CardData = styled("div")`
   display: flex;
@@ -143,13 +147,25 @@ const ButtonFollow = styled.button`
 `;
 
 function JobCard(job) {
-  const [activeButton, setActiveButton] = useState(true);
+  const [activeButton, setActiveButton] = useState(Boolean(job.follow_id));
+  const [followId, setFollowId] = useState(job.follow_id);
   const { navigate } = useAuth();
 
   function handleLinkChange(event) {
     event.preventDefault();
 
     setActiveButton(!activeButton);
+  }
+
+  function handleFollowing() {
+    if (followId)
+      deleteFollowing(job.id, "jobs", followId).then(() => setFollowId(null));
+    if (!followId)
+      createFollowing(job.id, "jobs")
+        .then((data) => {
+          setFollowId(data.id);
+        })
+        .catch(console.log);
   }
 
   return (
@@ -212,7 +228,7 @@ function JobCard(job) {
         `}
       >
         <div onClick={handleLinkChange}>
-          <ButtonFollow follow={activeButton}>
+          <ButtonFollow follow={activeButton} onClick={handleFollowing}>
             <RiFocus3Line
               css={css`
                 font-size: 22px;

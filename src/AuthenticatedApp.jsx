@@ -108,15 +108,32 @@ function AuthenticatedApp() {
     }, {});
   }
 
+  function AddFollowingId() {
+    return jobs.reduce((accu, current, currentIndex) => {
+      current.followings.forEach((elem) => {
+        if (elem.user_id === user.id) {
+          current["follow_id"] = elem.id;
+          accu.push(jobs[currentIndex]);
+        }
+      });
+      if (current.followings.length === 0)
+        accu.push({ ...current, follow_id: null });
+      return accu;
+    }, []);
+  }
+
   return (
     <Container>
       {user ? (
         <>
           <NavbarProfessional />
           <Routes>
-            <Route path={"/"} element={<Search jobs={jobs}/>} />
-            <Route path={"/home"} element={<Search jobs={jobs}/>} />
-            <Route path={"*"} element={<Search jobs={jobs}/>} />
+            <Route path={"/"} element={<Search jobs={AddFollowingId()} />} />
+            <Route
+              path={"/home"}
+              element={<Search jobs={AddFollowingId()} />}
+            />
+            <Route path={"*"} element={<Search jobs={AddFollowingId()} />} />
             <Route path={"Applications"} element={<YourApplication />} />
             <Route
               path={"following"}
