@@ -428,9 +428,12 @@ function ApplicationJob({ findJob }) {
     formData1.append("user_id", user.id);
     formData1.append("job_id", id);
 
+    console.log(formData1)
     createApplicationJob(formData1);
     navigate("/Applications");
   }
+  console.log(profile)
+  console.log(user)
 
   function handleLinkChange(event) {
     event.preventDefault();

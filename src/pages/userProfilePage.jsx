@@ -162,7 +162,7 @@ const ProfileUser = ({ user }) => {
 
     updateUserProfile(formData1);
     navigate("/");
-    // console.log(curriculum);
+    console.log(curriculum);
   }
 
   return (

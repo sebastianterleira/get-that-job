@@ -24,6 +24,7 @@ import { useForm,
   useFormContext,
   Controller
 } from "react-hook-form";
+import { useAuth } from "../../context/auth-context";
 
 const ContentButton = emotion.div`
 display: flex;
@@ -372,6 +373,7 @@ function getStepContent(step) {
 }
 
 const LinaerStepper = () => {
+  const { signupCompany } = useAuth();
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
@@ -381,7 +383,7 @@ const LinaerStepper = () => {
       email: "",
       password: "",
       password_confirmation: "",
-      company_webside: "",
+      company_website: "",
       about_company: "",
       upload_photo: ""
     },
@@ -395,9 +397,18 @@ const LinaerStepper = () => {
     return skippedSteps.includes(step);
   };
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-    setSkippedSteps(skippedSteps.filter((skipItem) => skipItem !== activeStep));
+  const handleNext = (data) => {
+    console.log(data);
+    if (activeStep === steps.length - 1) {
+      setActiveStep(activeStep + 1);
+    } else {
+      setActiveStep(activeStep + 1);
+      setSkippedSteps(skippedSteps.filter((skipItem) => skipItem !== activeStep));
+    }
+
+    if(activeStep === 1) {                                                                                     
+      signupCompany(data);
+    }
   };
 
   const handleBack = () => {
@@ -411,9 +422,9 @@ const LinaerStepper = () => {
     setActiveStep(activeStep + 1);
   };
 
-  const onSubmit = (data) => {
-    console.log(data)
-  };
+  // const onSubmit = (data) => {
+  //   console.log(data)
+  // };
 
   return (
     <div>
@@ -453,7 +464,7 @@ const LinaerStepper = () => {
 				) : (
 					<>
 						<FormProvider {...methods}>
-							<StyledForm onSubmit={methods.handleSubmit(onSubmit)}>
+							<StyledForm onSubmit={methods.handleSubmit(handleNext)}>
 								{getStepContent(activeStep)}
 								<ContentButton>
 									{activeStep === 0 || activeStep === 1 ? ""
@@ -475,7 +486,7 @@ const LinaerStepper = () => {
 							<ButtonForm
 								variant="contained"
 								color="primary"
-								onClick={handleNext}
+								// onClick={Submit}
 								type="submit"
 							>
 								{activeStep === steps.length - 1 ? "Finish    >" : "Next    >"}

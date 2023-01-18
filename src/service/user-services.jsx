@@ -2,12 +2,19 @@ import { tokenKey } from "../config";
 import collectionClient from "./collection-client";
 
 export async function createUser(userData) {
-  const { token, ...user } = await collectionClient("/users", {
+  const { data } = await collectionClient("/user", {
     body: userData,
   });
+  
+  return data;
+}
 
-  sessionStorage.setItem(tokenKey, token);
-  return user;
+export async function createCompany(recruiterData) {
+  const { data } = await collectionClient("/company", {
+    body: recruiterData,
+  });
+
+  return data;
 }
 
 export async function getUser() {

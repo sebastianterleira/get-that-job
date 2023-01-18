@@ -36,6 +36,7 @@ const Wrapper = styled.div`
 const Header = styled.section`
   display: flex;
   gap: 3rem;
+  align-items: center;
 `;
 
 const Title = styled.p`
@@ -79,6 +80,8 @@ const Details = styled.div`
   ${typography.text.sm}
   font-family:inter;
   color: #8e8e8e;
+  margin-bottom: 5px;
+  margin-top: 5px;
 `;
 
 const JobCandidates = styled.div`
@@ -101,6 +104,7 @@ const IconWrapper = styled.div`
   font-size: 1.2rem;
   display: flex;
   align-items: center;
+  gap: 5px;
 `;
 const TextIcon = styled.p`
   ${typography.text.sm}

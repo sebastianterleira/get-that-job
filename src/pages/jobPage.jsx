@@ -13,6 +13,7 @@ const Container = styled.div`
 
 const Filters = styled.section`
   margin-bottom: 1rem;
+  margin-top: 1rem;
   display: flex;
   gap: 1rem;
 `;

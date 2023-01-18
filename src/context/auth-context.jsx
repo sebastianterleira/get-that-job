@@ -5,6 +5,7 @@ import {
   getUser,
   getRecruiter,
   updateUser,
+  createCompany,
 } from "../service/user-services";
 import { updateRecruiter } from "../service/user-services";
 import * as auth from "../service/auth-services";
@@ -60,6 +61,10 @@ function AuthProvider(props) {
     createUser(userData).then(setUser).catch(console.log);
   }
 
+  function signupCompany(recruiterData) {
+    createCompany(recruiterData).then(setRecruiter).catch(console.log);
+  }
+
   function updateRecruiterProfile(data) {
     updateRecruiter(data).then(setRecruiter).catch(console.log);
   }
@@ -75,6 +80,7 @@ function AuthProvider(props) {
     setUser,
     logout,
     signup,
+    signupCompany,
     lgoinRecruiter,
     loginProfessional,
     navigate,
