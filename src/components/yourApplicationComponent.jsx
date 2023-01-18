@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import IconExample from "../styles/img/iconoexample.svg";
 import {
@@ -70,6 +72,8 @@ const UpdateDate = styled("p")`
   font-size: 10px;
   line-height: 12px;
   letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 25px 0 16px 0;
 `;
 
 const SubTitles = styled("h2")`
@@ -85,11 +89,12 @@ const SubTitles = styled("h2")`
 const Text = styled("p")`
   font-family: "Inter";
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.25px;
   margin: 1rem 0;
+  color: #373737;
 `;
 
 const CVButton = styled("a")`
@@ -176,6 +181,11 @@ export default function YourApplicationComponent({
     setOpen(!open);
   }
 
+  var relativeTime = require("dayjs/plugin/relativeTime");
+  dayjs.extend(relativeTime);
+
+  const Ago = dayjs(`${created_at}`).fromNow(true);
+
   return (
     <Conteiner>
       <div style={{ width: "100%" }}>
@@ -199,7 +209,7 @@ export default function YourApplicationComponent({
             </div>
           </div>
           <div>
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div style={{ display: "flex", gap: "10px", width: "250px" }}>
               <ExtraDetails>
                 <RiBuilding3Line style={{ marginRight: "6px" }} />
                 {job_data?.company_name}
@@ -222,18 +232,19 @@ export default function YourApplicationComponent({
               </ExtraDetails>
             </div>
           </div>
-          <div style={{ display: "flex", gap: "16px" }}>
+          <div css={css`display: flex; gap: 16px; align-items: center;`}>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                width: "86px",
               }}
             >
               <ExtraDetails>
                 <RiMailLine />
               </ExtraDetails>
-              <ExtraDetails>days ago</ExtraDetails>
+              <ExtraDetails>{`${Ago} ago`}</ExtraDetails>
             </div>
             <div
               style={{

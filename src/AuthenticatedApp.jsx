@@ -114,9 +114,9 @@ function AuthenticatedApp() {
         <>
           <NavbarProfessional />
           <Routes>
-            <Route path={"/"} element={<Search />} />
-            <Route path={"/home"} element={<Search />} />
-            <Route path={"*"} element={<Search />} />
+            <Route path={"/"} element={<Search jobs={jobs}/>} />
+            <Route path={"/home"} element={<Search jobs={jobs}/>} />
+            <Route path={"*"} element={<Search jobs={jobs}/>} />
             <Route path={"Applications"} element={<YourApplication />} />
             <Route
               path={"following"}

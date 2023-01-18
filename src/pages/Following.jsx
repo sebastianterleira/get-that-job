@@ -4,12 +4,9 @@ import CompanyCard from "../components/company-follow";
 import JobFollow from "../components/job-follow";
 import { useAuth } from "../context/auth-context";
 
-const Wrapper = styled.div`
-  margin: 2rem 8.31rem;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+const Container = styled.div`
+  margin: 2rem 7rem 2rem 7rem;
+  min-height: 100vh;
 `;
 
 const Tittle = styled.div`
@@ -47,7 +44,7 @@ function Following({ handlefollowing }) {
   }
 
   return (
-    <Wrapper>
+    <Container>
       <Tittle>Following</Tittle>
       <Subtitle>You are following {followingJobs.length} jobs</Subtitle>
       <ContainerCard>
@@ -72,7 +69,7 @@ function Following({ handlefollowing }) {
           />
         ))}
       </ContainerCard>
-    </Wrapper>
+    </Container>
   );
 }
 export default Following;

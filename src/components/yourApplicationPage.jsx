@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { getApplications } from "../service/applicationJobs";
 import YourApplicationComponent from "./yourApplicationComponent";
 
+const Container = styled.div`
+  margin: 2rem 7rem 2rem 7rem;
+`;
+
 const Title = styled("h1")`
   font-family: "Montserrat";
   font-style: normal;
@@ -84,15 +88,8 @@ export default function YourApplication() {
   }
 
   return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        margin: "0 128px",
-      }}
-    >
-      <div style={{ width: "80vw", marginTop: "2rem" }}>
+    <Container>
+      <div>
         <Title>Your Applications</Title>
         <FilterTitle>FILTER YOUR APPLICATIONS</FilterTitle>
         <Filters>
@@ -147,12 +144,13 @@ export default function YourApplication() {
             <label htmlFor="declined">Declined</label>
           </ContainerFilter>
         </Filters>
-        <FilterCount>4 applications found</FilterCount>
+        <FilterCount>{`${applications.length} applications found`}</FilterCount>
         <div
           style={{
             width: "100%",
             display: "flex",
             flexDirection: "column",
+						gap: "25px",
           }}
         >
           {filterApplications?.map((elem) => (
@@ -160,6 +158,6 @@ export default function YourApplication() {
           ))}
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
