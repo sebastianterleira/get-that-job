@@ -232,7 +232,13 @@ export default function YourApplicationComponent({
               </ExtraDetails>
             </div>
           </div>
-          <div css={css`display: flex; gap: 16px; align-items: center;`}>
+          <div
+            css={css`
+              display: flex;
+              gap: 16px;
+              align-items: center;
+            `}
+          >
             <div
               style={{
                 display: "flex",
@@ -297,7 +303,7 @@ export default function YourApplicationComponent({
               justifyContent: "center",
             }}
           >
-            <CVButton href={cv_url} download>
+            <CVButton href={cv_url} target="_blank" download>
               DOWNLOAD CV
             </CVButton>
             <DeclineButton

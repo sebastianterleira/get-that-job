@@ -37,19 +37,10 @@ const Title = styled.p`
 
 const ContainerMain = styled.div`
   width: 888px;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 1rem;
-  height: 0;
-  transition: all 0.5s;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.3s, opacity 0.2s linear;
-  transform-origin: top;
-  ${({ active }) =>
-    active
-      ? "  margin-top: 12px; visibility: visible; opacity: 1; height:auto;"
-      : ""};
+  ${({ active }) => (active ? "display:flex;" : "")};
 `;
 
 const SubTitle = styled.p`
@@ -147,6 +138,26 @@ const ContainerButtons = styled.section`
   gap: 1rem;
 `;
 
+const CVButton = styled("a")`
+  width: 183px;
+  height: 40px;
+  border: 1px solid #f48fb1;
+  border-radius: 16px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  &:hover {
+    background-color: palevioletred;
+    color: white;
+  }
+`;
+
 const CardApplies = ({ applications }) => {
   const [display, setDisplay] = useState(false);
   const [statusValue, setStatusValue] = useState(applications.state);
@@ -154,6 +165,7 @@ const CardApplies = ({ applications }) => {
   function handleDisplay() {
     setDisplay(!display);
   }
+
   let message;
   switch (statusValue) {
     case "review":
@@ -267,6 +279,9 @@ const CardApplies = ({ applications }) => {
               cupiditate commodi?
             </p>
           </ContainerText>
+          <CVButton href={applications.user_cv} target="_blank" download>
+            DOWNLOAD CV
+          </CVButton>
         </ContainerMain>
       </Wrapper>
 

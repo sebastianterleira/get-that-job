@@ -46,19 +46,10 @@ const Title = styled.p`
 
 const ContainerMain = styled.div`
   width: 888px;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 1rem;
-  height: 0;
-  transition: all 0.5s;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.3s, opacity 0.2s linear;
-  transform-origin: top;
-  ${({ active }) =>
-    active
-      ? "  margin-top: 12px; visibility: visible; opacity: 1; height:auto;"
-      : ""};
+  ${({ active }) => (active ? "display:flex;" : "")};
 `;
 
 const SubTitle = styled.p`
