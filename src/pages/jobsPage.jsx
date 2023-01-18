@@ -3,9 +3,7 @@ import { typography } from "../styles/typography";
 import CardPosting from "../components/CardPostingJob";
 
 const Container = styled.div`
-  margin: 2rem 7.5rem;
-  width: 1200px;
-  min-height: 100vh;
+  margin: 2rem 4rem 2rem 4rem;
 `;
 
 const ContainerCards = styled.div`

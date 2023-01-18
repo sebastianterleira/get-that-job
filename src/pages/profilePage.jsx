@@ -7,10 +7,7 @@ import { RiUploadLine } from "react-icons/ri";
 import { useAuth } from "../context/auth-context";
 
 const Container = styled.div`
-  margin: 2rem auto;
-  width: 960px;
-  height: 630px;
-  background-color: ;
+  margin: 2rem 4rem 2rem 4rem;
 `;
 
 const Title = styled.p`

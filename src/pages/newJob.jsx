@@ -13,12 +13,7 @@ import { createJob } from "../service/jobsRecruiter-services";
 import { useAuth } from "../context/auth-context";
 
 const Container = styled.div`
-  margin: 2rem auto;
-  width: 1200px;
-  height: 900px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  margin: 2rem 4rem 2rem 4rem;
 `;
 
 const AreaContainer = styled.div`

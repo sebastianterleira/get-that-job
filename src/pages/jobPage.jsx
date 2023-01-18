@@ -8,12 +8,7 @@ import CardPosting from "../components/CardPostingJob";
 import { typography } from "../styles/typography";
 
 const Container = styled.div`
-  margin: 2rem auto;
-  width: 1200px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  margin: 2rem 4rem 2rem 4rem;
 `;
 
 const Filters = styled.section`
