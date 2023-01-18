@@ -22,8 +22,6 @@ import { createApplicationJob } from "../service/applicationJobs";
 
 const Container = styled.div`
   margin: 2rem 7rem 2rem 7rem;
-  width: 910px;
-  height: 900px;
 `;
 
 const ContainerButtonBack = styled.div`
@@ -462,6 +460,10 @@ function ApplicationJob({ findJob }) {
       <ConteinerCompany>
         <CardImagenCompany>
           <img
+            css={css`
+              width: 80px;
+              height: 75px;
+            `}
             src={
               job?.company_data.profile === null
                 ? Company
