@@ -63,7 +63,7 @@ const GroupInput = styled.div`
   position: relative;
 `;
 
-function FilterJob({ filteredProducts, jobs }) {
+function FilterJob({ jobs }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedValues, setSelectedValues] = useState([]);
 
@@ -100,7 +100,7 @@ function FilterJob({ filteredProducts, jobs }) {
               onSelect={function noRefCheck() {}}
               value={handleChange}
               onChange={handleChange}
-              onClick={() => filteredProducts(selectedCategories)}
+              onClick={() => console.log("Jopla")}
               options={categories}
               placeholder="Select Category"
               style={{

@@ -5,16 +5,10 @@ import { BiSearch } from "react-icons/bi";
 import { fonts } from "../styles/typography";
 import JobList from "../components/job-list";
 import FilterJob from "../components/filters-job";
-import { useState, useEffect } from "react";
-import { useAuth } from "../context/auth-context";
-import { getJobs } from "../service/user-services";
+import { useState } from "react";
 
-const Wrapper = styled.div`
-  max-width: 1024px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+const Container = styled.div`
+  margin: 2rem 4rem 2rem 4rem;
 `;
 
 const Tittle = styled.div`
@@ -66,33 +60,16 @@ const GroupInput = styled.div`
   position: relative;
 `;
 
-function Search() {
-  const { jobs, setJobs } = useAuth([]);
-  const [tablaProducts, setTablaProducts] = useState([]);
-  const [state, setState] = useState({
-    status: "idle",
-    data: null,
-    error: null,
-  });
-  const { status, data: item, error } = state;
+function Search({ jobs }) {
+  const [searh, setSearch] = useState("");
 
-  useEffect(() => {
-    getJobs().then(setTablaProducts).catch(console.log);
-  }, []);
+  let filterJob = jobs;
 
-  const filterSearch = (terminoBusqueda) => {
-    var searchResults = tablaProducts.filter((elemento) => {
-      if (
-        elemento.name
-          .toString()
-          .toLowerCase()
-          .includes(terminoBusqueda.toLowerCase())
-      ) {
-        return elemento;
-      }
-    });
-    setJobs(searchResults);
-  };
+  if (searh !== "") {
+    filterJob = jobs.filter((job) =>
+      job.name.toString().toLowerCase().includes(searh.toLowerCase())
+    );
+  }
 
   // let allCategories = jobs.reduce((accu, current) => {
   // 	if (!accu.includes(current.category)) accu.push(current.category);
@@ -100,19 +77,17 @@ function Search() {
   // 	return accu;
   // }, ["All"]);
 
-  // console.log(tablaProducts);
-
-  const filteredProducts = (data) =>
-    tablaProducts.map((job) => {
-      if (data.includes(job.category)) {
-        console.log(job);
-        setJobs(job);
-      }
-    });
+  // const filteredProducts = (data) =>
+  //   tablaProducts.map((job) => {
+  //     if (data.includes(job.category)) {
+  //       console.log(job);
+  //       setJobs(job);
+  //     }
+  //   });
 
   return (
     <>
-      <Wrapper>
+      <Container>
         <Tittle>Find that job</Tittle>
         <LabelInput>
           <p
@@ -133,14 +108,14 @@ function Search() {
               `}
             />
             <Input
-              onChange={(event) => filterSearch(event.target.value)}
+              onChange={(event) => setSearch(event.target.value)}
               placeholder="manufacturing, sales, swim"
             />
           </GroupInput>
         </LabelInput>
-        <FilterJob jobs={jobs} filteredProducts={filteredProducts} />
-        <JobList jobs={jobs} />
-      </Wrapper>
+        <FilterJob jobs={filterJob} />
+        <JobList jobs={filterJob} />
+      </Container>
     </>
   );
 }
