@@ -5,14 +5,16 @@ import LogoHeader from "../static/LogoHeader.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Home from "../pages/landing-page";
+import { css } from '@emotion/react'
 
 const NavBarMenu = styled.div`
   background: #ffffff;
   margin: auto;
   display: flex;
   flex-direction: row;
-  padding: 12px 152px 12px 152px;
-  gap: 690px;
+  padding: 12px 20px 12px 20px;
+  // gap: 690px;
+  justify-content: space-between;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 `;
 
@@ -54,17 +56,17 @@ const ButtonNav = styled.button`
   transition: all 500ms ease;
   z-index: 0;
 
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    margin: auto;
-    background-color: #bf5f82;
-    transition: all 500ms ease;
-    z-index: 1;
-  }
+  // &:before {
+  //   content: "";
+  //   position: absolute;
+  //   left: 0;
+  //   right: 0;
+  //   top: 0;
+  //   margin: auto;
+  //   background-color: #bf5f82;
+  //   transition: all 500ms ease;
+  //   z-index: 1;
+  // }
   &:hover {
     background-color: #f48fb1;
     box-shadow: 0 0 10px #f48fb1, 0 0 10px #f48fb1, 0 0 15px #f48fb1;
@@ -83,6 +85,7 @@ const ImagenLogo = styled.img`
     border-radius: 10px;
   }
 `;
+
 function Header() {
   const { navigate } = useAuth();
   function Navigate(link) {
@@ -91,11 +94,21 @@ function Header() {
 
   return (
     <>
-      <NavBarMenu>
+      <NavBarMenu css={css`
+      font-size: 30px;
+      @media (min-width: 420px) {
+        font-size: 50px;
+      }
+    `}>
         <Link to={"/"}>
           <ImagenLogo src={LogoHeader} alt="LogoHeader" />
         </Link>
-        <ContentRow>
+        <ContentRow css={css`
+      font-size: 30px;
+      @media (min-width: 420px) {
+        font-size: 50px;
+      }
+    `}>
           <ButtonNav onClick={() => Navigate("login")}>🙍‍♂️ Login</ButtonNav>
           <ButtonNav onClick={() => Navigate("signup")}>🙍‍♂️ Sign-Up</ButtonNav>
         </ContentRow>
