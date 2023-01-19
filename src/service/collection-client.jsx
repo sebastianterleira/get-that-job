@@ -38,7 +38,6 @@ export default async function collectionClient(
       headers,
     };
   }
-  console.log(config);
 
   const response = await fetch(BASE_URI + endpoint, config);
 
@@ -59,6 +58,5 @@ export default async function collectionClient(
   } catch (error) {
     data = response.statusText;
   }
-  console.log(data);
   return data;
 }

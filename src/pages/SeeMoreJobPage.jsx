@@ -14,6 +14,10 @@ import { RiFocus3Line } from "react-icons/ri";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import Company from "../static/img/Companies-Logos/Rectangle1.png";
 import { useAuth } from "../context/auth-context";
+import {
+  createFollowing,
+  deleteFollowing,
+} from "../service/following-services";
 
 const Container = styled.div`
   margin: 2rem 7rem 2rem 7rem;
@@ -244,11 +248,18 @@ const ContentTIme = styled.div`
 `;
 
 function SeeMore({ findJob }) {
+  const { navigate, user } = useAuth();
+
+  let followintrue = user?.follows_company?.find(
+    (elem) => elem?.name === user?.data?.name
+  )?.job_id;
+
   const { id } = useParams();
   const job = findJob(Number.parseInt(id));
-  const [activeButton, setActiveButton] = useState(true);
+  const [activeButton, setActiveButton] = useState(Boolean(followintrue));
+  const [follow, setFollow] = useState(followintrue);
+
   const history = useNavigate();
-  const { navigate } = useAuth();
 
   function handleLinkChange(event) {
     event.preventDefault();
@@ -260,6 +271,14 @@ function SeeMore({ findJob }) {
   dayjs.extend(relativeTime);
 
   const Ago = dayjs(`${job.created_at}`).fromNow(true);
+
+  function handleFollowing() {
+    if (activeButton) deleteFollowing(job.company_data.id, "companies", follow);
+    if (!activeButton)
+      createFollowing(job.company_data.id, "companies")
+        .then(setFollow)
+        .catch(console.log);
+  }
 
   return (
     <Container>
@@ -302,7 +321,7 @@ function SeeMore({ findJob }) {
             `}
           >
             <div onClick={handleLinkChange}>
-              <ButtonFollow follow={activeButton}>
+              <ButtonFollow follow={activeButton} onClick={handleFollowing}>
                 <RiFocus3Line
                   css={css`
                     font-size: 22px;
