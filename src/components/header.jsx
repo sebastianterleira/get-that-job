@@ -11,8 +11,9 @@ const NavBarMenu = styled.div`
   margin: auto;
   display: flex;
   flex-direction: row;
-  padding: 12px 152px 12px 152px;
-  gap: 690px;
+  padding: 12px 20px 12px 20px;
+  // gap: 690px;
+  justify-content: space-between;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 `;
 

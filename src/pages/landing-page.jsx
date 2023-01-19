@@ -15,19 +15,16 @@ import { typography } from "../styles";
 import { DiGithubBadge, DiReact, DiRuby } from "react-icons/di";
 import { AiFillLinkedin } from "react-icons/ai";
 import { useAuth } from "../context/auth-context";
-
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 `;
-
 const ContentTitle = styled.div`
   display: flex;
   margin: 12px 350px 32px 350px;
 `;
-
 const Title = styled.p`
   ${typography.sm};
   font-weight: 300;
@@ -37,12 +34,10 @@ const Title = styled.p`
   letter-spacing: -0.5px;
   color: #373737;
 `;
-
 const ContentParrafo = styled.div`
   display: flex;
   margin: 0px 400px 32px 400px;
 `;
-
 const PageDescription = styled.p`
   ${typography.sm};
   font-weight: 400;
@@ -51,12 +46,11 @@ const PageDescription = styled.p`
   text-align: center;
   color: #000000;
 `;
-
 const ButtonNav = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #f48fb1;
+  border: 1px solid #F48FB1;
   border-radius: 30px;
   font-family: ${fonts.chiron};
   width: 260px;
@@ -73,7 +67,6 @@ const ButtonNav = styled.button`
   overflow: hidden;
   transition: all 500ms ease;
   z-index: 0;
-
   &:before {
     content: "";
     position: absolute;
@@ -81,17 +74,16 @@ const ButtonNav = styled.button`
     right: 0;
     top: 0;
     margin: auto;
-    background-color: #bf5f82;
+    background-color: #BF5F82;
     transition: all 500ms ease;
     z-index: 1;
   }
   &:hover {
-    background-color: #f48fb1;
-    box-shadow: 0 0 10px #f48fb1, 0 0 10px #f48fb1, 0 0 15px #f48fb1;
+    background-color: #F48FB1;
+    box-shadow: 0 0 10px #F48FB1, 0 0 10px #F48FB1, 0 0 15px #F48FB1;
     color: #616161;
   }
 `;
-
 const Card = styled.div`
   display: flex;
   background: #fff;
@@ -99,61 +91,54 @@ const Card = styled.div`
   height: 472px;
   margin: 0px 0px 64px 0px;
 `;
-
 const ContentText = styled.div`
   width: 60%;
   padding: 20px;
   display: flex;
-  background: #bf5f82;
+  background: #BF5F82;
   justify-content: center;
   flex-direction: column;
   align-items: flex-start;
   gap: 30px;
 `;
-
 const TextLG = styled.p`
   ${typography.sm};
   font-weight: 400;
   font-size: 48px;
   line-height: 59px;
   text-align: center;
-  color: #ffffff;
+  color: #FFFFFF;
   align-items: flex-start;
 `;
-
 const TextSM = styled.p`
   font-weight: 400;
   font-size: 24px;
   line-height: 29px;
-  color: #ffffff;
+  color: #FFFFFF;
 `;
-
 const ContentIMG = styled.div`
   margin: auto;
   display: flex;
+  width:100%;
   align-items: center;
   justify-content: center;
 `;
-
 const TitleMembers = styled.p`
   ${typography.sm};
   font-weight: 400;
   font-size: 48px;
   line-height: 59px;
   text-align: center;
-  color: #bf5f82;
+  color: #BF5F82;
 `;
-
 const GridMembers = styled.div`
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(6, 205px);
-  grid-auto-rows: minmax(170px, auto);
-  justify-items: center;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
   align-items: center;
+  gap:50px;
   margin-bottom: 30px;
 `;
-
 const ContentGrid = styled.div`
   display: flex;
   align-items: center;
@@ -161,7 +146,6 @@ const ContentGrid = styled.div`
   flex-direction: column;
   gap: 16px;
 `;
-
 const ContentContact = styled.div`
   width: 50px;
   display: flex;
@@ -169,7 +153,6 @@ const ContentContact = styled.div`
   gap: 50px;
   justify-content: center;
 `;
-
 const NameDev = styled.p`
   ${typography.sm};
   font-weight: 400;
@@ -177,7 +160,6 @@ const NameDev = styled.p`
   line-height: 29px;
   color: #000000;
 `;
-
 function Home() {
   const { navigate } = useAuth();
   return (
@@ -205,6 +187,8 @@ function Home() {
             alt={"Group"}
             css={css`
               margin: 20px 0 60px 0;
+              height:100%;
+              object-fit: contain;
             `}
           />
           <Card>
@@ -228,6 +212,8 @@ function Home() {
                 alt={"Search"}
                 css={css`
                   font-size: 300px;
+                  height:100%;
+                  object-fit: contain;
                 `}
               />
             </ContentIMG>
@@ -580,5 +566,4 @@ function Home() {
     </main>
   );
 }
-
 export default Home;
