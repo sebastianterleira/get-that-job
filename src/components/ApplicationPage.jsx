@@ -411,6 +411,8 @@ function ApplicationJob({ findJob }) {
     setFormData({ ...formData, [name]: value });
   }
 
+  console.log(user);
+
   function handleChangeFile(event) {
     const file = event.target.files[0];
 
@@ -428,12 +430,9 @@ function ApplicationJob({ findJob }) {
     formData1.append("user_id", user.id);
     formData1.append("job_id", id);
 
-    console.log(formData1)
     createApplicationJob(formData1);
     navigate("/Applications");
   }
-  console.log(profile)
-  console.log(user)
 
   function handleLinkChange(event) {
     event.preventDefault();

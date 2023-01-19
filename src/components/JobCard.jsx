@@ -87,10 +87,10 @@ const TextButtonFollow = styled.p`
 `;
 
 const ButtonSeeMore = styled.button`
+  all: unset;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #f48fb1;
   border-radius: 30px;
   font-family: ${fonts.chiron};
   width: 110px;
@@ -102,28 +102,34 @@ const ButtonSeeMore = styled.button`
   text-transform: uppercase;
   color: #616161;
   background: #fff;
-  padding: 5px;
-  cursor: pointer;
+  padding: 3px;
   overflow: hidden;
   transition: all 500ms ease;
   z-index: 0;
 
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    margin: auto;
-    background-color: #bf5f82;
-    transition: all 500ms ease;
-    z-index: 1;
-  }
-  &:hover {
-    background-color: #f48fb1;
-    box-shadow: 0 0 10px #f48fb1, 0 0 10px #f48fb1, 0 0 15px #f48fb1;
-    color: #616161;
-  }
+  ${({ disabled }) =>
+    disabled
+      ? "background-color: #E1E2E1; color:#8E8E8E;"
+      : ` 
+  border: 1px solid #f48fb1;
+    cursor: pointer;
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      margin: auto;
+      background-color: #bf5f82;
+      transition: all 500ms ease;
+      z-index: 1;
+    }
+    &:hover {
+      background-color: #f48fb1;
+      box-shadow: 0 0 10px #f48fb1, 0 0 10px #f48fb1, 0 0 15px #f48fb1;
+      color: #616161;
+    }
+`}
 `;
 
 const ButtonFollow = styled.button`
@@ -147,6 +153,7 @@ const ButtonFollow = styled.button`
 `;
 
 function JobCard(job) {
+  const { user } = useAuth();
   const [activeButton, setActiveButton] = useState(Boolean(job.follow_id));
   const [followId, setFollowId] = useState(job.follow_id);
   const { navigate } = useAuth();
@@ -156,6 +163,8 @@ function JobCard(job) {
 
     setActiveButton(!activeButton);
   }
+
+  let applied = job.applications?.find((elem) => elem.user_id === user.id);
 
   function handleFollowing() {
     if (followId)
@@ -239,8 +248,11 @@ function JobCard(job) {
         <TextButtonFollow>
           {activeButton ? "FOLLOWING" : "FOLLOW"}
         </TextButtonFollow>
-        <ButtonSeeMore onClick={() => navigate(`jobs/${job?.id}`)}>
-          See More
+        <ButtonSeeMore
+          onClick={() => navigate(`jobs/${job?.id}`)}
+          disabled={Boolean(applied)}
+        >
+          {applied ? "Applied" : "See More"}
         </ButtonSeeMore>
       </div>
     </CardData>
