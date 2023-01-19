@@ -69,7 +69,6 @@ function AuthProvider(props) {
     updateUser(data).then(setUser).catch(console.log);
   }
 
-  console.log(recruiter)
   const value = {
     user,
     jobs,

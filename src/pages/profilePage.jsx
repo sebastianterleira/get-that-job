@@ -95,10 +95,10 @@ const ProfileRecruiter = ({ recruiter }) => {
   const { navigate, updateRecruiterProfile } = useAuth();
   const [imageReview, setImageReview] = useState(null);
   const [formData, setFormData] = useState({
-    email: recruiter?.email,
-    name: recruiter?.name,
-    website: recruiter?.website,
-    description: recruiter?.description,
+    email: recruiter?.email || "",
+    name: recruiter?.name || "",
+    website: recruiter?.website || "",
+    description: recruiter?.description || "",
     profile: recruiter?.profile_image,
   });
   const { email, name, website, description, profile } = formData;

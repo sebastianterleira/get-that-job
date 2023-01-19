@@ -1,32 +1,29 @@
 import emotion from "@emotion/styled";
 import { fonts } from "../../styles";
-import React, { useState } from 'react';
-import { styled } from '@mui/material/styles';
-import PropTypes from 'prop-types';
-import dayjs from 'dayjs';
-import Check from '@mui/icons-material/Check';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import React, { useState } from "react";
+import { styled } from "@mui/material/styles";
+import PropTypes from "prop-types";
+import dayjs from "dayjs";
+import Check from "@mui/icons-material/Check";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import StepConnector, {
+  stepConnectorClasses,
+} from "@mui/material/StepConnector";
+import { Typography, TextField, Stepper, Step, StepLabel } from "@mui/material";
 import {
-  Typography,
-  TextField,
-  Stepper,
-  Step,
-  StepLabel,
-} from "@mui/material";
-import { useForm,
+  useForm,
   FormProvider,
   useFormContext,
-  Controller
+  Controller,
 } from "react-hook-form";
 import { useAuth } from "../../context/auth-context";
 
@@ -37,7 +34,7 @@ align-items: center;
 justify-content: center;
 gap: 18px;
 margin-top: 30px;
-`
+`;
 
 const MessageWarning = emotion.div`
 font-family: ${fonts.bedroom};
@@ -47,7 +44,7 @@ font-size: 15px;
 line-height: 24px;
 color: darkgray;
 text-align: center;
-`
+`;
 
 const ButtonForm = emotion.button`
 display: flex;
@@ -87,7 +84,7 @@ z-index: 0;
 	box-shadow: 0 0 10px #F48FB1, 0 0 10px #F48FB1, 0 0 15px #F48FB1;
 	color: #fff;
 }
-`
+`;
 
 const ButtonSkip = emotion.button`
 display: flex;
@@ -127,13 +124,13 @@ z-index: 0;
 	box-shadow: 0 0 10px #F48FB1, 0 0 10px #F48FB1, 0 0 15px #F48FB1;
 	color: #616161;
 }
-`
+`;
 
 const StyledForm = emotion.form`
 display: flex;
 flex-direction: column;
 gap: 20px;
-`
+`;
 
 function getSteps() {
   return [
@@ -146,44 +143,45 @@ function getSteps() {
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 10,
-    left: 'calc(-50% + 16px)',
-    right: 'calc(50% + 16px)',
+    left: "calc(-50% + 16px)",
+    right: "calc(50% + 16px)",
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#F48FB1',
+      borderColor: "#F48FB1",
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      borderColor: '#F48FB1',
+      borderColor: "#F48FB1",
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
-    borderColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+    borderColor:
+      theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
     borderTopWidth: 3,
     borderRadius: 1,
   },
 }));
 
-const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
-  color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
-  display: 'flex',
+const QontoStepIconRoot = styled("div")(({ theme, ownerState }) => ({
+  color: theme.palette.mode === "dark" ? theme.palette.grey[700] : "#eaeaf0",
+  display: "flex",
   height: 22,
-  alignItems: 'center',
+  alignItems: "center",
   ...(ownerState.active && {
-    color: '#BF5F82',
+    color: "#BF5F82",
   }),
-  '& .QontoStepIcon-completedIcon': {
-    color: '#BF5F82',
+  "& .QontoStepIcon-completedIcon": {
+    color: "#BF5F82",
     zIndex: 1,
     fontSize: 18,
   },
-  '& .QontoStepIcon-circle': {
+  "& .QontoStepIcon-circle": {
     width: 8,
     height: 8,
-    borderRadius: '50%',
-    backgroundColor: 'currentColor',
+    borderRadius: "50%",
+    backgroundColor: "currentColor",
   },
 }));
 
@@ -216,7 +214,7 @@ QontoStepIcon.propTypes = {
 };
 
 const AuthInformation = () => {
-  const {control} = useFormContext();
+  const { control } = useFormContext();
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -228,231 +226,244 @@ const AuthInformation = () => {
 
   return (
     <>
-    <Controller
-    control={control}
-    name="email"
-    render={({ field }) => (
-      <TextField
-        id="Email"
-        label="Email"
-        variant="standard"
-        placeholder="some.user@mail.com"
-        fullWidth
-        color="primary"
-        margin="normal"
-        required
-        {...field}
+      <Controller
+        control={control}
+        name="email"
+        render={({ field }) => (
+          <TextField
+            id="Email"
+            label="Email"
+            variant="standard"
+            placeholder="some.user@mail.com"
+            fullWidth
+            color="primary"
+            margin="normal"
+            required
+            {...field}
+          />
+        )}
       />
-    )}/>
-    <Controller 
-    control={control}
-    name="password"
-    render={({ field }) => (
-    <FormControl variant="standard" required color="primary"{...field}>
-          <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-          <Input
-            id="standard-adornment-password"
-            placeholder="******"
-            type={showPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      )}/>
-    <Controller 
-    control={control}
-    name="password_confirmation"
-    render={({ field }) => (
-    <FormControl variant="standard" required color="primary"{...field}>
-          <InputLabel htmlFor="standard-adornment-password2">Password Confirmation</InputLabel>
-          <Input
-            id="standard-adornment-password2"
-            placeholder="******"
-            type={showPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      )}/>
-  </>
-  );
-}
-
-const PersonalInformation = () => {
-	const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
-	
-		const handleChange = (newValue) => {
-			setValue(newValue);
-		};
-	
-  const {control} = useFormContext();
-
-
-    return (
-    <>
-    <Controller
-    control={control}
-    name="name"
-    render={({ field }) => (
-    <TextField
-      id="name"
-      label="Name"
-      variant="standard"
-      placeholder="John Doe"
-      fullWidth
-      color="primary"
-      margin="normal"
-        {...field}
-        />
-      )}/>
       <Controller
-      control={control}
-      name="phone"
-      render={({ field }) => (
-      <TextField
-        id="phone"
-        label="Phone"
-        pattern="[0-9]+"
-        maxLength="9"
-        variant="standard"
-        placeholder="+XXXXXXXXX"
-        fullWidth
-        color="primary"
-        margin="normal"
-        {...field}
-        />
-      )}/>
+        control={control}
+        name="password"
+        render={({ field }) => (
+          <FormControl variant="standard" required color="primary" {...field}>
+            <InputLabel htmlFor="standard-adornment-password">
+              Password
+            </InputLabel>
+            <Input
+              id="standard-adornment-password"
+              placeholder="******"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        )}
+      />
       <Controller
-      control={control}
-      name="birthdate"
-      render={({ field }) => (
-			<LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DesktopDatePicker
-					id="birthdate"
-          label="Birthdate"
-          inputFormat="MM/DD/YYYY"
-          value={value}
-          onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
-					{...field}
-					/>
-			</LocalizationProvider>
-      )}/>
-      <Controller
-      control={control}
-      name="linkedin"
-      render={({ field }) => (
-      <TextField
-        id="linkedin"
-        label="Linkedin url"
-        variant="standard"
-        placeholder="https://www.linkedin.com/in/username"
-        fullWidth
-        color="primary"
-        margin="normal"
-        {...field}
-        />
-      )}/>
+        control={control}
+        name="password_confirmation"
+        render={({ field }) => (
+          <FormControl variant="standard" required color="primary" {...field}>
+            <InputLabel htmlFor="standard-adornment-password2">
+              Password Confirmation
+            </InputLabel>
+            <Input
+              id="standard-adornment-password2"
+              placeholder="******"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        )}
+      />
     </>
   );
-}
+};
 
-const ProfessionalInformation = () => {
-  const [ file, setFile] = useState("");
-  const {control} = useFormContext();
-  console.log(file)
+const PersonalInformation = () => {
+  const [value, setValue] = React.useState(dayjs("2014-08-18T21:11:54"));
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
+  const { control } = useFormContext();
 
   return (
     <>
       <Controller
-      control={control}
-      name="title"
-      render={({ field }) => (
-        <TextField
-          id="title"
-          label="Title"
-					variant="standard"
-          placeholder="Mechanical administrator..."
-          fullWidth
-          color="primary"
-          margin="normal"
-          {...field}
+        control={control}
+        name="name"
+        render={({ field }) => (
+          <TextField
+            id="name"
+            label="Name"
+            variant="standard"
+            placeholder="John Doe"
+            fullWidth
+            color="primary"
+            margin="normal"
+            {...field}
           />
-        )}/>
-				<Controller
-				control={control}
-				name="experience"
-				render={({ field }) => (
-					<TextField 
-          id="standard-textarea"
-          label="Professional Experience"
-          placeholder="Worked 6 years in a bitcoin farm until I decided to change my life...."
-          multiline
-          color="primary"
-          maxRows={4}
-          fullWidth
-          defaultValue="Default Value"
-          {...field}
+        )}
+      />
+      <Controller
+        control={control}
+        name="phone"
+        render={({ field }) => (
+          <TextField
+            id="phone"
+            label="Phone"
+            pattern="[0-9]+"
+            maxLength="9"
+            variant="standard"
+            placeholder="+XXXXXXXXX"
+            fullWidth
+            color="primary"
+            margin="normal"
+            {...field}
           />
-        )}/>
-				<Controller
-				control={control}
-				name="education"
-				render={({ field }) => (
-					<TextField 
-          id="standard-textarea"
-          label="Education"
-          placeholder="Major in life experiences with a PHD in procrastination..."
-          multiline
-          color="primary"
-          maxRows={4}
-          fullWidth
-          defaultValue="Default Value"
-          {...field}
+        )}
+      />
+      <Controller
+        control={control}
+        name="birthdate"
+        render={({ field }) => (
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+              id="birthdate"
+              label="Birthdate"
+              inputFormat="MM/DD/YYYY"
+              value={value}
+              onChange={handleChange}
+              renderInput={(params) => <TextField {...params} />}
+              {...field}
+            />
+          </LocalizationProvider>
+        )}
+      />
+      <Controller
+        control={control}
+        name="linkedin"
+        render={({ field }) => (
+          <TextField
+            id="linkedin"
+            label="Linkedin url"
+            variant="standard"
+            placeholder="https://www.linkedin.com/in/username"
+            fullWidth
+            color="primary"
+            margin="normal"
+            {...field}
           />
-					)}/>
-				<Controller
-      control={control}
-      name="user_cv"
-      render={({ field }) => (
-        <TextField
-          id="title"
-          onChange={(event) => setFile(event.target.files[0])}
-          margin="normal"
-					type="file"
-          {...field}
-          />
-        )}/>
-      </>
+        )}
+      />
+    </>
   );
-}
+};
+
+const ProfessionalInformation = () => {
+  const [file, setFile] = useState("");
+  const { control } = useFormContext();
+
+  return (
+    <>
+      <Controller
+        control={control}
+        name="title"
+        render={({ field }) => (
+          <TextField
+            id="title"
+            label="Title"
+            variant="standard"
+            placeholder="Mechanical administrator..."
+            fullWidth
+            color="primary"
+            margin="normal"
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="experience"
+        render={({ field }) => (
+          <TextField
+            id="standard-textarea"
+            label="Professional Experience"
+            placeholder="Worked 6 years in a bitcoin farm until I decided to change my life...."
+            multiline
+            color="primary"
+            maxRows={4}
+            fullWidth
+            defaultValue="Default Value"
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="education"
+        render={({ field }) => (
+          <TextField
+            id="standard-textarea"
+            label="Education"
+            placeholder="Major in life experiences with a PHD in procrastination..."
+            multiline
+            color="primary"
+            maxRows={4}
+            fullWidth
+            defaultValue="Default Value"
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="user_cv"
+        render={({ field }) => (
+          <TextField
+            id="title"
+            onChange={(event) => setFile(event.target.files[0])}
+            margin="normal"
+            type="file"
+            {...field}
+          />
+        )}
+      />
+    </>
+  );
+};
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <AuthInformation/>
+      return <AuthInformation />;
     case 1:
-      return <PersonalInformation/>
+      return <PersonalInformation />;
     case 2:
-      return <ProfessionalInformation/>
+      return <ProfessionalInformation />;
     default:
       return "unknown step";
   }
@@ -469,12 +480,12 @@ const LinaerStepper = () => {
       password: "",
       password_confirmation: "",
       name: "",
-      phone: "          ",
+      phone: "",
       birthdate: "",
       linkedin: "",
-			title: "",
-			education: "",
-			experience: "",
+      title: "",
+      education: "",
+      experience: "",
       user_cv: "",
     },
   });
@@ -490,27 +501,30 @@ const LinaerStepper = () => {
   const handleNext = (data) => {
     console.log(data);
     const formData1 = new FormData();
-      formData1.append("email", data.email);
-      formData1.append("password", data.password);
-      formData1.append("password_confirmation", data.password_confirmation);
-      formData1.append("name", data.name);
-      formData1.append("phone", data.phone);
-      formData1.append("birthdate", data.birthdate);
-      formData1.append("linkedin", data.linkedin);
-      formData1.append("experience", data.experience);
-      formData1.append("title", data.title);
-      formData1.append("education", data.education);
-      formData1.append("user_cv", data.user_cv);
+    formData1.append("email", data.email);
+    formData1.append("password", data.password);
+    formData1.append("password_confirmation", data.password_confirmation);
+    formData1.append("name", data.name);
+    formData1.append("phone", data.phone);
+    formData1.append("birthdate", data.birthdate);
+    formData1.append("linkedin", data.linkedin);
+    formData1.append("experience", data.experience);
+    formData1.append("title", data.title);
+    formData1.append("education", data.education);
+    // formData1.append("user_cv", data.user_cv);
 
     if (activeStep === steps.length - 1) {
       setActiveStep(activeStep + 1);
     } else {
       setActiveStep(activeStep + 1);
-      setSkippedSteps(skippedSteps.filter((skipItem) => skipItem !== activeStep));
+      setSkippedSteps(
+        skippedSteps.filter((skipItem) => skipItem !== activeStep)
+      );
     }
-    if(activeStep === 2) {                                                                                     
+    if (activeStep === 2) {
       signup(formData1);
     }
+    console.log(data);
   };
 
   const handleBack = () => {
@@ -530,74 +544,85 @@ const LinaerStepper = () => {
 
   return (
     <div>
-				<Stepper alternativeLabel activeStep={activeStep} connector={<QontoConnector />}>
-					{steps.map((step, index) => {
-						const labelProps = {};
-						const stepProps = {};
-						if (isStepOptional(index)) {
-							labelProps.optional = (
-								<Typography
-									variant="caption"
-									align="center"
-									style={{ display: "block" }}
-								>
-									optional
-								</Typography>
-							);
-						}
-						if (isStepSkipped(index)) {
-							stepProps.completed = false;
-						}
-						return (
-							<Step {...stepProps} key={index}>
-								<StepLabel {...labelProps} StepIconComponent={QontoStepIcon}>{step}</StepLabel>
-							</Step>
-						);
-					})}
-				</Stepper>
-				{activeStep === 1 || activeStep === 2 ? (
-					<MessageWarning>You can complete this information later but we reccomend you to do it now</MessageWarning>
-				) : "" }
-			
-				{activeStep === steps.length ? (
-					<Typography variant="h3" align="center">
-						Thank You
-					</Typography>
-				) : (
-					<>
-						<FormProvider {...methods}>
-							<StyledForm onSubmit={methods.handleSubmit(handleNext)}>
-								{getStepContent(activeStep)}
-								<ContentButton>
-									{activeStep === 0 || activeStep === 1 ? ""
-								: <ButtonForm
-								onClick={handleBack}
-							>
-								{"<   previus"}
-							</ButtonForm>
-								}
-							{isStepOptional(activeStep) && (
-								<ButtonSkip
-									variant="contained"
-									color="primary"
-									onClick={handleSkip}
-								>
-									skip this!
-								</ButtonSkip>
-							)}
-							<ButtonForm
-								variant="contained"
-								color="primary"
-								// onClick={handleNext}
-								type="submit"
-							>
-								{activeStep === steps.length - 1 ? "Finish    >" : "Next    >"}
-							</ButtonForm>
-								</ContentButton>
-							</StyledForm>
-						</FormProvider>
-					</>
-				)}
+      <Stepper
+        alternativeLabel
+        activeStep={activeStep}
+        connector={<QontoConnector />}
+      >
+        {steps.map((step, index) => {
+          const labelProps = {};
+          const stepProps = {};
+          if (isStepOptional(index)) {
+            labelProps.optional = (
+              <Typography
+                variant="caption"
+                align="center"
+                style={{ display: "block" }}
+              >
+                optional
+              </Typography>
+            );
+          }
+          if (isStepSkipped(index)) {
+            stepProps.completed = false;
+          }
+          return (
+            <Step {...stepProps} key={index}>
+              <StepLabel {...labelProps} StepIconComponent={QontoStepIcon}>
+                {step}
+              </StepLabel>
+            </Step>
+          );
+        })}
+      </Stepper>
+      {activeStep === 1 || activeStep === 2 ? (
+        <MessageWarning>
+          You can complete this information later but we reccomend you to do it
+          now
+        </MessageWarning>
+      ) : (
+        ""
+      )}
+
+      {activeStep === steps.length ? (
+        <Typography variant="h3" align="center">
+          Thank You
+        </Typography>
+      ) : (
+        <>
+          <FormProvider {...methods}>
+            <StyledForm onSubmit={methods.handleSubmit(handleNext)}>
+              {getStepContent(activeStep)}
+              <ContentButton>
+                {activeStep === 0 || activeStep === 1 ? (
+                  ""
+                ) : (
+                  <ButtonForm onClick={handleBack}>{"<   previus"}</ButtonForm>
+                )}
+                {isStepOptional(activeStep) && (
+                  <ButtonSkip
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSkip}
+                  >
+                    skip this!
+                  </ButtonSkip>
+                )}
+                <ButtonForm
+                  variant="contained"
+                  color="primary"
+                  // onClick={handleNext}
+                  type="submit"
+                >
+                  {activeStep === steps.length - 1
+                    ? "Finish    >"
+                    : "Next    >"}
+                </ButtonForm>
+              </ContentButton>
+            </StyledForm>
+          </FormProvider>
+        </>
+      )}
     </div>
   );
 };
