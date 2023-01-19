@@ -16,6 +16,7 @@ import { DiGithubBadge, DiReact, DiRuby } from "react-icons/di";
 import { AiFillLinkedin } from "react-icons/ai";
 import { useAuth } from "../context/auth-context";
 const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -88,11 +89,10 @@ const Card = styled.div`
   display: flex;
   background: #fff;
   width: 100%;
-  height: 472px;
   margin: 0px 0px 64px 0px;
 `;
 const ContentText = styled.div`
-  width: 60%;
+  width:100%;
   padding: 20px;
   display: flex;
   background: #BF5F82;
@@ -109,6 +109,7 @@ const TextLG = styled.p`
   text-align: center;
   color: #FFFFFF;
   align-items: flex-start;
+  
 `;
 const TextSM = styled.p`
   font-weight: 400;
@@ -119,9 +120,9 @@ const TextSM = styled.p`
 const ContentIMG = styled.div`
   margin: auto;
   display: flex;
-  width:100%;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `;
 const TitleMembers = styled.p`
   ${typography.sm};
@@ -145,6 +146,7 @@ const ContentGrid = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 16px;
+  
 `;
 const ContentContact = styled.div`
   width: 50px;
@@ -160,20 +162,22 @@ const NameDev = styled.p`
   line-height: 29px;
   color: #000000;
 `;
+
+
 function Home() {
   const { navigate } = useAuth();
   return (
     <main>
-      <section>
+      <section >
         <Wrapper>
-          <ContentTitle>
-            <Title>
+          <ContentTitle >
+            <Title >
               The place where you get{" "}
               <span style={{ color: "#F48FB1" }}>that</span> job
             </Title>
           </ContentTitle>
-          <ContentParrafo>
-            <PageDescription>
+          <ContentParrafo >
+            <PageDescription >
               With our Machine Learning algorithm you will get that job in no
               time. We promise you! Just give us the money and we will take care
               of it.
@@ -187,12 +191,13 @@ function Home() {
             alt={"Group"}
             css={css`
               margin: 20px 0 60px 0;
+              width: 100%;
               height:100%;
               object-fit: contain;
             `}
           />
-          <Card>
-            <ContentText>
+          <Card >
+            <ContentText >
               <TextLG>Find your next job</TextLG>
               <TextSM>
                 Our Machine learning algorithm is so good that it’s even illegal
@@ -212,7 +217,7 @@ function Home() {
                 alt={"Search"}
                 css={css`
                   font-size: 300px;
-                  height:100%;
+                  width:100%;
                   object-fit: contain;
                 `}
               />
