@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React, { useState } from "react";
 import { fonts } from "../styles";
 import { RiCloseLine } from "react-icons/ri";
 import { RiArrowDownSLine } from "react-icons/ri";
@@ -63,20 +62,22 @@ const GroupInput = styled.div`
   position: relative;
 `;
 
-function FilterJob({ jobs }) {
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedValues, setSelectedValues] = useState([]);
-
-  console.log(selectedCategories);
-
+function FilterJob({ filters, filterType, filtersAmounts, handleAmount }) {
   const categories = [
     { cat: "Group 1", key: "Manufactoring" },
+    { cat: "Group 1", key: "Legal" },
+    { cat: "Group 1", key: "Education" },
+    { cat: "Group 1", key: "Goverment" },
+    { cat: "Group 1", key: "Sales" },
     { cat: "Group 1", key: "Art" },
-    { cat: "Group 1", key: "Programmig" },
   ];
 
   const handleChange = (value) => {
-    setSelectedValues(value, () => console.log(selectedValues));
+    filters([...value]);
+  };
+
+  const handleChangeTypes = (value) => {
+    filterType([...value]);
   };
 
   return (
@@ -94,13 +95,8 @@ function FilterJob({ jobs }) {
             <Multiselect
               customCloseIcon={<RiCloseLine />}
               displayValue="key"
-              onKeyPressFn={function noRefCheck() {}}
-              onRemove={function noRefCheck() {}}
-              onSearch={function noRefCheck() {}}
-              onSelect={function noRefCheck() {}}
-              value={handleChange}
-              onChange={handleChange}
-              onClick={() => console.log("Jopla")}
+              onRemove={handleChange}
+              onSelect={handleChange}
               options={categories}
               placeholder="Select Category"
               style={{
@@ -152,6 +148,14 @@ function FilterJob({ jobs }) {
                 font-size: 25px;
               `}
             />
+            <RiArrowDownSLine
+              css={css`
+                position: absolute;
+                margin-left: 245px;
+                top: 8px;
+                font-size: 25px;
+              `}
+            />
           </GroupInput>
         </LabelInput>
         <LabelInput>
@@ -166,14 +170,12 @@ function FilterJob({ jobs }) {
             <Multiselect
               customCloseIcon={<RiCloseLine />}
               displayValue="key"
-              onKeyPressFn={function noRefCheck() {}}
-              onRemove={function noRefCheck() {}}
-              onSearch={function noRefCheck() {}}
-              onSelect={function noRefCheck() {}}
+              onRemove={handleChangeTypes}
+              onSelect={handleChangeTypes}
               options={[
                 {
                   cat: "Group 1",
-                  key: "Full time",
+                  key: "Full Time",
                 },
                 {
                   cat: "Group 1",
@@ -249,7 +251,12 @@ function FilterJob({ jobs }) {
             Salary range
           </p>
           <GroupInput>
-            <InputSalary placeholder="min" />
+            <InputSalary
+              placeholder="min"
+              name="min"
+              value={filtersAmounts.min}
+              onChange={handleAmount}
+            />
             <RiMoneyDollarCircleLine
               css={css`
                 position: absolute;
@@ -259,7 +266,12 @@ function FilterJob({ jobs }) {
               `}
             />
             <Guion>-</Guion>
-            <InputSalary placeholder="max" />
+            <InputSalary
+              placeholder="max"
+              name="max"
+              value={filtersAmounts.max}
+              onChange={handleAmount}
+            />
             <RiMoneyDollarCircleLine
               css={css`
                 position: absolute;

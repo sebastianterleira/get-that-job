@@ -62,6 +62,12 @@ const GroupInput = styled.div`
 
 function Search({ jobs }) {
   const [searh, setSearch] = useState("");
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [filtersTypes, setFiltersTypes] = useState([]);
+  const [filtersAmounts, setFiltersAmounts] = useState({
+    min: 0,
+    max: 100000,
+  });
 
   let filterJob = jobs;
 
@@ -70,20 +76,43 @@ function Search({ jobs }) {
       job.name.toString().toLowerCase().includes(searh.toLowerCase())
     );
   }
+  // Filters Categories in jobs
+  if (selectedValues.length !== 0) {
+    filterJob = filterJob.reduce((accu, current) => {
+      selectedValues.forEach((element) => {
+        if (current.category.toUpperCase() === element.key.toUpperCase())
+          accu.push(current);
+      });
+      return accu;
+    }, []);
+  }
+  //Filters types in jobs
+  if (filtersTypes.length !== 0) {
+    filterJob = filterJob.reduce((accu, current) => {
+      filtersTypes.forEach((element) => {
+        if (current.type_job.toUpperCase() === element.key.toUpperCase())
+          accu.push(current);
+      });
+      return accu;
+    }, []);
+  }
 
-  // let allCategories = jobs.reduce((accu, current) => {
-  // 	if (!accu.includes(current.category)) accu.push(current.category);
+  const handleChangeAmount = (event) => {
+    const { name, value } = event.target;
 
-  // 	return accu;
-  // }, ["All"]);
+    setFiltersAmounts({ ...filtersAmounts, [name]: value });
+  };
 
-  // const filteredProducts = (data) =>
-  //   tablaProducts.map((job) => {
-  //     if (data.includes(job.category)) {
-  //       console.log(job);
-  //       setJobs(job);
-  //     }
-  //   });
+  if (filtersAmounts.max !== "") {
+    filterJob = filterJob?.reduce((accu, current) => {
+      if (
+        current.min_salary >= +filtersAmounts.min &&
+        current.max_salary <= +filtersAmounts.max
+      )
+        accu.push(current);
+      return accu;
+    }, []);
+  }
 
   return (
     <>
@@ -113,7 +142,12 @@ function Search({ jobs }) {
             />
           </GroupInput>
         </LabelInput>
-        <FilterJob jobs={filterJob} />
+        <FilterJob
+          filters={setSelectedValues}
+          filterType={setFiltersTypes}
+          filtersAmounts={filtersAmounts}
+          handleAmount={handleChangeAmount}
+        />
         <JobList jobs={filterJob} />
       </Container>
     </>
