@@ -469,12 +469,13 @@ const LinaerStepper = () => {
       password: "",
       password_confirmation: "",
       name: "",
-      phone: "",
+      phone: "          ",
       birthdate: "",
       linkedin: "",
 			title: "",
 			education: "",
 			experience: "",
+      user_cv: "",
     },
   });
 

@@ -61,7 +61,7 @@ const Main = styled.div`
 `;
 
 function NavbarProfessional() {
-  const { logout } = useAuth();
+  const { logoutProfessional } = useAuth();
   const optionIcon = {
     following: <BiTargetLock />,
     search: <AiOutlineSearch />,
@@ -101,7 +101,7 @@ function NavbarProfessional() {
 
           <NavBarItem
             to={"/"}
-            handleClick={logout}
+            handleClick={logoutProfessional}
             name={"Logout"}
             icon={optionIcon.logout}
           />

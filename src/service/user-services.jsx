@@ -47,10 +47,10 @@ export async function getCompany(id) {
 }
 
 export async function updateRecruiter(body) {
-  const { data } = await collectionClient("/company", {
+  const data = await collectionClient("/company", {
     body: body,
     method: "PATCH",
   });
-
+  
   return data;
 }
