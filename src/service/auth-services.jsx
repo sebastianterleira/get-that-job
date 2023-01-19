@@ -9,14 +9,6 @@ export async function login(credentials) {
   return data;
 }
 
-export async function logout() {
-  await collectionClient("/logout", {
-    method: "DELETE",
-  });
-
-  sessionStorage.removeItem(tokenKey);
-}
-
 export async function loginRecruiter(credentials) {
   const { data } = await collectionClient("/company/sign_in", {
     body: credentials,
@@ -31,7 +23,6 @@ export async function logoutRecruiter() {
 
   sessionStorage.removeItem(tokenKey);
 }
-
 
 export async function loginProfessional(credentials) {
   const { data } = await collectionClient("/user/sign_in", {

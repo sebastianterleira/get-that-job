@@ -22,7 +22,7 @@ function AuthProvider(props) {
   const [jobs, setJobs] = useState(null);
 
   useEffect(() => {
-    if (recruiter) getRecruiter().then(setRecruiter).catch(console.log);
+    getRecruiter().then(setRecruiter).catch(console.log);
   }, []);
 
   useEffect(() => {
@@ -45,16 +45,12 @@ function AuthProvider(props) {
     auth.loginRecruiter(credentials).then(setRecruiter).catch(console.log);
   }
 
-  function logout() {
-    auth.logoutProfessional().then(() => setUser(null));
-  }
-
   function logoutRecruiter() {
     auth.logoutRecruiter().then(() => setRecruiter(null));
   }
 
   function logoutProfessional() {
-    auth.logoutRecruiter().then(() => setRecruiter(null));
+    auth.logoutProfessional().then(() => setUser(null));
   }
 
   function signup(userData) {
@@ -73,12 +69,12 @@ function AuthProvider(props) {
     updateUser(data).then(setUser).catch(console.log);
   }
 
+  console.log(recruiter)
   const value = {
     user,
     jobs,
     recruiter,
     setUser,
-    logout,
     signup,
     signupCompany,
     lgoinRecruiter,
